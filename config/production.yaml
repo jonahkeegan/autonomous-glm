@@ -1,0 +1,23 @@
+# Production Environment Configuration
+# Overrides default.yaml for production environment
+
+app:
+  environment: production
+  debug: false
+
+logging:
+  level: WARNING
+  file_rotation: "50 MB"
+  file_count: 10
+
+database:
+  pool_size: 10
+  timeout: 60
+
+agent_protocol:
+  message_timeout: 3000
+  retry_attempts: 5
+  retry_max_delay: 300000  # 5 minutes max in production
+
+cv_pipeline:
+  batch_size: 20  # Larger batches in production

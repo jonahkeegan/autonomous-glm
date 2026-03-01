@@ -6,16 +6,37 @@
 - Active Artifacts: None
 - Pending Reviews: None
 - Active Milestone: M0 - Foundation
-- Active Epics: M0-2 (Configuration), M0-3 (Validation)
-- **Just Completed**: M0-1 Database Schema & Data Layer ✅
+- Active Epics: M0-3 (Validation)
+- **Just Completed**: M0-2 Configuration Management ✅
 
 ## Milestone 0 Progress
 
 | Epic | Description | Status |
 |------|-------------|--------|
 | M0-1 | Database Schema & Data Layer | ✅ Complete (43 tests pass) |
-| M0-2 | Configuration Management | 🔲 Not Started |
-| M0-3 | Foundation Validation Suite | 🔲 Not Started (blocked by M0-2) |
+| M0-2 | Configuration Management | ✅ Complete (50 tests pass) |
+| M0-3 | Foundation Validation Suite | 🔲 Not Started |
+
+## M0-2 Implementation Details
+
+**Files Created:**
+- `config/default.yaml` - Base configuration with all defaults
+- `config/development.yaml` - Development environment overrides
+- `config/staging.yaml` - Staging environment overrides
+- `config/production.yaml` - Production environment overrides
+- `src/config/__init__.py` - Module exports
+- `src/config/schema.py` - Pydantic models for 8 config sections
+- `src/config/loader.py` - Config loader with deep merge
+- `src/config/env.py` - Environment variable handling
+- `src/config/paths.py` - Path resolution utilities
+- `tests/unit/test_config.py` - 50 unit tests
+
+**Key Design Decisions:**
+- YAML configuration with deep merge for environment overrides
+- Pydantic validation for type safety
+- Singleton pattern for configuration instance
+- Environment variables override file configuration
+- AUTONOMOUS_GLM_* prefix for all env vars
 
 ## M0-1 Implementation Details
 
@@ -40,6 +61,7 @@
 ## Recent Activity
 | Date | Activity | Status |
 |------|----------|--------|
+| 2026-02-28 | M0-2 Configuration Management complete | Complete |
 | 2026-02-28 | M0-1 Database Schema & Data Layer complete | Complete |
 | 2026-02-28 | Created epic plans for Milestone 0 | Complete |
 | 2026-02-27 | Project initialized | Complete |

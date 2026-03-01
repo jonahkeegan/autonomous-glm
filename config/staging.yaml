@@ -1,0 +1,16 @@
+# Staging Environment Configuration
+# Overrides default.yaml for staging environment
+
+app:
+  environment: staging
+  debug: false
+
+logging:
+  level: INFO
+
+database:
+  pool_size: 3
+
+agent_protocol:
+  message_timeout: 5000
+  retry_attempts: 3

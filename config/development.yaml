@@ -1,0 +1,16 @@
+# Development Environment Configuration
+# Overrides default.yaml for local development
+
+app:
+  environment: development
+  debug: true
+
+logging:
+  level: DEBUG
+
+database:
+  pool_size: 1  # Single connection for development
+
+agent_protocol:
+  message_timeout: 10000  # Longer timeout for debugging
+  retry_attempts: 1  # Fewer retries in development

@@ -1,0 +1,85 @@
+# Autonomous-GLM Default Configuration
+# Base configuration with all defaults - environment-specific files override these
+
+# Application Settings
+app:
+  name: autonomous-glm
+  version: "0.1.0"
+  environment: development
+  debug: false
+
+# Path Configuration
+# All paths are relative to project root unless absolute
+paths:
+  data_dir: "./data"
+  artifacts_dir: "./data/artifacts"
+  screenshots_dir: "./data/artifacts/screenshots"
+  videos_dir: "./data/artifacts/videos"
+  context_dir: "./data/artifacts/context"
+  logs_dir: "./logs"
+  output_dir: "./output"
+  reports_dir: "./output/reports"
+  design_system_dir: "./design_system"
+  memory_bank_dir: "./memory-bank"
+  database_path: "./data/autonomous_glm.db"
+
+# Database Configuration
+database:
+  pool_size: 5
+  timeout: 30  # seconds
+
+# Agent Protocol Configuration
+agent_protocol:
+  message_timeout: 5000  # milliseconds
+  retry_attempts: 3
+  retry_base_delay: 1000  # milliseconds
+  retry_max_delay: 1800000  # milliseconds (30 minutes max)
+
+# Individual Agent Settings
+agents:
+  claude:
+    enabled: true
+    endpoint: null  # Optional custom endpoint
+  minimax:
+    enabled: true
+    endpoint: null
+  codex:
+    enabled: true
+    endpoint: null
+
+# Computer Vision Pipeline
+cv_pipeline:
+  model: "glm-5-vision"
+  detection_threshold: 0.95  # 95% confidence required
+  batch_size: 10
+
+# Audit Configuration
+audit:
+  dimensions:
+    - visual_hierarchy
+    - spacing_rhythm
+    - typography
+    - color
+    - alignment_grid
+    - components
+    - iconography
+    - motion_transitions
+    - empty_states
+    - loading_states
+    - error_states
+    - dark_mode_theming
+    - density
+    - responsiveness
+    - accessibility
+  severity_thresholds:
+    low: 0.0
+    medium: 0.4
+    high: 0.7
+    critical: 0.9
+
+# Logging Configuration
+logging:
+  level: INFO
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+  file_rotation: "10 MB"
+  file_count: 5
