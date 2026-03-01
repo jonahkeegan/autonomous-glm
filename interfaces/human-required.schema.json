@@ -1,0 +1,97 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "HumanRequired",
+  "description": "Schema for messages requiring human review/intervention",
+  "type": "object",
+  "required": ["message_id", "source_agent", "target_agent", "message_type", "payload", "timestamp"],
+  "properties": {
+    "message_id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Unique identifier for this message"
+    },
+    "source_agent": {
+      "type": "string",
+      "const": "autonomous-glm",
+      "description": "Source agent identifier"
+    },
+    "target_agent": {
+      "type": "string",
+      "const": "human",
+      "description": "Target is always human for review requests"
+    },
+    "message_type": {
+      "type": "string",
+      "const": "HUMAN_REQUIRED",
+      "description": "Message type identifier"
+    },
+    "payload": {
+      "type": "object",
+      "required": ["review_type", "reason", "blocking"],
+      "properties": {
+        "review_type": {
+          "type": "string",
+          "enum": [
+            "design_system_change",
+            "disputed_finding",
+            "critical_severity",
+            "subjective_polish",
+            "complex_aria",
+            "novel_component",
+            "cross_agent_impact"
+          ],
+          "description": "Type of human review required"
+        },
+        "reason": {
+          "type": "string",
+          "description": "Why human review is needed"
+        },
+        "related_artifact_id": {
+          "type": "string",
+          "format": "uuid",
+          "description": "Related artifact ID if applicable"
+        },
+        "related_audit_id": {
+          "type": "string",
+          "format": "uuid",
+          "description": "Related audit ID if applicable"
+        },
+        "related_proposal_id": {
+          "type": "string",
+          "format": "uuid",
+          "description": "Related design proposal ID if applicable"
+        },
+        "blocking": {
+          "type": "boolean",
+          "description": "Whether this blocks downstream propagation"
+        },
+        "options": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "label": { "type": "string" },
+              "description": { "type": "string" },
+              "action": { "type": "string" }
+            }
+          },
+          "description": "Available options for human decision"
+        },
+        "report_path": {
+          "type": "string",
+          "description": "Path to relevant report or context"
+        }
+      }
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO-8601 timestamp"
+    },
+    "requires_response": {
+      "type": "boolean",
+      "const": true,
+      "description": "Always requires response for human review"
+    }
+  }
+}

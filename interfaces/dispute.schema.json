@@ -1,0 +1,77 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Dispute",
+  "description": "Schema for dispute messages when findings are contested",
+  "type": "object",
+  "required": ["message_id", "source_agent", "target_agent", "message_type", "payload", "timestamp"],
+  "properties": {
+    "message_id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Unique identifier for this message"
+    },
+    "source_agent": {
+      "type": "string",
+      "enum": ["autonomous-glm", "claude", "minimax", "codex"],
+      "description": "Agent raising the dispute"
+    },
+    "target_agent": {
+      "type": "string",
+      "enum": ["claude", "autonomous-glm", "human"],
+      "description": "Target agent for dispute resolution"
+    },
+    "message_type": {
+      "type": "string",
+      "const": "DISPUTE",
+      "description": "Message type identifier"
+    },
+    "payload": {
+      "type": "object",
+      "required": ["dispute_id", "audit_id", "finding_id", "dispute_reason"],
+      "properties": {
+        "dispute_id": {
+          "type": "string",
+          "format": "uuid",
+          "description": "Unique ID for this dispute"
+        },
+        "audit_id": {
+          "type": "string",
+          "format": "uuid",
+          "description": "ID of the related audit"
+        },
+        "finding_id": {
+          "type": "string",
+          "format": "uuid",
+          "description": "ID of the disputed finding"
+        },
+        "finding_summary": {
+          "type": "string",
+          "description": "Summary of the disputed finding"
+        },
+        "dispute_reason": {
+          "type": "string",
+          "description": "Reason for the dispute"
+        },
+        "proposed_alternative": {
+          "type": "string",
+          "description": "Alternative interpretation or resolution"
+        },
+        "severity": {
+          "type": "string",
+          "enum": ["low", "medium", "high"],
+          "description": "Dispute severity/urgency"
+        }
+      }
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO-8601 timestamp"
+    },
+    "requires_response": {
+      "type": "boolean",
+      "default": true,
+      "description": "Whether a response is required"
+    }
+  }
+}

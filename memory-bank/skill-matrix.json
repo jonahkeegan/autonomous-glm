@@ -1,0 +1,7 @@
+{
+  "cv_detection": { "confidence": 0.0, "last_updated": null },
+  "hierarchy_analysis": { "confidence": 0.0, "last_updated": null },
+  "accessibility_audit": { "confidence": 0.0, "last_updated": null },
+  "color_typography": { "confidence": 0.0, "last_updated": null },
+  "motion_transitions": { "confidence": 0.0, "last_updated": null }
+}

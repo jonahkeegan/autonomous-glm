@@ -1,0 +1,83 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "DesignProposal",
+  "description": "Schema for design system proposal messages from autonomous-glm",
+  "type": "object",
+  "required": ["message_id", "source_agent", "target_agent", "message_type", "payload", "timestamp"],
+  "properties": {
+    "message_id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Unique identifier for this message"
+    },
+    "source_agent": {
+      "type": "string",
+      "const": "autonomous-glm",
+      "description": "Source agent identifier"
+    },
+    "target_agent": {
+      "type": "string",
+      "enum": ["claude", "minimax", "codex", "human"],
+      "description": "Target agent for this message"
+    },
+    "message_type": {
+      "type": "string",
+      "const": "DESIGN_PROPOSAL",
+      "description": "Message type identifier"
+    },
+    "payload": {
+      "type": "object",
+      "required": ["proposal_id", "proposal_type", "changes", "human_approval_required"],
+      "properties": {
+        "proposal_id": {
+          "type": "string",
+          "format": "uuid",
+          "description": "Unique ID for this proposal"
+        },
+        "proposal_type": {
+          "type": "string",
+          "enum": ["token_addition", "token_modification", "component_addition", "component_modification", "standard_update"],
+          "description": "Type of design system change"
+        },
+        "changes": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "target_file": { "type": "string" },
+              "change_type": { "type": "string", "enum": ["add", "modify", "remove"] },
+              "old_value": { "type": "string" },
+              "new_value": { "type": "string" },
+              "rationale": { "type": "string" }
+            }
+          },
+          "description": "List of proposed changes"
+        },
+        "affected_components": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Components affected by this proposal"
+        },
+        "human_approval_required": {
+          "type": "boolean",
+          "description": "Whether human approval is required"
+        },
+        "audit_source": {
+          "type": "string",
+          "format": "uuid",
+          "description": "ID of the audit that triggered this proposal"
+        }
+      }
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO-8601 timestamp"
+    },
+    "requires_response": {
+      "type": "boolean",
+      "default": true,
+      "description": "Whether a response is required"
+    }
+  }
+}

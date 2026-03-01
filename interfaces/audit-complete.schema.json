@@ -1,0 +1,77 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "AuditComplete",
+  "description": "Schema for audit completion messages from autonomous-glm",
+  "type": "object",
+  "required": ["message_id", "source_agent", "target_agent", "message_type", "payload", "timestamp"],
+  "properties": {
+    "message_id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Unique identifier for this message"
+    },
+    "source_agent": {
+      "type": "string",
+      "const": "autonomous-glm",
+      "description": "Source agent identifier"
+    },
+    "target_agent": {
+      "type": "string",
+      "enum": ["claude", "minimax", "codex", "human"],
+      "description": "Target agent for this message"
+    },
+    "message_type": {
+      "type": "string",
+      "const": "AUDIT_COMPLETE",
+      "description": "Message type identifier"
+    },
+    "payload": {
+      "type": "object",
+      "required": ["artifact_id", "audit_id", "findings_count", "phases"],
+      "properties": {
+        "artifact_id": {
+          "type": "string",
+          "format": "uuid",
+          "description": "ID of the audited artifact"
+        },
+        "audit_id": {
+          "type": "string",
+          "format": "uuid",
+          "description": "Unique ID for this audit"
+        },
+        "findings_count": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Total number of findings"
+        },
+        "critical_count": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Number of critical severity findings"
+        },
+        "phases": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": ["Critical", "Refinement", "Polish"]
+          },
+          "description": "Phases with findings"
+        },
+        "report_path": {
+          "type": "string",
+          "description": "Path to the full audit report"
+        }
+      }
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO-8601 timestamp"
+    },
+    "requires_response": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether a response is required"
+    }
+  }
+}
