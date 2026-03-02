@@ -1,13 +1,71 @@
 # Active Context
 
 ## Current State
-- Phase: Foundation (Milestone 0)
+- Phase: Input Ingestion Pipeline (Milestone 1)
 - Last Audit: None
 - Active Artifacts: None
 - Pending Reviews: None
-- Active Milestone: M0 - Foundation COMPLETE ✅
-- Active Epics: None (M0 Complete)
-- **Just Completed**: M0-3 Foundation Validation Suite ✅
+- Active Milestone: M1 - Input Ingestion Pipeline 🔄 In Progress
+- Active Epics: M1-2, M1-3 (M1-1 Complete)
+- **Just Completed**: M1-1 Screenshot Ingestion ✅
+
+## Milestone 1 Progress
+
+| Epic | Description | Status |
+|------|-------------|--------|
+| M1-1 | Screenshot Ingestion | ✅ Complete (45 tests pass) |
+| M1-2 | Video Ingestion | 🔲 Not Started (Planning Complete) |
+| M1-3 | Context Metadata & API Endpoints | 🔲 Not Started (Planning Complete) |
+
+### M1-1 Implementation Details
+
+**Files Created:**
+- `src/ingest/__init__.py` - Module exports and public API
+- `src/ingest/models.py` - Pydantic models (IngestConfig, ValidationResult, IngestResult)
+- `src/ingest/validators.py` - Screenshot validation with magic byte detection
+- `src/ingest/storage.py` - Content-addressable storage with SHA-256 hashes
+- `src/ingest/screenshot.py` - Main entry point integrating validation, storage, DB
+- `tests/unit/test_screenshot_ingest.py` - 45 comprehensive unit tests
+- `tests/fixtures/generate_fixtures.py` - Test fixture generator
+
+**Files Modified:**
+- `requirements.txt` - Added `pillow>=10.0.0`
+- `src/config/schema.py` - Added `IngestionConfig` model
+- `config/default.yaml` - Added ingestion configuration section
+
+**Key Features:**
+- Magic byte validation for PNG/JPEG (prevents extension spoofing)
+- Dimension validation (100-10000px configurable)
+- File size validation (≤50MB configurable)
+- Content-addressable storage with SHA-256 hash IDs
+- YYYY/MM directory structure for organized storage
+- Atomic file writes with temp file + rename
+- Duplicate detection via content hash
+- Corruption detection via PIL verification
+- Database integration with `Screen` entity
+
+**Test Coverage:**
+- 45 new tests for ingestion module
+- 278 total tests passing
+- Categories: Model tests, Validator tests, Storage tests, Integration tests, Edge cases
+
+---
+
+### M1 Epic Planning Details
+
+**Epic M1-2: Video Ingestion**
+- Video handlers for MP4/MOV with ffmpeg
+- Time-based frame extraction (default 1 fps)
+- Frames stored as `Screen` entities, linked via `Flow` entity
+- Dependencies: M1-1 complete
+
+**Epic M1-3: Context Metadata & API**
+- FastAPI-based REST API
+- Endpoints: `POST /api/v1/ingest/screenshot`, `POST /api/v1/ingest/video`
+- JSON/YAML metadata parser
+- Dependencies: M1-1, M1-2 complete
+
+---
 
 ## Milestone 0 Progress
 
@@ -85,6 +143,8 @@
 ## Recent Activity
 | Date | Activity | Status |
 |------|----------|--------|
+| 2026-03-01 | M1-1 Screenshot Ingestion complete (45 tests, 278 total) | Complete |
+| 2026-03-01 | M1 Epic Planning complete (3 epics created) | Complete |
 | 2026-03-01 | M0-3 Foundation Validation Suite complete | Complete |
 | 2026-03-01 | Created health check script | Complete |
 | 2026-03-01 | Created validation tests for schemas, directories, design system, memory bank | Complete |

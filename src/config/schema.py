@@ -194,6 +194,58 @@ class AuditConfig(BaseModel):
     )
 
 
+class IngestionConfig(BaseModel):
+    """Configuration for screenshot/video ingestion."""
+    max_file_size_mb: float = Field(
+        default=50.0,
+        ge=0.1,
+        le=1000.0,
+        description="Maximum file size in megabytes"
+    )
+    min_width: int = Field(
+        default=100,
+        ge=1,
+        description="Minimum image width in pixels"
+    )
+    min_height: int = Field(
+        default=100,
+        ge=1,
+        description="Minimum image height in pixels"
+    )
+    max_width: int = Field(
+        default=10000,
+        ge=100,
+        description="Maximum image width in pixels"
+    )
+    max_height: int = Field(
+        default=10000,
+        ge=100,
+        description="Maximum image height in pixels"
+    )
+    allowed_formats: list[str] = Field(
+        default=["png", "jpeg", "jpg"],
+        description="List of allowed image formats"
+    )
+    
+    @field_validator("max_width")
+    @classmethod
+    def validate_max_width(cls, v: int, info) -> int:
+        """Ensure max_width > min_width."""
+        min_width = info.data.get("min_width", 100)
+        if v <= min_width:
+            raise ValueError("max_width must be greater than min_width")
+        return v
+    
+    @field_validator("max_height")
+    @classmethod
+    def validate_max_height(cls, v: int, info) -> int:
+        """Ensure max_height > min_height."""
+        min_height = info.data.get("min_height", 100)
+        if v <= min_height:
+            raise ValueError("max_height must be greater than min_height")
+        return v
+
+
 class LoggingConfig(BaseModel):
     """Logging configuration."""
     level: LogLevel = Field(default=LogLevel.INFO, description="Log level")
@@ -214,4 +266,5 @@ class Config(BaseModel):
     agents: AgentsConfig = Field(default_factory=AgentsConfig)
     cv_pipeline: CVPipelineConfig = Field(default_factory=CVPipelineConfig)
     audit: AuditConfig = Field(default_factory=AuditConfig)
+    ingestion: IngestionConfig = Field(default_factory=IngestionConfig)
     logging: LoggingConfig = Field(default_factory=LoggingConfig)

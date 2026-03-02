@@ -77,6 +77,18 @@ audit:
     high: 0.7
     critical: 0.9
 
+# Ingestion Configuration
+ingestion:
+  max_file_size_mb: 50.0
+  min_width: 100
+  min_height: 100
+  max_width: 10000
+  max_height: 10000
+  allowed_formats:
+    - png
+    - jpeg
+    - jpg
+
 # Logging Configuration
 logging:
   level: INFO
