@@ -6,15 +6,15 @@
 - Active Artifacts: None
 - Pending Reviews: None
 - Active Milestone: M1 - Input Ingestion Pipeline 🔄 In Progress
-- Active Epics: M1-2, M1-3 (M1-1 Complete)
-- **Just Completed**: M1-1 Screenshot Ingestion ✅
+- Active Epics: M1-3 (M1-1, M1-2 Complete)
+- **Just Completed**: M1-2 Video Ingestion ✅ (34 tests, 311 total)
 
 ## Milestone 1 Progress
 
 | Epic | Description | Status |
 |------|-------------|--------|
 | M1-1 | Screenshot Ingestion | ✅ Complete (45 tests pass) |
-| M1-2 | Video Ingestion | 🔲 Not Started (Planning Complete) |
+| M1-2 | Video Ingestion | ✅ Complete (34 tests pass) |
 | M1-3 | Context Metadata & API Endpoints | 🔲 Not Started (Planning Complete) |
 
 ### M1-1 Implementation Details
@@ -51,13 +51,38 @@
 
 ---
 
-### M1 Epic Planning Details
+### M1-2 Implementation Details
 
-**Epic M1-2: Video Ingestion**
-- Video handlers for MP4/MOV with ffmpeg
-- Time-based frame extraction (default 1 fps)
-- Frames stored as `Screen` entities, linked via `Flow` entity
-- Dependencies: M1-1 complete
+**Files Created:**
+- `src/ingest/video_models.py` - Pydantic models (VideoContainer, VideoCodec, VideoIngestConfig, FrameInfo, etc.)
+- `src/ingest/video_validators.py` - Video validation with magic byte detection, ffprobe integration
+- `src/ingest/frames.py` - Frame extraction with temp directory management, hash deduplication
+- `src/ingest/video.py` - Main entry point (ingest_video, validate_video, ingest_video_quick)
+- `tests/unit/test_video_ingest.py` - 34 comprehensive unit tests
+
+**Files Modified:**
+- `requirements.txt` - Added `ffmpeg-python>=0.2.0`
+- `src/ingest/__init__.py` - Added video exports
+- `src/config/schema.py` - Added `VideoIngestionConfig` model
+- `config/default.yaml` - Added video_ingestion configuration section
+
+**Key Features:**
+- MP4/MOV container detection via ftyp box magic bytes
+- Codec detection and normalization (H264, H265, HEVC, VP8, VP9)
+- Time-based frame extraction at configurable FPS (default 1 fps)
+- SHA-256 hash-based frame deduplication
+- Temp directory management with automatic cleanup
+- Context manager pattern for resource safety
+- Database integration with Screen and Flow entities
+
+**Test Coverage:**
+- 34 new tests for video ingestion module
+- 311 total tests passing
+- Categories: Config tests, Validator tests, FrameExtractor tests, Model tests, Integration tests
+
+---
+
+### M1 Epic Planning Details
 
 **Epic M1-3: Context Metadata & API**
 - FastAPI-based REST API
@@ -143,6 +168,7 @@
 ## Recent Activity
 | Date | Activity | Status |
 |------|----------|--------|
+| 2026-03-02 | M1-2 Video Ingestion complete (34 tests, 311 total) | Complete |
 | 2026-03-01 | M1-1 Screenshot Ingestion complete (45 tests, 278 total) | Complete |
 | 2026-03-01 | M1 Epic Planning complete (3 epics created) | Complete |
 | 2026-03-01 | M0-3 Foundation Validation Suite complete | Complete |

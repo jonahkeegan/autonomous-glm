@@ -89,6 +89,24 @@ ingestion:
     - jpeg
     - jpg
 
+# Video Ingestion Configuration
+video_ingestion:
+  max_file_size_mb: 500.0
+  max_duration_seconds: 1800  # 30 minutes
+  max_width: 10000
+  max_height: 10000
+  allowed_containers:
+    - mp4
+    - mov
+  allowed_codecs:
+    - h264
+    - h265
+    - hevc
+    - vp8
+    - vp9
+  extraction_interval: 1.0  # seconds between frames (1 fps)
+  max_frames: 500
+
 # Logging Configuration
 logging:
   level: INFO

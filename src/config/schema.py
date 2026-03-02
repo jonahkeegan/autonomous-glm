@@ -246,6 +246,52 @@ class IngestionConfig(BaseModel):
         return v
 
 
+class VideoIngestionConfig(BaseModel):
+    """Configuration for video ingestion."""
+    max_file_size_mb: float = Field(
+        default=500.0,
+        ge=0.1,
+        le=10000.0,
+        description="Maximum video file size in megabytes"
+    )
+    max_duration_seconds: float = Field(
+        default=1800.0,
+        ge=1.0,
+        le=7200.0,
+        description="Maximum video duration in seconds"
+    )
+    max_width: int = Field(
+        default=10000,
+        ge=100,
+        description="Maximum video width in pixels"
+    )
+    max_height: int = Field(
+        default=10000,
+        ge=100,
+        description="Maximum video height in pixels"
+    )
+    allowed_containers: list[str] = Field(
+        default=["mp4", "mov"],
+        description="List of allowed container formats"
+    )
+    allowed_codecs: list[str] = Field(
+        default=["h264", "h265", "hevc", "vp8", "vp9"],
+        description="List of allowed video codecs"
+    )
+    extraction_interval: float = Field(
+        default=1.0,
+        ge=0.1,
+        le=10.0,
+        description="Frame extraction interval in seconds"
+    )
+    max_frames: int = Field(
+        default=500,
+        ge=1,
+        le=5000,
+        description="Maximum number of frames to extract per video"
+    )
+
+
 class LoggingConfig(BaseModel):
     """Logging configuration."""
     level: LogLevel = Field(default=LogLevel.INFO, description="Log level")
@@ -267,4 +313,5 @@ class Config(BaseModel):
     cv_pipeline: CVPipelineConfig = Field(default_factory=CVPipelineConfig)
     audit: AuditConfig = Field(default_factory=AuditConfig)
     ingestion: IngestionConfig = Field(default_factory=IngestionConfig)
+    video_ingestion: VideoIngestionConfig = Field(default_factory=VideoIngestionConfig)
     logging: LoggingConfig = Field(default_factory=LoggingConfig)

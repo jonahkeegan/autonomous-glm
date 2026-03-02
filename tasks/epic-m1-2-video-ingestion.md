@@ -3,7 +3,7 @@
 > **Milestone:** 1 - Input Ingestion Pipeline  
 > **Priority:** High  
 > **Dependencies:** M1-1 (Screenshot Ingestion)  
-> **Status:** 🔲 Not Started
+> **Status:** ✅ Complete
 
 ---
 
@@ -142,67 +142,67 @@ tests/
 ## Tasks
 
 ### Phase 1: Foundation & Models
-- [ ] Add ffmpeg-python to requirements.txt
-- [ ] Create `src/ingest/video_models.py` with Pydantic models
-- [ ] Create `src/ingest/video_validators.py` stub
-- [ ] Add video ingestion config section to `config/default.yaml`
-- [ ] Document ffmpeg system dependency in README/setup docs
+- [x] Add ffmpeg-python to requirements.txt
+- [x] Create `src/ingest/video_models.py` with Pydantic models
+- [x] Create `src/ingest/video_validators.py` stub
+- [x] Add video ingestion config section to `config/default.yaml`
+- [x] Document ffmpeg system dependency in README/setup docs
 
 ### Phase 2: Video Validation
-- [ ] Implement MP4 container validation (ftyp box)
-- [ ] Implement MOV container validation
-- [ ] Implement codec detection (H.264, H.265, VP8, VP9)
-- [ ] Implement video duration check
-- [ ] Implement resolution validation
-- [ ] Implement corruption detection (header parsing)
-- [ ] Write unit tests for video validators
+- [x] Implement MP4 container validation (ftyp box)
+- [x] Implement MOV container validation
+- [x] Implement codec detection (H.264, H.265, VP8, VP9)
+- [x] Implement video duration check
+- [x] Implement resolution validation
+- [x] Implement corruption detection (header parsing)
+- [x] Write unit tests for video validators
 
 ### Phase 3: Frame Extraction
-- [ ] Create `src/ingest/frames.py`
-- [ ] Implement time-based frame extraction using ffmpeg
-- [ ] Implement frame metadata capture (timestamp, frame number)
-- [ ] Implement temporary frame storage
-- [ ] Implement frame hash calculation for deduplication
-- [ ] Handle extraction errors gracefully
-- [ ] Write unit tests for frame extractor
+- [x] Create `src/ingest/frames.py`
+- [x] Implement time-based frame extraction using ffmpeg
+- [x] Implement frame metadata capture (timestamp, frame number)
+- [x] Implement temporary frame storage
+- [x] Implement frame hash calculation for deduplication
+- [x] Handle extraction errors gracefully
+- [x] Write unit tests for frame extractor
 
 ### Phase 4: Video Handler Integration
-- [ ] Create `src/ingest/video.py`
-- [ ] Implement `validate_video()` using video validators
-- [ ] Implement `extract_frames()` using frame extractor
-- [ ] Implement frame storage using existing screenshot patterns
-- [ ] Implement `create_flow()` for Flow entity creation
-- [ ] Implement `ingest_video()` as main entry point
-- [ ] Write unit tests for video handler
+- [x] Create `src/ingest/video.py`
+- [x] Implement `validate_video()` using video validators
+- [x] Implement `extract_frames()` using frame extractor
+- [x] Implement frame storage using existing screenshot patterns
+- [x] Implement `create_flow()` for Flow entity creation
+- [x] Implement `ingest_video()` as main entry point
+- [x] Write unit tests for video handler
 
 ### Phase 5: Database Integration
-- [ ] Integrate with `Screen` CRUD for extracted frames
-- [ ] Integrate with `Flow` CRUD for flow creation
-- [ ] Store extraction metadata in `Flow.metadata`
-- [ ] Handle transaction rollback on partial failure
-- [ ] Write integration tests for database operations
+- [x] Integrate with `Screen` CRUD for extracted frames
+- [x] Integrate with `Flow` CRUD for flow creation
+- [x] Store extraction metadata in `Flow.metadata`
+- [x] Handle transaction rollback on partial failure
+- [x] Write integration tests for database operations
 
 ### Phase 6: Configuration & Testing
-- [ ] Add video settings to `src/config/schema.py`
-- [ ] Update `config/default.yaml` with video defaults
-- [ ] Create video test fixtures (short MP4, MOV clips)
-- [ ] Write comprehensive unit tests (>90% coverage)
-- [ ] Test edge cases (corrupt video, unsupported codec, too long)
-- [ ] Test frame deduplication
-- [ ] Run full test suite and verify no regressions
+- [x] Add video settings to `src/config/schema.py`
+- [x] Update `config/default.yaml` with video defaults
+- [x] Create video test fixtures (short MP4, MOV clips)
+- [x] Write comprehensive unit tests (>90% coverage)
+- [x] Test edge cases (corrupt video, unsupported codec, too long)
+- [x] Test frame deduplication
+- [x] Run full test suite and verify no regressions
 
 ---
 
 ## Success Criteria
 
-- [ ] Videos ingest and extract frames correctly
-- [ ] Frame extraction time < 2s per video segment (10s at 1fps)
-- [ ] Extracted frames stored as valid `Screen` entities
-- [ ] `Flow` entity correctly links sequential frames
-- [ ] Video validation rejects unsupported formats clearly
-- [ ] All paths use configuration (no hardcoded paths)
-- [ ] Unit test coverage > 90% for video ingestion module
-- [ ] No regressions in existing test suite
+- [x] Videos ingest and extract frames correctly
+- [x] Frame extraction time < 2s per video segment (10s at 1fps)
+- [x] Extracted frames stored as valid `Screen` entities
+- [x] `Flow` entity correctly links sequential frames
+- [x] Video validation rejects unsupported formats clearly
+- [x] All paths use configuration (no hardcoded paths)
+- [x] Unit test coverage > 90% for video ingestion module
+- [x] No regressions in existing test suite
 
 ---
 
