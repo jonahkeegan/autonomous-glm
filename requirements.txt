@@ -4,6 +4,12 @@ pyyaml>=6.0
 pillow>=10.0.0
 ffmpeg-python>=0.2.0
 
+# API dependencies
+fastapi>=0.109.0
+uvicorn[standard]>=0.27.0
+python-multipart>=0.0.6
+
 # Development/Testing dependencies
 pytest>=7.0.0
 pytest-cov>=4.0.0
+httpx>=0.26.0  # For testing FastAPI with TestClient

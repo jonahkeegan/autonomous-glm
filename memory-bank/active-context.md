@@ -1,13 +1,13 @@
 # Active Context
 
 ## Current State
-- Phase: Input Ingestion Pipeline (Milestone 1)
+- Phase: Input Ingestion Pipeline (Milestone 1) ✅ **COMPLETE**
 - Last Audit: None
 - Active Artifacts: None
 - Pending Reviews: None
-- Active Milestone: M1 - Input Ingestion Pipeline 🔄 In Progress
-- Active Epics: M1-3 (M1-1, M1-2 Complete)
-- **Just Completed**: M1-2 Video Ingestion ✅ (34 tests, 311 total)
+- Active Milestone: M2 - CV Detection Pipeline (Next)
+- Active Epics: None (M1 Complete)
+- **Just Completed**: M1-3 Context Metadata & API ✅ (50 tests, 361 total)
 
 ## Milestone 1 Progress
 
@@ -15,7 +15,7 @@
 |------|-------------|--------|
 | M1-1 | Screenshot Ingestion | ✅ Complete (45 tests pass) |
 | M1-2 | Video Ingestion | ✅ Complete (34 tests pass) |
-| M1-3 | Context Metadata & API Endpoints | 🔲 Not Started (Planning Complete) |
+| M1-3 | Context Metadata & API Endpoints | ✅ Complete (50 tests pass) |
 
 ### M1-1 Implementation Details
 
@@ -82,13 +82,35 @@
 
 ---
 
-### M1 Epic Planning Details
+### M1-3 Implementation Details
 
-**Epic M1-3: Context Metadata & API**
-- FastAPI-based REST API
-- Endpoints: `POST /api/v1/ingest/screenshot`, `POST /api/v1/ingest/video`
-- JSON/YAML metadata parser
-- Dependencies: M1-1, M1-2 complete
+**Files Created:**
+- `src/api/__init__.py` - API module exports
+- `src/api/app.py` - FastAPI application factory with CORS, lifespan
+- `src/api/config.py` - APIConfig model with defaults
+- `src/api/exceptions.py` - ProblemDetail RFC 7807 error handling
+- `src/api/models.py` - Request/Response Pydantic models
+- `src/api/routes/__init__.py` - Router exports
+- `src/api/routes/health.py` - Health check endpoint (database, storage, ffmpeg)
+- `src/api/routes/ingest.py` - Screenshot/video upload endpoints with metadata
+- `src/ingest/metadata_models.py` - ArtifactMetadata, ScreenMetadata, FlowMetadata
+- `src/ingest/metadata.py` - JSON/YAML parsing, validation, DB association
+- `tests/unit/test_api.py` - 19 API tests
+- `tests/unit/test_metadata.py` - 31 metadata tests
+
+**Key Features:**
+- FastAPI application with OpenAPI docs at /docs
+- Health check returns healthy/degraded/unhealthy status
+- Multipart file upload for screenshots and videos
+- JSON metadata attachment to ingested artifacts
+- Three-tier metadata hierarchy (base, screenshot, video)
+- RFC 7807 ProblemDetail error responses
+- CORS middleware for cross-origin requests
+
+**Test Coverage:**
+- 50 new tests for API and metadata modules
+- 361 total tests passing
+- Categories: Config tests, Model tests, Endpoint tests, Parsing tests, Validation tests
 
 ---
 
@@ -168,6 +190,7 @@
 ## Recent Activity
 | Date | Activity | Status |
 |------|----------|--------|
+| 2026-03-02 | M1-3 Context Metadata & API complete (50 tests, 361 total) | Complete |
 | 2026-03-02 | M1-2 Video Ingestion complete (34 tests, 311 total) | Complete |
 | 2026-03-01 | M1-1 Screenshot Ingestion complete (45 tests, 278 total) | Complete |
 | 2026-03-01 | M1 Epic Planning complete (3 epics created) | Complete |
