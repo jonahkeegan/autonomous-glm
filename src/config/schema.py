@@ -131,6 +131,63 @@ class CVPipelineConfig(BaseModel):
     )
 
 
+class VisionConfig(BaseModel):
+    """Vision detection configuration for GPT-4 Vision API."""
+    model: str = Field(
+        default="gpt-4o",
+        description="OpenAI model to use for detection"
+    )
+    max_tokens: int = Field(
+        default=4096,
+        ge=1,
+        le=16384,
+        description="Maximum tokens in API response"
+    )
+    temperature: float = Field(
+        default=0.1,
+        ge=0.0,
+        le=2.0,
+        description="Sampling temperature (lower = more deterministic)"
+    )
+    confidence_threshold: float = Field(
+        default=0.5,
+        ge=0.0,
+        le=1.0,
+        description="Minimum confidence to include in results"
+    )
+    rate_limit_per_minute: int = Field(
+        default=60,
+        ge=1,
+        le=1000,
+        description="Maximum API requests per minute"
+    )
+    retry_attempts: int = Field(
+        default=3,
+        ge=0,
+        le=10,
+        description="Number of retry attempts on failure"
+    )
+    retry_base_delay_ms: int = Field(
+        default=1000,
+        ge=100,
+        description="Base delay for retries in milliseconds"
+    )
+    retry_max_delay_ms: int = Field(
+        default=30000,
+        ge=1000,
+        description="Maximum delay for retries in milliseconds"
+    )
+
+    @field_validator("retry_max_delay_ms")
+    @classmethod
+    def validate_retry_delays(cls, v: int, info) -> int:
+        """Ensure max delay is greater than base delay."""
+        base_delay = info.data.get("retry_base_delay_ms", 1000)
+        if v < base_delay:
+            raise ValueError("retry_max_delay_ms must be greater than retry_base_delay_ms")
+        return v
+
+
 class SeverityThresholdsConfig(BaseModel):
     """Severity threshold configuration for audit findings."""
     low: float = Field(default=0.0, ge=0.0, le=1.0)
@@ -311,6 +368,7 @@ class Config(BaseModel):
     agent_protocol: AgentProtocolConfig = Field(default_factory=AgentProtocolConfig)
     agents: AgentsConfig = Field(default_factory=AgentsConfig)
     cv_pipeline: CVPipelineConfig = Field(default_factory=CVPipelineConfig)
+    vision: VisionConfig = Field(default_factory=VisionConfig)
     audit: AuditConfig = Field(default_factory=AuditConfig)
     ingestion: IngestionConfig = Field(default_factory=IngestionConfig)
     video_ingestion: VideoIngestionConfig = Field(default_factory=VideoIngestionConfig)

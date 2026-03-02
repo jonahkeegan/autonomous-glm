@@ -58,3 +58,4 @@ data/artifacts/videos/*.mp4
 output/reports/*.json.venv/
 htmlcov/
 .pytest_cache/
+.venv/

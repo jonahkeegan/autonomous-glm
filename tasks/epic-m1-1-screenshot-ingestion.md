@@ -2,8 +2,8 @@
 
 > **Milestone:** 1 - Input Ingestion Pipeline  
 > **Priority:** Critical  
-> **Dependencies:** M0 (Complete)  
-> **Status:** 🔲 Not Started
+> **Dependencies:** Epic M0-1, Epic M0-2  
+> **Status:** ✅ COMPLETE
 
 ---
 

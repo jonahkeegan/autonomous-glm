@@ -49,9 +49,19 @@ agents:
 
 # Computer Vision Pipeline
 cv_pipeline:
-  model: "glm-5-vision"
-  detection_threshold: 0.95  # 95% confidence required
+  model: glm-5-vision
+  detection_threshold: 0.95
   batch_size: 10
+
+vision:
+  model: gpt-4o
+  max_tokens: 4096
+  temperature: 0.1
+  confidence_threshold: 0.5
+  rate_limit_per_minute: 60
+  retry_attempts: 3
+  retry_base_delay_ms: 1000
+  retry_max_delay_ms: 30000
 
 # Audit Configuration
 audit:

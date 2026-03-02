@@ -2,8 +2,8 @@
 
 > **Milestone:** 1 - Input Ingestion Pipeline  
 > **Priority:** High  
-> **Dependencies:** M1-1 (Screenshot Ingestion), M1-2 (Video Ingestion)  
-> **Status:** 🔲 Not Started
+> **Dependencies:** Epic M1-1 (Screenshot Ingestion), Epic M1-2 (Video Ingestion)  
+> **Status:** ✅ COMPLETE
 
 ---
 

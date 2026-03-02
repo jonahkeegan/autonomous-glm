@@ -1,13 +1,58 @@
 # Active Context
 
 ## Current State
-- Phase: Input Ingestion Pipeline (Milestone 1) ✅ **COMPLETE**
+- Phase: CV/AI Analysis Core (Milestone 2) 🟢 **M2-1 Complete, M2-2 Ready**
 - Last Audit: None
 - Active Artifacts: None
 - Pending Reviews: None
-- Active Milestone: M2 - CV Detection Pipeline (Next)
-- Active Epics: None (M1 Complete)
-- **Just Completed**: M1-3 Context Metadata & API ✅ (50 tests, 361 total)
+- Active Milestone: M2 - CV/AI Analysis Core
+- Active Epics: M2-1 ✅, M2-2 (next), M2-3
+- **Just Completed**: M2-1 Component Detection Pipeline ✅ (34 tests, 395 total)
+
+## M2-1 Implementation Details
+
+**Files Created:**
+- `src/vision/__init__.py` - Module exports
+- `src/vision/models.py` - Pydantic models (ComponentType, DetectedComponent, DetectionResult, DetectionConfig)
+- `src/vision/client.py` - VisionClient with GPT-4 Vision API integration
+- `src/vision/prompts.py` - System prompt and user prompt templates
+- `tests/unit/test_vision_client.py` - 34 comprehensive unit tests
+
+**Files Modified:**
+- `config/default.yaml` - Added `vision:` config section
+- `src/config/schema.py` - Added `VisionConfig` model
+- `requirements.txt` - Added `openai>=1.0.0`
+
+**Key Features:**
+- 21 component types supported (button, input, modal, label, icon, image, text, container, card, navigation, checkbox, radio, select, slider, switch, tab, table, header, footer, sidebar, unknown)
+- Normalized bounding boxes (0.0-1.0) with to_absolute() conversion
+- Exponential backoff retry with configurable attempts
+- Rate limiting (requests per minute)
+- Async support via detect_components_async()
+- Markdown code block stripping from API responses
+- Confidence threshold filtering
+
+**Test Coverage:**
+- 34 new tests for vision module
+- 395 total tests passing (1 skipped for ffmpeg)
+
+## M2 Epic Planning Summary
+
+**CV Strategy Decision:** GPT-4 Vision API with component.gallery few-shot prompting
+
+| Epic | Name | Priority | Dependencies |
+|------|------|----------|--------------|
+| M2-1 | Component Detection Pipeline | Critical | M1-1, M1-2 |
+| M2-2 | Hierarchy & Flow Analysis | High | M2-1 |
+| M2-3 | Token Extraction | High | M2-1 |
+
+**Key Technical Decisions:**
+- CV Model: GPT-4 Vision API (gpt-4o) - >95% accuracy, structured JSON output
+- Few-shot examples: component.gallery (1000+ labeled UI components)
+- Bounding boxes: Normalized coordinates (0.0-1.0)
+- Hierarchy: Nested JSON in Screen.hierarchy field
+- Similarity: pHash + component overlap comparison
+- Color matching: CIEDE2000 perceptual distance
 
 ## Milestone 1 Progress
 
@@ -190,6 +235,8 @@
 ## Recent Activity
 | Date | Activity | Status |
 |------|----------|--------|
+| 2026-03-02 | M2-1 Component Detection Pipeline complete (34 tests, 395 total) | Complete |
+| 2026-03-02 | M2 Epic Planning complete (3 epics, GPT-4 Vision API chosen) | Complete |
 | 2026-03-02 | M1-3 Context Metadata & API complete (50 tests, 361 total) | Complete |
 | 2026-03-02 | M1-2 Video Ingestion complete (34 tests, 311 total) | Complete |
 | 2026-03-01 | M1-1 Screenshot Ingestion complete (45 tests, 278 total) | Complete |
