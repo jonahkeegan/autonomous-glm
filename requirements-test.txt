@@ -1,0 +1,19 @@
+# Test dependencies for Autonomous-GLM
+# Install with: pip install -r requirements-test.txt
+
+# Test framework
+pytest>=7.0.0
+pytest-cov>=4.0.0
+pytest-json-report>=1.5.0
+
+# Schema validation
+jsonschema>=4.0.0
+
+# Configuration parsing (already in main requirements)
+pyyaml>=6.0
+
+# Type checking (optional, for CI)
+mypy>=1.0.0
+
+# Code quality (optional, for CI)
+ruff>=0.1.0

@@ -55,4 +55,6 @@ htmlcov/
 # Project-specific
 data/artifacts/screenshots/*.png
 data/artifacts/videos/*.mp4
-output/reports/*.json
+output/reports/*.json.venv/
+htmlcov/
+.pytest_cache/
