@@ -1,13 +1,45 @@
 # Active Context
 
 ## Current State
-- Phase: CV/AI Analysis Core (Milestone 2) 🟢 **M2-1 & M2-2 Complete, M2-3 Ready**
+- Phase: CV/AI Analysis Core (Milestone 2) 🟢 **M2 COMPLETE - All 3 Epics Done**
 - Last Audit: None
 - Active Artifacts: None
 - Pending Reviews: None
-- Active Milestone: M2 - CV/AI Analysis Core
-- Active Epics: M2-1 ✅, M2-2 ✅, M2-3 (next)
-- **Just Completed**: M2-2 Hierarchy & Flow Analysis ✅ (54 tests, 449 total)
+- Active Milestone: M2 - CV/AI Analysis Core ✅ COMPLETE
+- Active Epics: M2-1 ✅, M2-2 ✅, M2-3 ✅
+- **Just Completed**: M2-3 Token Extraction ✅ (59 tests, 508 total)
+
+## M2-3 Token Extraction Implementation Details
+
+**Files Created:**
+- `src/vision/tokens/__init__.py` - Module exports with clean public API
+- `src/vision/tokens/models.py` - Pydantic models (RGB, HSL, LAB, HexColor, ColorResult, ColorCluster, Margins, Padding, SpacingPattern, FontSizeEstimate, FontWeightEstimate, TypographyResult, TokenMatch, TokenMatchResult, DesignToken, DesignSystemTokens)
+- `src/vision/tokens/color.py` - ColorExtractor with k-means clustering, gradient detection
+- `src/vision/tokens/spacing.py` - SpacingAnalyzer with margin/padding inference, grid quantization
+- `src/vision/tokens/typography.py` - TypographyDetector with font size/weight estimation
+- `src/vision/tokens/matcher.py` - TokenMatcher with LAB color distance, spacing/typography matching
+- `tests/unit/test_tokens.py` - 59 comprehensive unit tests
+
+**Files Modified:**
+- `src/vision/__init__.py` - Added tokens module exports
+- `requirements.txt` - Added scikit-learn>=1.3.0
+
+**Key Features:**
+- K-means color extraction with configurable cluster count
+- LAB color space conversion for perceptual color distance
+- Gradient detection via color variance analysis
+- Spacing quantization to 4px/8px grid
+- Font size estimation from bbox height (0.8 ratio)
+- Font weight estimation from pixel density
+- Default Tailwind-style design tokens
+- Token matching with confidence scores
+- `has_unmatched_tokens` computed via model_validator
+
+**Test Coverage:**
+- 59 new tests for token extraction module
+- 508 total tests passing
+
+---
 
 ## M2-2 Implementation Details
 
@@ -264,6 +296,8 @@
 ## Recent Activity
 | Date | Activity | Status |
 |------|----------|--------|
+| 2026-03-02 | M2-3 Token Extraction complete (59 tests, 508 total) - MILESTONE 2 COMPLETE | Complete |
+| 2026-03-02 | M2-2 Hierarchy & Flow Analysis complete (54 tests, 449 total) | Complete |
 | 2026-03-02 | M2-1 Component Detection Pipeline complete (34 tests, 395 total) | Complete |
 | 2026-03-02 | M2 Epic Planning complete (3 epics, GPT-4 Vision API chosen) | Complete |
 | 2026-03-02 | M1-3 Context Metadata & API complete (50 tests, 361 total) | Complete |

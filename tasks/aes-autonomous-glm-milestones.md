@@ -17,84 +17,61 @@ This document maps the development milestones for autonomous-glm, structured to 
 
 ## Milestone 0: Foundation
 
-**Status:** ✅ COMPLETE  
+**Status:** 🔲 Not Started  
 **Duration Estimate:** 1-2 days  
-**Actual Duration:** 2 days (2026-02-27 - 2026-03-01)  
 **Dependencies:** None
 
 ### Objectives
 Establish the foundational infrastructure, data model, and configuration required for all subsequent development.
 
 ### Deliverables
-- [x] Project directory structure (`/data`, `/logs`, `/output`, `/design_system`, `/memory-bank`)
-- [x] SQLite database schema with all entities (Screen, Flow, Component, AuditFinding, PlanPhase, SystemToken)
-- [x] Configuration management (environment variables, config files)
-- [x] Design system file templates (`tokens.md`, `components.md`, `standards.md`)
-- [x] Memory bank initialization (`audit-patterns.md`, `mistakes.md`, `agent-feedback.md`, `skill-matrix.json`)
-- [x] Interface schema files validation (`/interfaces/*.schema.json`)
+- [ ] Project directory structure (`/data`, `/logs`, `/output`, `/design_system`, `/memory-bank`)
+- [ ] SQLite database schema with all entities (Screen, Flow, Component, AuditFinding, PlanPhase, SystemToken)
+- [ ] Configuration management (environment variables, config files)
+- [ ] Design system file templates (`tokens.md`, `components.md`, `standards.md`)
+- [ ] Memory bank initialization (`audit-patterns.md`, `mistakes.md`, `agent-feedback.md`, `skill-matrix.json`)
+- [ ] Interface schema files validation (`/interfaces/*.schema.json`)
 
 ### Success Criteria
-- [x] All directories exist with proper `.gitkeep` files
-- [x] Database initializes with correct schema
-- [x] Configuration loads without errors
-- [x] Design system files are readable and valid
+- All directories exist with proper `.gitkeep` files
+- Database initializes with correct schema
+- Configuration loads without errors
+- Design system files are readable and valid
 
 ### KPIs
-- [x] Zero startup errors
-- [x] All schema validations pass
-
-### Completion Summary
-**Completed:** 2026-03-01  
-**Epics:** M0-1 (Database), M0-2 (Configuration), M0-3 (Validation Suite)  
-**Tests:** 233 passing, 83% coverage  
-**Files Created:** 25+ source files, test files, config files
+- Zero startup errors
+- All schema validations pass
 
 ---
 
 ## Milestone 1: Input Ingestion Pipeline
 
-**Status:** ✅ COMPLETE  
+**Status:** 🔲 Not Started  
 **Duration Estimate:** 3-4 days  
-**Actual Duration:** 2 days (2026-03-01 - 2026-03-02)  
 **Dependencies:** Milestone 0
 
 ### Objectives
 Build the artifact ingestion system that accepts screenshots, videos, and context metadata.
 
 ### Deliverables
-- [x] Screenshot handler (PNG, JPEG) with file validation
-- [x] Video handler (MP4, MOV) with frame extraction capability
-- [x] Context metadata parser (JSON, YAML)
-- [x] Artifact storage and reference management
-- [x] Ingest ID generation and tracking
-- [x] API endpoints:
-  - `POST /api/v1/ingest/screenshot` — returns ingest ID
-  - `POST /api/v1/ingest/video` — returns ingest ID
-  - `GET /api/v1/ingest/{ingest_id}` — query ingest status
-  - `GET /health` — health check endpoint
+- [ ] Screenshot handler (PNG, JPEG) with file validation
+- [ ] Video handler (MP4, MOV) with frame extraction capability
+- [ ] Context metadata parser (JSON, YAML)
+- [ ] Artifact storage and reference management
+- [ ] Ingest ID generation and tracking
+- [ ] API endpoints:
+  - `POST /ingest/screenshot` — returns ingest ID
+  - `POST /ingest/video` — returns ingest ID
 
 ### Success Criteria
-- [x] Screenshots ingest correctly and store references
-- [x] Videos extract key frames for analysis
-- [x] Context metadata parses and associates with artifacts
-- [x] Ingest IDs are unique and trackable
+- Screenshots ingest correctly and store references
+- Videos extract key frames for analysis
+- Context metadata parses and associates with artifacts
+- Ingest IDs are unique and trackable
 
 ### KPIs
-- [x] Ingest time < 100ms per screenshot
-- [x] Video frame extraction < 2s per video segment
-
-### Completion Summary
-**Completed:** 2026-03-02  
-**Epics:** M1-1 (Screenshot), M1-2 (Video), M1-3 (Context Metadata & API)  
-**Tests:** 361 passing, 1 skipped (ffmpeg binary)  
-**Files Created:** 14+ source files, test files  
-**Key Features:**
-- Magic byte validation for PNG/JPEG/MP4/MOV
-- Content-addressable storage with SHA-256 hashes
-- Time-based frame extraction at configurable FPS
-- FastAPI application with OpenAPI docs at /docs
-- RFC 7807 ProblemDetail error responses
-- Three-tier metadata hierarchy (base, screenshot, video)
+- Ingest time < 100ms per screenshot
+- Video frame extraction < 2s per video segment
 
 ---
 
@@ -447,14 +424,12 @@ M0: Foundation
 
 ## Next Steps
 
-1. ~~**Begin Milestone 0** — Set up foundation infrastructure~~ ✅ COMPLETE
-2. ~~**Begin Milestone 1** — Build input ingestion pipeline~~ ✅ COMPLETE
-3. **Begin Milestone 2** — CV/AI Analysis Core (CURRENT)
-4. **Create golden dataset** — Parallel track for testing assets
-5. **Validate GLM-5 access** — Confirm CV pipeline availability
-6. **Coordinate with agent teams** — Confirm communication protocols with Claude/Minimax/Codex
+1. **Begin Milestone 0** — Set up foundation infrastructure
+2. **Create golden dataset** — Parallel track for testing assets
+3. **Validate GLM-5 access** — Confirm CV pipeline availability
+4. **Coordinate with agent teams** — Confirm communication protocols with Claude/Minimax/Codex
 
 ---
 
 *Document created: 2026-02-28*  
-*Last updated: 2026-03-02*
+*Last updated: 2026-02-28*

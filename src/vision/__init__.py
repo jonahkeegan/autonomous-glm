@@ -2,7 +2,7 @@
 Vision module for Autonomous-GLM.
 
 Provides GPT-4 Vision API integration for UI component detection,
-hierarchy analysis, and flow sequencing.
+hierarchy analysis, flow sequencing, and token extraction.
 """
 
 from .models import (
