@@ -1,6 +1,8 @@
 {
-  "cv_detection": { "confidence": 0.0, "last_updated": null },
-  "hierarchy_analysis": { "confidence": 0.0, "last_updated": null },
+  "cv_detection": { "confidence": 0.7, "last_updated": "2026-03-02", "notes": "M2-1 complete with 34 passing tests" },
+  "hierarchy_analysis": { "confidence": 0.7, "last_updated": "2026-03-02", "notes": "M2-2 complete - container detection, z-order inference, tree building" },
+  "flow_analysis": { "confidence": 0.7, "last_updated": "2026-03-02", "notes": "M2-2 complete - similarity detection, key frames, deduplication, transitions" },
+  "similarity_detection": { "confidence": 0.7, "last_updated": "2026-03-02", "notes": "M2-2 complete - pHash + component overlap with configurable thresholds" },
   "accessibility_audit": { "confidence": 0.0, "last_updated": null },
   "color_typography": { "confidence": 0.0, "last_updated": null },
   "motion_transitions": { "confidence": 0.0, "last_updated": null }

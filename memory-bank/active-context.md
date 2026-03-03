@@ -1,13 +1,42 @@
 # Active Context
 
 ## Current State
-- Phase: CV/AI Analysis Core (Milestone 2) 🟢 **M2-1 Complete, M2-2 Ready**
+- Phase: CV/AI Analysis Core (Milestone 2) 🟢 **M2-1 & M2-2 Complete, M2-3 Ready**
 - Last Audit: None
 - Active Artifacts: None
 - Pending Reviews: None
 - Active Milestone: M2 - CV/AI Analysis Core
-- Active Epics: M2-1 ✅, M2-2 (next), M2-3
-- **Just Completed**: M2-1 Component Detection Pipeline ✅ (34 tests, 395 total)
+- Active Epics: M2-1 ✅, M2-2 ✅, M2-3 (next)
+- **Just Completed**: M2-2 Hierarchy & Flow Analysis ✅ (54 tests, 449 total)
+
+## M2-2 Implementation Details
+
+**Files Created:**
+- `src/vision/hierarchy_models.py` - Pydantic models (HierarchyNode, HierarchyTree, ContainerMatch, ZLayer, NestingLevel, HierarchyAnalysisResult)
+- `src/vision/flow_models.py` - Pydantic models (TransitionType, KeyFrameReason, SimilarityScore, ScreenTransition, KeyFrameMarker, FlowSequence, FlowAnalysisResult)
+- `src/vision/similarity.py` - SimilarityCalculator with pHash + component overlap
+- `src/vision/hierarchy.py` - HierarchyAnalyzer with container detection, z-order inference
+- `src/vision/flow.py` - FlowSequencer with key frame detection, deduplication, transitions
+- `tests/unit/test_hierarchy.py` - 54 comprehensive unit tests
+
+**Files Modified:**
+- `src/vision/__init__.py` - Updated exports for all new modules
+- `requirements.txt` - Added imagehash>=4.3.1
+
+**Key Features:**
+- Container detection via bounding box containment + area ratio threshold
+- Z-order inference using position and size heuristics
+- Hierarchy tree with parent/children navigation methods
+- Perceptual hash (pHash) similarity via imagehash library
+- Component overlap comparison using type and position signatures
+- Key frame detection with multiple reason types
+- Frame deduplication with configurable threshold
+- Transition type inference (navigation, modal, scroll, tab_switch)
+- Convenience functions for all major operations
+
+**Test Coverage:**
+- 54 new tests for hierarchy and flow modules
+- 449 total tests passing
 
 ## M2-1 Implementation Details
 
