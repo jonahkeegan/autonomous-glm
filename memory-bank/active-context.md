@@ -1,13 +1,13 @@
 # Active Context
 
 ## Current State
-- Phase: **Milestone 3 In Progress - M3-1 Complete**
+- Phase: **Milestone 3 In Progress - M3-2 Complete**
 - Last Audit: None
 - Active Artifacts: None
 - Pending Reviews: None
 - Active Milestone: M3 - Audit Engine
-- Completed Milestones: M0 ✅, M1 ✅, M2 ✅, M3-1 ✅
-- **Just Completed**: M3-1 Database Persistence Integration ✅ (31 tests, 539 total)
+- Completed Milestones: M0 ✅, M1 ✅, M2 ✅, M3-1 ✅, M3-2 ✅
+- **Just Completed**: M3-2 Core Audit Framework ✅ (40 tests, 579 total)
 
 ---
 
@@ -315,9 +315,37 @@
 - Minimax: Pending
 - Codex: Pending
 
+## M3-2 Core Audit Framework Implementation Details
+
+**Files Created:**
+- `src/audit/__init__.py` - Module exports with clean public API
+- `src/audit/models.py` - Pydantic models (AuditDimension, AuditSession, AuditResult, AuditFindingCreate, DimensionStats, StandardsReference)
+- `src/audit/severity.py` - SeverityMatrix, SeverityEngine with Impact×Frequency classification
+- `src/audit/standards.py` - StandardsRegistry with WCAG 2.1 AA criteria (30+)
+- `src/audit/jobs_filter.py` - JobsFilter with 4 design principles (Obvious, Removable, Inevitable, Refined)
+- `src/audit/orchestrator.py` - AuditOrchestrator with plugin architecture
+- `src/audit/persistence.py` - Database persistence (save/get/complete sessions)
+- `tests/unit/test_audit_framework.py` - 40 comprehensive unit tests
+
+**Key Features:**
+- 15+ audit dimensions (7 visual + 6 state + 2 deferred)
+- AuditSession with status tracking (PENDING → IN_PROGRESS → COMPLETED/PARTIAL/FAILED)
+- Severity classification via Impact × Frequency matrix
+- WCAG 2.1 AA criteria registry with custom criterion support
+- Jobs/Ive design filter with keyword-based auto-evaluation
+- Plugin architecture for dimension auditors
+- Database persistence with FK to screens table
+
+**Test Coverage:**
+- 40 new tests for audit framework
+- 579 total tests passing
+
+---
+
 ## Recent Activity
 | Date | Activity | Status |
 |------|----------|--------|
+| 2026-03-02 | M3-2 Core Audit Framework complete (40 tests, 579 total) | Complete |
 | 2026-03-02 | M3-1 Database Persistence Integration complete (31 tests, 539 total) | Complete |
 | 2026-03-02 | M2-3 Token Extraction complete (59 tests, 508 total) - MILESTONE 2 COMPLETE | Complete |
 | 2026-03-02 | M2-2 Hierarchy & Flow Analysis complete (54 tests, 449 total) | Complete |
