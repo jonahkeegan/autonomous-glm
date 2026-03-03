@@ -1,0 +1,87 @@
+{
+  "name": "screenshot_003",
+  "description": "E-commerce product card",
+  "dimensions": {
+    "width": 400,
+    "height": 500
+  },
+  "components": [
+    {
+      "type": "card",
+      "label": null,
+      "bbox": {
+        "x": 20,
+        "y": 20,
+        "width": 360,
+        "height": 460
+      }
+    },
+    {
+      "type": "image",
+      "label": "product",
+      "bbox": {
+        "x": 40,
+        "y": 40,
+        "width": 320,
+        "height": 200
+      }
+    },
+    {
+      "type": "text",
+      "label": "Premium Widget Pro",
+      "bbox": {
+        "x": 40,
+        "y": 260,
+        "width": 126,
+        "height": 18
+      }
+    },
+    {
+      "type": "text",
+      "label": "$99.99",
+      "bbox": {
+        "x": 40,
+        "y": 290,
+        "width": 42,
+        "height": 18
+      }
+    },
+    {
+      "type": "text",
+      "label": "High-quality widget for professionals",
+      "bbox": {
+        "x": 40,
+        "y": 320,
+        "width": 259,
+        "height": 18
+      }
+    },
+    {
+      "type": "button",
+      "label": "Add to Cart",
+      "bbox": {
+        "x": 40,
+        "y": 380,
+        "width": 320,
+        "height": 44
+      }
+    },
+    {
+      "type": "button",
+      "label": "Buy Now",
+      "bbox": {
+        "x": 40,
+        "y": 436,
+        "width": 320,
+        "height": 44
+      }
+    }
+  ],
+  "component_count": 7,
+  "component_types": [
+    "text",
+    "button",
+    "image",
+    "card"
+  ]
+}

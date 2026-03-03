@@ -1,0 +1,147 @@
+{
+  "name": "screenshot_004",
+  "description": "Settings form with inputs",
+  "dimensions": {
+    "width": 600,
+    "height": 500
+  },
+  "components": [
+    {
+      "type": "header",
+      "label": "Settings",
+      "bbox": {
+        "x": 40,
+        "y": 20,
+        "width": 80,
+        "height": 28
+      }
+    },
+    {
+      "type": "text",
+      "label": "Profile Settings",
+      "bbox": {
+        "x": 40,
+        "y": 70,
+        "width": 112,
+        "height": 18
+      }
+    },
+    {
+      "type": "input",
+      "label": "Full name",
+      "bbox": {
+        "x": 40,
+        "y": 100,
+        "width": 520,
+        "height": 36
+      }
+    },
+    {
+      "type": "input",
+      "label": "Email",
+      "bbox": {
+        "x": 40,
+        "y": 150,
+        "width": 520,
+        "height": 36
+      }
+    },
+    {
+      "type": "text",
+      "label": "Notifications",
+      "bbox": {
+        "x": 40,
+        "y": 210,
+        "width": 91,
+        "height": 18
+      }
+    },
+    {
+      "type": "text",
+      "label": "\u2610 Email notifications",
+      "bbox": {
+        "x": 40,
+        "y": 240,
+        "width": 147,
+        "height": 18
+      }
+    },
+    {
+      "type": "text",
+      "label": "\u2610 Push notifications",
+      "bbox": {
+        "x": 40,
+        "y": 270,
+        "width": 140,
+        "height": 18
+      }
+    },
+    {
+      "type": "text",
+      "label": "\u2611 Marketing emails",
+      "bbox": {
+        "x": 40,
+        "y": 300,
+        "width": 126,
+        "height": 18
+      }
+    },
+    {
+      "type": "text",
+      "label": "Theme",
+      "bbox": {
+        "x": 40,
+        "y": 340,
+        "width": 35,
+        "height": 18
+      }
+    },
+    {
+      "type": "button",
+      "label": "Light",
+      "bbox": {
+        "x": 40,
+        "y": 370,
+        "width": 160,
+        "height": 36
+      }
+    },
+    {
+      "type": "button",
+      "label": "Dark",
+      "bbox": {
+        "x": 220,
+        "y": 370,
+        "width": 160,
+        "height": 36
+      }
+    },
+    {
+      "type": "button",
+      "label": "System",
+      "bbox": {
+        "x": 400,
+        "y": 370,
+        "width": 160,
+        "height": 36
+      }
+    },
+    {
+      "type": "button",
+      "label": "Save Changes",
+      "bbox": {
+        "x": 40,
+        "y": 440,
+        "width": 520,
+        "height": 44
+      }
+    }
+  ],
+  "component_count": 13,
+  "component_types": [
+    "text",
+    "input",
+    "button",
+    "header"
+  ]
+}

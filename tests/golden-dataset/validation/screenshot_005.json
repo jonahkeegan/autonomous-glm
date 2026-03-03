@@ -1,0 +1,117 @@
+{
+  "name": "screenshot_005",
+  "description": "Navigation sidebar layout",
+  "dimensions": {
+    "width": 800,
+    "height": 600
+  },
+  "components": [
+    {
+      "type": "text",
+      "label": "MyApp",
+      "bbox": {
+        "x": 20,
+        "y": 20,
+        "width": 35,
+        "height": 18
+      }
+    },
+    {
+      "type": "navigation",
+      "label": "Dashboard",
+      "bbox": {
+        "x": 20,
+        "y": 70,
+        "width": 63,
+        "height": 18
+      }
+    },
+    {
+      "type": "navigation",
+      "label": "Projects",
+      "bbox": {
+        "x": 20,
+        "y": 114,
+        "width": 56,
+        "height": 18
+      }
+    },
+    {
+      "type": "navigation",
+      "label": "Team",
+      "bbox": {
+        "x": 20,
+        "y": 158,
+        "width": 28,
+        "height": 18
+      }
+    },
+    {
+      "type": "navigation",
+      "label": "Settings",
+      "bbox": {
+        "x": 20,
+        "y": 202,
+        "width": 56,
+        "height": 18
+      }
+    },
+    {
+      "type": "navigation",
+      "label": "Help",
+      "bbox": {
+        "x": 20,
+        "y": 246,
+        "width": 28,
+        "height": 18
+      }
+    },
+    {
+      "type": "header",
+      "label": "Dashboard",
+      "bbox": {
+        "x": 240,
+        "y": 20,
+        "width": 90,
+        "height": 28
+      }
+    },
+    {
+      "type": "card",
+      "label": null,
+      "bbox": {
+        "x": 240,
+        "y": 70,
+        "width": 520,
+        "height": 200
+      }
+    },
+    {
+      "type": "card",
+      "label": null,
+      "bbox": {
+        "x": 240,
+        "y": 290,
+        "width": 250,
+        "height": 200
+      }
+    },
+    {
+      "type": "card",
+      "label": null,
+      "bbox": {
+        "x": 510,
+        "y": 290,
+        "width": 250,
+        "height": 200
+      }
+    }
+  ],
+  "component_count": 10,
+  "component_types": [
+    "text",
+    "card",
+    "navigation",
+    "header"
+  ]
+}

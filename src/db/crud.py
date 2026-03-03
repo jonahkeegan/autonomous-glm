@@ -891,3 +891,331 @@ def delete_plan_phase(
             "DELETE FROM plan_phases WHERE id = ?", (phase_id,)
         )
         return cursor.rowcount > 0
+
+
+# =============================================================================
+# BATCH OPERATIONS FOR M3-1 PERSISTENCE
+# =============================================================================
+
+def batch_create_components(
+    screen_id: str,
+    components: list["DetectedComponent"],
+    db_path: Optional[Path] = None,
+) -> list[Component]:
+    """Batch create components from M2 detection results.
+    
+    Args:
+        screen_id: UUID of the parent screen
+        components: List of DetectedComponent from vision detection
+        db_path: Optional database path
+        
+    Returns:
+        List of persisted Component models
+        
+    Raises:
+        ValueError: If any component is invalid
+        sqlite3.Error: If database operation fails (rolls back transaction)
+    """
+    import uuid
+    from .models import BoundingBox
+    
+    now = datetime.now().isoformat()
+    persisted = []
+    
+    with connection(db_path) as conn:
+        for detected in components:
+            component_id = str(uuid.uuid4())
+            
+            # Convert normalized bbox to BoundingBox model
+            bbox = BoundingBox(
+                x=detected.bbox_x,
+                y=detected.bbox_y,
+                width=detected.bbox_width,
+                height=detected.bbox_height,
+            )
+            
+            # Include confidence and label in properties
+            properties = detected.properties or {}
+            properties["_confidence"] = detected.confidence
+            if detected.label:
+                properties["_label"] = detected.label
+            
+            conn.execute(
+                """INSERT INTO components (id, screen_id, type, bounding_box, properties, created_at)
+                   VALUES (?, ?, ?, ?, ?, ?)""",
+                (
+                    component_id,
+                    screen_id,
+                    detected.type.value,
+                    bbox.model_dump_json(),
+                    json.dumps(properties),
+                    now,
+                ),
+            )
+            
+            persisted.append(Component(
+                id=component_id,
+                screen_id=screen_id,
+                type=detected.type.value,
+                bounding_box=bbox,
+                properties=properties,
+                token_ids=[],
+                created_at=datetime.fromisoformat(now),
+            ))
+    
+    return persisted
+
+
+def batch_create_tokens(
+    tokens: list["DesignToken"],
+    db_path: Optional[Path] = None,
+) -> list[SystemToken]:
+    """Batch create system tokens from M2 token extraction.
+    
+    Args:
+        tokens: List of DesignToken from token extraction
+        db_path: Optional database path
+        
+    Returns:
+        List of persisted SystemToken models
+        
+    Note:
+        Uses INSERT OR IGNORE to skip duplicates (unique constraint on name+type)
+    """
+    import uuid
+    
+    now = datetime.now().isoformat()
+    persisted = []
+    
+    # Map token types between vision and db models
+    type_mapping = {
+        "color": TokenType.COLOR,
+        "spacing": TokenType.SPACING,
+        "typography": TokenType.TYPOGRAPHY,
+        "border": TokenType.BORDER,
+        "shadow": TokenType.SHADOW,
+    }
+    
+    with connection(db_path) as conn:
+        for token in tokens:
+            token_id = str(uuid.uuid4())
+            
+            # Get the token type string from the DesignToken
+            token_type_str = token.token_type.value if hasattr(token.token_type, 'value') else str(token.token_type)
+            db_token_type = type_mapping.get(token_type_str, TokenType.COLOR)
+            type_id = _get_token_type_id(db_token_type)
+            
+            # Use INSERT OR IGNORE to handle duplicates gracefully
+            conn.execute(
+                """INSERT OR IGNORE INTO system_tokens (id, name, type_id, value, description, created_at)
+                   VALUES (?, ?, ?, ?, ?, ?)""",
+                (
+                    token_id,
+                    token.name,
+                    type_id,
+                    token.value,
+                    token.description,
+                    now,
+                ),
+            )
+            
+            # Check if insert succeeded (rowcount > 0 means new row)
+            cursor = conn.execute(
+                "SELECT id FROM system_tokens WHERE name = ? AND type_id = ?",
+                (token.name, type_id),
+            )
+            existing_row = cursor.fetchone()
+            
+            if existing_row:
+                # Fetch the actual token (either newly inserted or existing)
+                cursor = conn.execute(
+                    "SELECT * FROM system_tokens WHERE id = ?", (existing_row["id"],)
+                )
+                row = cursor.fetchone()
+                persisted.append(row_to_system_token(dict(row)))
+    
+    return persisted
+
+
+def batch_link_components_tokens(
+    links: list[tuple[str, str]],
+    db_path: Optional[Path] = None,
+) -> int:
+    """Batch link components to tokens.
+    
+    Args:
+        links: List of (component_id, token_id) tuples
+        db_path: Optional database path
+        
+    Returns:
+        Number of links created
+    """
+    count = 0
+    
+    with connection(db_path) as conn:
+        for component_id, token_id in links:
+            try:
+                conn.execute(
+                    """INSERT INTO component_tokens (component_id, token_id)
+                       VALUES (?, ?)""",
+                    (component_id, token_id),
+                )
+                count += 1
+            except Exception:
+                # Skip duplicate links (PRIMARY KEY constraint)
+                pass
+    
+    return count
+
+
+def delete_components_by_screen(
+    screen_id: str,
+    db_path: Optional[Path] = None,
+) -> int:
+    """Delete all components for a screen.
+    
+    Args:
+        screen_id: UUID of the screen
+        db_path: Optional database path
+        
+    Returns:
+        Number of components deleted
+    """
+    with connection(db_path) as conn:
+        cursor = conn.execute(
+            "DELETE FROM components WHERE screen_id = ?", (screen_id,)
+        )
+        return cursor.rowcount
+
+
+def clear_all_tokens(
+    db_path: Optional[Path] = None,
+) -> int:
+    """Clear all system tokens.
+    
+    Args:
+        db_path: Optional database path
+        
+    Returns:
+        Number of tokens deleted
+    """
+    with connection(db_path) as conn:
+        cursor = conn.execute("DELETE FROM system_tokens")
+        return cursor.rowcount
+
+
+def get_components_by_screen(
+    screen_id: str,
+    db_path: Optional[Path] = None,
+) -> list[Component]:
+    """Get all components for a screen.
+    
+    Args:
+        screen_id: UUID of the screen
+        db_path: Optional database path
+        
+    Returns:
+        List of Component models
+    """
+    components = []
+    
+    with connection(db_path) as conn:
+        cursor = conn.execute(
+            "SELECT * FROM components WHERE screen_id = ? ORDER BY created_at",
+            (screen_id,),
+        )
+        rows = cursor.fetchall()
+        
+        for row in rows:
+            # Get token IDs for each component
+            cursor = conn.execute(
+                "SELECT token_id FROM component_tokens WHERE component_id = ?",
+                (row["id"],),
+            )
+            token_ids = [r["token_id"] for r in cursor.fetchall()]
+            components.append(row_to_component(dict(row), token_ids))
+    
+    return components
+
+
+def get_all_tokens(
+    db_path: Optional[Path] = None,
+) -> list[SystemToken]:
+    """Get all system tokens.
+    
+    Args:
+        db_path: Optional database path
+        
+    Returns:
+        List of SystemToken models
+    """
+    with connection(db_path) as conn:
+        cursor = conn.execute(
+            "SELECT * FROM system_tokens ORDER BY type_id, name"
+        )
+        rows = cursor.fetchall()
+    
+    return [row_to_system_token(dict(row)) for row in rows]
+
+
+def get_component_tokens(
+    component_id: str,
+    db_path: Optional[Path] = None,
+) -> list[SystemToken]:
+    """Get all tokens linked to a component.
+    
+    Args:
+        component_id: UUID of the component
+        db_path: Optional database path
+        
+    Returns:
+        List of SystemToken models
+    """
+    with connection(db_path) as conn:
+        cursor = conn.execute(
+            """SELECT st.* FROM system_tokens st
+               INNER JOIN component_tokens ct ON st.id = ct.token_id
+               WHERE ct.component_id = ?
+               ORDER BY st.type_id, st.name""",
+            (component_id,),
+        )
+        rows = cursor.fetchall()
+    
+    return [row_to_system_token(dict(row)) for row in rows]
+
+
+def get_token_components(
+    token_id: str,
+    db_path: Optional[Path] = None,
+) -> list[Component]:
+    """Get all components using a specific token.
+    
+    Args:
+        token_id: UUID of the token
+        db_path: Optional database path
+        
+    Returns:
+        List of Component models
+    """
+    components = []
+    
+    with connection(db_path) as conn:
+        cursor = conn.execute(
+            """SELECT c.* FROM components c
+               INNER JOIN component_tokens ct ON c.id = ct.component_id
+               WHERE ct.token_id = ?
+               ORDER BY c.created_at""",
+            (token_id,),
+        )
+        rows = cursor.fetchall()
+        
+        for row in rows:
+            # Get all token IDs for each component (not just the queried one)
+            cursor = conn.execute(
+                "SELECT token_id FROM component_tokens WHERE component_id = ?",
+                (row["id"],),
+            )
+            token_ids = [r["token_id"] for r in cursor.fetchall()]
+            components.append(row_to_component(dict(row), token_ids))
+    
+    return components

@@ -143,4 +143,14 @@ __all__ = [
     "list_plan_phases",
     "update_plan_phase",
     "delete_plan_phase",
+    # Batch operations (M3-1)
+    "batch_create_components",
+    "batch_create_tokens",
+    "batch_link_components_tokens",
+    "delete_components_by_screen",
+    "clear_all_tokens",
+    "get_components_by_screen",
+    "get_all_tokens",
+    "get_component_tokens",
+    "get_token_components",
 ]

@@ -1,0 +1,41 @@
+{
+  "description": "Minimal validation dataset for M3-1 persistence testing",
+  "created": "2026-03-02",
+  "screenshots": [
+    {
+      "name": "screenshot_001",
+      "description": "Login form with inputs and buttons",
+      "image": "screenshot_001.png",
+      "metadata": "screenshot_001.json",
+      "component_count": 8
+    },
+    {
+      "name": "screenshot_002",
+      "description": "Dashboard with stats cards",
+      "image": "screenshot_002.png",
+      "metadata": "screenshot_002.json",
+      "component_count": 20
+    },
+    {
+      "name": "screenshot_003",
+      "description": "E-commerce product card",
+      "image": "screenshot_003.png",
+      "metadata": "screenshot_003.json",
+      "component_count": 7
+    },
+    {
+      "name": "screenshot_004",
+      "description": "Settings form with inputs",
+      "image": "screenshot_004.png",
+      "metadata": "screenshot_004.json",
+      "component_count": 13
+    },
+    {
+      "name": "screenshot_005",
+      "description": "Navigation sidebar layout",
+      "image": "screenshot_005.png",
+      "metadata": "screenshot_005.json",
+      "component_count": 10
+    }
+  ]
+}

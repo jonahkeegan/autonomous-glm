@@ -1,0 +1,145 @@
+{
+  "name": "screenshot_001",
+  "description": "Login form with inputs and buttons",
+  "dimensions": {
+    "width": 400,
+    "height": 600
+  },
+  "components": [
+    {
+      "type": "header",
+      "label": "Sign In",
+      "bbox": {
+        "x": 40,
+        "y": 40,
+        "width": 70,
+        "height": 28
+      },
+      "bbox_normalized": {
+        "x": 0.1,
+        "y": 0.0667,
+        "width": 0.175,
+        "height": 0.0467
+      }
+    },
+    {
+      "type": "input",
+      "label": "Email address",
+      "bbox": {
+        "x": 40,
+        "y": 100,
+        "width": 320,
+        "height": 40
+      },
+      "bbox_normalized": {
+        "x": 0.1,
+        "y": 0.1667,
+        "width": 0.8,
+        "height": 0.0667
+      }
+    },
+    {
+      "type": "input",
+      "label": "Password",
+      "bbox": {
+        "x": 40,
+        "y": 160,
+        "width": 320,
+        "height": 40
+      },
+      "bbox_normalized": {
+        "x": 0.1,
+        "y": 0.2667,
+        "width": 0.8,
+        "height": 0.0667
+      }
+    },
+    {
+      "type": "button",
+      "label": "Sign In",
+      "bbox": {
+        "x": 40,
+        "y": 220,
+        "width": 320,
+        "height": 44
+      },
+      "bbox_normalized": {
+        "x": 0.1,
+        "y": 0.3667,
+        "width": 0.8,
+        "height": 0.0733
+      }
+    },
+    {
+      "type": "text",
+      "label": "Forgot password?",
+      "bbox": {
+        "x": 40,
+        "y": 280,
+        "width": 112,
+        "height": 18
+      },
+      "bbox_normalized": {
+        "x": 0.1,
+        "y": 0.4667,
+        "width": 0.28,
+        "height": 0.03
+      }
+    },
+    {
+      "type": "text",
+      "label": "or continue with",
+      "bbox": {
+        "x": 160,
+        "y": 320,
+        "width": 112,
+        "height": 18
+      },
+      "bbox_normalized": {
+        "x": 0.4,
+        "y": 0.5333,
+        "width": 0.28,
+        "height": 0.03
+      }
+    },
+    {
+      "type": "button",
+      "label": "Continue with Google",
+      "bbox": {
+        "x": 40,
+        "y": 360,
+        "width": 320,
+        "height": 44
+      },
+      "bbox_normalized": {
+        "x": 0.1,
+        "y": 0.6,
+        "width": 0.8,
+        "height": 0.0733
+      }
+    },
+    {
+      "type": "text",
+      "label": "Don't have an account? Sign up",
+      "bbox": {
+        "x": 40,
+        "y": 420,
+        "width": 210,
+        "height": 18
+      },
+      "bbox_normalized": {
+        "x": 0.1,
+        "y": 0.7,
+        "width": 0.525,
+        "height": 0.03
+      }
+    }
+  ],
+  "component_count": 8,
+  "component_types": [
+    "text",
+    "input",
+    "button",
+    "header"
+  ]
+}

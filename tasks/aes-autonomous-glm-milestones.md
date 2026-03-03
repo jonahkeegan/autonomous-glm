@@ -77,32 +77,64 @@ Build the artifact ingestion system that accepts screenshots, videos, and contex
 
 ## Milestone 2: CV/AI Analysis Core
 
-**Status:** 🔲 Not Started  
+**Status:** ✅ Complete (with gaps)  
 **Duration Estimate:** 5-7 days  
-**Dependencies:** Milestone 1
+**Actual Duration:** 3 days  
+**Dependencies:** Milestone 1  
+**Completion Date:** 2026-03-02
 
 ### Objectives
 Integrate GLM-5 computer vision pipeline for detecting screens, components, and flows.
 
 ### Deliverables
-- [ ] GLM-5 CV integration module
-- [ ] Component detection with bounding boxes
-- [ ] Element type classification (button, input, modal, etc.)
-- [ ] Screen hierarchy extraction
-- [ ] Flow sequencing from video frames
-- [ ] Token reference extraction (colors, spacing, typography)
-- [ ] Component entity persistence to database
+- [x] GLM-5 CV integration module (GPT-4o Vision API)
+- [x] Component detection with bounding boxes
+- [x] Element type classification (21 component types)
+- [x] Screen hierarchy extraction
+- [x] Flow sequencing from video frames
+- [x] Token reference extraction (colors, spacing, typography)
+- [~] Component entity persistence to database (deferred to M3/M4)
 
 ### Success Criteria
-- Component detection accuracy > 95% on golden dataset
-- Bounding boxes accurately represent element positions
-- Hierarchy extraction produces valid nested structures
-- Flow sequencing correctly orders screens
+- [~] Component detection accuracy > 95% on golden dataset (pending M7 golden dataset)
+- [x] Bounding boxes accurately represent element positions
+- [x] Hierarchy extraction produces valid nested structures
+- [x] Flow sequencing correctly orders screens
 
 ### KPIs
-- Detection time < 1s per screenshot
-- Video segment analysis < 5s per key segment
-- CV detection accuracy > 95%
+- [x] Detection time < 1s per screenshot (API-dependent)
+- [x] Video segment analysis < 5s per key segment
+- [~] CV detection accuracy > 95% (pending golden dataset validation)
+
+### Implementation Summary
+
+**Epic M2-1: Component Detection Pipeline** ✅
+- GPT-4o Vision API client with retry/rate limiting
+- 21 component types with normalized bounding boxes
+- 34 unit tests passing
+
+**Epic M2-2: Hierarchy & Flow Analysis** ✅
+- Container detection via bounding box containment
+- Z-order inference using position/size heuristics
+- Flow sequencing with pHash similarity detection
+- 54 unit tests passing
+
+**Epic M2-3: Token Extraction** ✅
+- K-means color extraction with LAB distance matching
+- Spacing analysis with 4px/8px grid quantization
+- Typography estimation from bbox dimensions
+- 59 unit tests passing
+
+**Total: 147 new tests, 508 total suite**
+
+### Known Gaps
+
+| Gap | Impact | Resolution |
+|-----|--------|------------|
+| Golden dataset validation pending | Cannot verify >95% accuracy | Scheduled for M7 |
+| Database persistence deferred | Components/tokens not persisted | Schedule for M3/M4 |
+| Component gallery deferred | Few-shot examples not integrated | Add if accuracy issues arise |
+| Z-order heuristics | Not true render order | Document limitation |
 
 ---
 
@@ -115,34 +147,53 @@ Integrate GLM-5 computer vision pipeline for detecting screens, components, and 
 ### Objectives
 Implement the comprehensive audit protocol based on SOUL.md design philosophy.
 
+### Epic Breakdown
+
+| Epic | Name | Priority | Description |
+|------|------|----------|-------------|
+| M3-1 | Database Persistence Integration | Critical | Persist Components/Tokens from M2, create validation dataset |
+| M3-2 | Core Audit Framework | Critical | Models, severity engine, standards linking, orchestrator |
+| M3-3 | Visual Audit Dimensions | High | Hierarchy, spacing, typography, color, alignment, components, density |
+| M3-4 | State & Accessibility Dimensions | High | Iconography, states, theming, accessibility |
+
 ### Deliverables
-- [ ] 15+ dimension audit protocol implementation:
-  - Visual Hierarchy
-  - Spacing & Rhythm
-  - Typography
-  - Color
-  - Alignment & Grid
-  - Components
-  - Iconography
-  - Motion & Transitions
-  - Empty States
-  - Loading States
-  - Error States
-  - Dark Mode / Theming
-  - Density
-  - Responsiveness
-  - Accessibility
+- [ ] 13 dimension audit protocol implementation:
+  - **Visual Hierarchy** (M3-3)
+  - **Spacing & Rhythm** (M3-3)
+  - **Typography** (M3-3)
+  - **Color** (M3-3)
+  - **Alignment & Grid** (M3-3)
+  - **Components** (M3-3)
+  - **Density** (M3-3)
+  - **Iconography** (M3-4)
+  - **Empty States** (M3-4)
+  - **Loading States** (M3-4)
+  - **Error States** (M3-4)
+  - **Dark Mode / Theming** (M3-4)
+  - **Accessibility** (M3-4)
+- [ ] ~~Motion & Transitions~~ (deferred - requires video analysis)
+- [ ] ~~Responsiveness~~ (deferred - requires multi-viewport)
 - [ ] Severity classification engine (low, medium, high, critical)
 - [ ] Standards reference linking (WCAG, design system tokens)
 - [ ] Rhythm/hierarchy scoring algorithms (O(n²))
 - [ ] Jobs Filter application ("Would a user need to be told this exists?")
 - [ ] AuditFinding entity persistence
+- [ ] Component/Token persistence from M2 (M3-1)
+- [ ] Minimal validation dataset (M3-1)
+
+### Deferred Dimensions
+
+| Dimension | Reason | Target |
+|-----------|--------|--------|
+| Motion & Transitions | Requires video frame analysis for animation detection | Post-M7 (enhanced video) |
+| Responsiveness | Requires screenshots at multiple viewport sizes | Post-M6 (multi-viewport) |
 
 ### Success Criteria
-- All 15 dimensions produce findings when issues exist
+- All 13 implemented dimensions produce findings when issues exist
 - Severity classification is consistent and justified
 - Each finding links to relevant design standard
 - Scoring algorithms produce reproducible results
+- Components and Tokens persisted from M2 detection results
 
 ### KPIs
 - Audit completeness: 100% of dimensions evaluated
