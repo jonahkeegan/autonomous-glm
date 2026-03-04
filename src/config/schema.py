@@ -349,6 +349,88 @@ class VideoIngestionConfig(BaseModel):
     )
 
 
+class PlanPhaseThresholdsConfig(BaseModel):
+    """Phase threshold configuration for plan generation."""
+    critical_severities: list[str] = Field(
+        default=["critical", "high"],
+        description="Severity levels that trigger Critical phase"
+    )
+    refinement_severities: list[str] = Field(
+        default=["medium"],
+        description="Severity levels that trigger Refinement phase"
+    )
+    polish_severities: list[str] = Field(
+        default=["low"],
+        description="Severity levels that trigger Polish phase"
+    )
+
+
+class PlanDimensionOverridesConfig(BaseModel):
+    """Dimension-to-phase override configuration."""
+    critical_dimensions: list[str] = Field(
+        default=["visual_hierarchy", "accessibility"],
+        description="Dimensions that always go to Critical phase"
+    )
+    refinement_dimensions: list[str] = Field(
+        default=["spacing_rhythm", "typography", "color", "alignment_grid", "components", "density"],
+        description="Dimensions that always go to Refinement phase"
+    )
+    polish_dimensions: list[str] = Field(
+        default=["dark_mode_theming", "empty_states", "loading_states", "error_states", "iconography"],
+        description="Dimensions that always go to Polish phase"
+    )
+
+
+class PlanDependencyRulesConfig(BaseModel):
+    """Dependency rules configuration for plan synthesis."""
+    hierarchy_before_spacing: bool = Field(
+        default=True,
+        description="Visual hierarchy fixes must precede spacing fixes"
+    )
+    hierarchy_before_typography: bool = Field(
+        default=True,
+        description="Visual hierarchy fixes must precede typography fixes"
+    )
+    color_before_theming: bool = Field(
+        default=True,
+        description="Color fixes must precede theming fixes"
+    )
+    components_before_density: bool = Field(
+        default=True,
+        description="Component fixes must precede density fixes"
+    )
+    alignment_before_spacing: bool = Field(
+        default=True,
+        description="Alignment fixes must precede spacing fixes"
+    )
+
+
+class PlanConfig(BaseModel):
+    """Plan generation configuration."""
+    phase_thresholds: PlanPhaseThresholdsConfig = Field(
+        default_factory=PlanPhaseThresholdsConfig,
+        description="Severity thresholds for phase classification"
+    )
+    dimension_overrides: PlanDimensionOverridesConfig = Field(
+        default_factory=PlanDimensionOverridesConfig,
+        description="Dimension-to-phase override rules"
+    )
+    dependency_rules: PlanDependencyRulesConfig = Field(
+        default_factory=PlanDependencyRulesConfig,
+        description="Cross-dimension dependency rules"
+    )
+    respect_phase_boundaries: bool = Field(
+        default=True,
+        description="Only reorder actions within same phase"
+    )
+    max_actions_per_phase: int = Field(
+        default=100,
+        ge=1,
+        le=1000,
+        description="Maximum actions per phase"
+    )
+
+
 class LoggingConfig(BaseModel):
     """Logging configuration."""
     level: LogLevel = Field(default=LogLevel.INFO, description="Log level")
@@ -372,4 +454,5 @@ class Config(BaseModel):
     audit: AuditConfig = Field(default_factory=AuditConfig)
     ingestion: IngestionConfig = Field(default_factory=IngestionConfig)
     video_ingestion: VideoIngestionConfig = Field(default_factory=VideoIngestionConfig)
+    plan: PlanConfig = Field(default_factory=PlanConfig)
     logging: LoggingConfig = Field(default_factory=LoggingConfig)

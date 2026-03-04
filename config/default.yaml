@@ -117,6 +117,49 @@ video_ingestion:
   extraction_interval: 1.0  # seconds between frames (1 fps)
   max_frames: 500
 
+# Plan Generation Configuration
+plan:
+  # Severity thresholds for phase classification
+  phase_thresholds:
+    critical_severities:
+      - critical
+      - high
+    refinement_severities:
+      - medium
+    polish_severities:
+      - low
+  
+  # Dimension-to-phase overrides (take precedence over severity)
+  dimension_overrides:
+    critical_dimensions:
+      - visual_hierarchy
+      - accessibility
+    refinement_dimensions:
+      - spacing_rhythm
+      - typography
+      - color
+      - alignment_grid
+      - components
+      - density
+    polish_dimensions:
+      - dark_mode_theming
+      - empty_states
+      - loading_states
+      - error_states
+      - iconography
+  
+  # Cross-dimension dependency rules
+  dependency_rules:
+    hierarchy_before_spacing: true
+    hierarchy_before_typography: true
+    color_before_theming: true
+    components_before_density: true
+    alignment_before_spacing: true
+  
+  # Synthesis settings
+  respect_phase_boundaries: true
+  max_actions_per_phase: 100
+
 # Logging Configuration
 logging:
   level: INFO
