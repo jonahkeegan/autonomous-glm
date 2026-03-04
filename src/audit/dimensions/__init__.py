@@ -4,7 +4,7 @@ Visual audit dimension auditors.
 This package contains dimension-specific auditors that analyze
 screens and components for visual design issues.
 
-Available Dimensions:
+Available Dimensions (Visual - M3-3):
 - visual_hierarchy: Prominence and eye-flow analysis
 - spacing_rhythm: Whitespace consistency and vertical rhythm
 - typography: Font size hierarchy and weight consistency
@@ -12,6 +12,14 @@ Available Dimensions:
 - alignment_grid: Grid alignment and positioning
 - components: Component consistency and style proliferation
 - density: Information density and whitespace sufficiency
+
+Available Dimensions (State & Accessibility - M3-4):
+- iconography: Icon size consistency and position patterns
+- empty_states: Empty state design and user guidance
+- loading_states: Loading indicator consistency
+- error_states: Error message styling and helpfulness
+- theming: Dark mode / theme contrast validation
+- accessibility: WCAG contrast, text size, touch targets
 """
 
 from src.audit.dimensions.base import (
@@ -65,9 +73,41 @@ from src.audit.dimensions.density import (
     audit_density,
 )
 
+# State & Accessibility Dimensions (M3-4)
+from src.audit.dimensions.iconography import (
+    IconographyAuditor,
+    audit_iconography,
+)
+
+from src.audit.dimensions.empty_states import (
+    EmptyStatesAuditor,
+    audit_empty_states,
+)
+
+from src.audit.dimensions.loading_states import (
+    LoadingStatesAuditor,
+    audit_loading_states,
+)
+
+from src.audit.dimensions.error_states import (
+    ErrorStatesAuditor,
+    audit_error_states,
+)
+
+from src.audit.dimensions.theming import (
+    ThemingAuditor,
+    audit_theming,
+)
+
+from src.audit.dimensions.accessibility import (
+    AccessibilityAuditor,
+    audit_accessibility,
+)
+
 
 # Dimension auditor registry
 DIMENSION_AUDITORS = {
+    # Visual Dimensions (M3-3)
     "visual_hierarchy": VisualHierarchyAuditor,
     "spacing_rhythm": SpacingRhythmAuditor,
     "typography": TypographyAuditor,
@@ -75,6 +115,13 @@ DIMENSION_AUDITORS = {
     "alignment_grid": AlignmentGridAuditor,
     "components": ComponentsAuditor,
     "density": DensityAuditor,
+    # State & Accessibility Dimensions (M3-4)
+    "iconography": IconographyAuditor,
+    "empty_states": EmptyStatesAuditor,
+    "loading_states": LoadingStatesAuditor,
+    "error_states": ErrorStatesAuditor,
+    "dark_mode_theming": ThemingAuditor,
+    "accessibility": AccessibilityAuditor,
 }
 
 
@@ -124,27 +171,34 @@ __all__ = [
     "group_by_type",
     "get_components_in_region",
     "calculate_density",
-    # Visual Hierarchy
+    # Visual Dimensions (M3-3)
     "VisualHierarchyAuditor",
     "audit_visual_hierarchy",
-    # Spacing & Rhythm
     "SpacingRhythmAuditor",
     "audit_spacing_rhythm",
-    # Typography
     "TypographyAuditor",
     "audit_typography",
-    # Color
     "ColorAuditor",
     "audit_color",
-    # Alignment & Grid
     "AlignmentGridAuditor",
     "audit_alignment_grid",
-    # Components
     "ComponentsAuditor",
     "audit_components",
-    # Density
     "DensityAuditor",
     "audit_density",
+    # State & Accessibility Dimensions (M3-4)
+    "IconographyAuditor",
+    "audit_iconography",
+    "EmptyStatesAuditor",
+    "audit_empty_states",
+    "LoadingStatesAuditor",
+    "audit_loading_states",
+    "ErrorStatesAuditor",
+    "audit_error_states",
+    "ThemingAuditor",
+    "audit_theming",
+    "AccessibilityAuditor",
+    "audit_accessibility",
     # Registry
     "DIMENSION_AUDITORS",
     "get_auditor",

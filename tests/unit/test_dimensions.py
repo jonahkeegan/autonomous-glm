@@ -535,9 +535,9 @@ class TestDensityAuditor:
 class TestDimensionRegistry:
     """Tests for dimension auditor registry."""
     
-    def test_all_dimensions_registered(self):
-        """All 7 dimensions should be registered."""
-        expected = {
+    def test_visual_dimensions_registered(self):
+        """All 7 visual dimensions should be registered."""
+        visual = {
             "visual_hierarchy",
             "spacing_rhythm",
             "typography",
@@ -546,7 +546,23 @@ class TestDimensionRegistry:
             "components",
             "density",
         }
-        assert set(DIMENSION_AUDITORS.keys()) == expected
+        assert visual.issubset(set(DIMENSION_AUDITORS.keys()))
+    
+    def test_state_dimensions_registered(self):
+        """All 6 state dimensions should be registered."""
+        state = {
+            "iconography",
+            "empty_states",
+            "loading_states",
+            "error_states",
+            "dark_mode_theming",
+            "accessibility",
+        }
+        assert state.issubset(set(DIMENSION_AUDITORS.keys()))
+    
+    def test_total_dimension_count(self):
+        """Should have 13 total dimensions (7 visual + 6 state)."""
+        assert len(DIMENSION_AUDITORS) == 13
     
     def test_get_auditor_valid(self):
         """get_auditor should return correct auditor."""
@@ -559,9 +575,9 @@ class TestDimensionRegistry:
             get_auditor("nonexistent")
     
     def test_get_all_auditors(self):
-        """get_all_auditors should return all 7 auditors."""
+        """get_all_auditors should return all 13 auditors."""
         auditors = get_all_auditors()
-        assert len(auditors) == 7
+        assert len(auditors) == 13
         assert all(hasattr(a, 'audit') for a in auditors)
     
     def test_get_auditor_with_config(self):
