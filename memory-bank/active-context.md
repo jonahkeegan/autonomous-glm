@@ -1,14 +1,14 @@
 # Active Context
 
 ## Current State
-- Phase: **Milestone 4 Implementation - M4-1 Complete**
+- Phase: **Milestone 4 Implementation - M4-1 & M4-2 Complete**
 - Last Audit: None
 - Active Artifacts: None
 - Pending Reviews: None
-- Active Milestone: M4 - Plan Generation (M4-1 complete, M4-2 next)
+- Active Milestone: M4 - Plan Generation (M4-1 ✅, M4-2 ✅, M4-3/M4-4 remaining)
 - Completed Milestones: M0 ✅, M1 ✅, M2 ✅, M3 ✅
-- **Just Completed**: M4-1 Phased Plan Synthesis (57 tests, 723 total)
-- **Milestone 3 Complete**: 156 new tests, 666 total suite passing
+- **Just Completed**: M4-2 Implementation Instruction Formatter (102 tests, 825 total)
+- **Milestone 4 Progress**: 2/4 epics complete
 
 ---
 
@@ -451,9 +451,40 @@
 
 ---
 
+## M4-2 Implementation Instruction Formatter Details
+
+**Files Created:**
+- `src/plan/instruction_models.py` - Pydantic models (PropertyChange, ComponentInfo, ImplementationInstruction, InstructionTemplate, ValidationResult, InstructionResult, BatchInstructionResult, IssueType)
+- `src/plan/templates.py` - InstructionTemplateRegistry with 10 built-in templates, render_for_issue(), get_best_template()
+- `src/plan/formatter.py` - InstructionFormatter with map_to_component(), determine_file_path(), generate_changes(), format_instruction(), format_all()
+- `src/plan/validator.py` - InstructionValidator with strict mode, confidence thresholds, placeholder path handling
+- `tests/unit/test_instruction_models.py` - 28 model tests
+- `tests/unit/test_templates.py` - 24 template tests
+- `tests/unit/test_formatter.py` - 24 formatter tests
+- `tests/unit/test_validator.py` - 26 validator tests
+
+**Files Modified:**
+- `src/plan/__init__.py` - Added all new exports
+
+**Key Features:**
+- 10 built-in instruction templates for all issue types (spacing, color_contrast, typography, alignment, hierarchy, accessibility, density, consistency, visual_balance, generic)
+- IssueType enum with automatic dimension mapping via from_dimension()
+- PropertyChange with requires_inspection flag and REQUIRES_INSPECTION marker
+- Placeholder path handling with is_placeholder_path flag and UNKNOWN_FILE fallback
+- Strict mode validation (converts warnings to errors)
+- Confidence threshold validation with configurable minimum
+- to_markdown() and to_json_dict() output formats
+- Batch processing with BatchInstructionResult
+
+**Test Coverage:**
+- 102 new tests for instruction formatter module
+- 825 total tests passing
+
+---
+
 ## M4 Epic Planning Summary
 
-**Status:** ✅ M4-1 Complete, 3 epics remaining
+**Status:** ✅ M4-1 & M4-2 Complete, 2 epics remaining
 
 | Epic | Name | Priority | Dependencies |
 |------|------|----------|--------------|
@@ -473,6 +504,7 @@
 ## Recent Activity
 | Date | Activity | Status |
 |------|----------|--------|
+| 2026-03-04 | M4-2 Implementation Instruction Formatter complete (102 tests, 825 total) | Complete |
 | 2026-03-04 | M4-1 Phased Plan Synthesis complete (57 tests, 723 total) | Complete |
 | 2026-03-04 | M4 Epic Planning complete (4 epics created) | Complete |
 | 2026-03-04 | **MILESTONE 3 COMPLETE** - Audit Engine (156 tests, 666 total) | Complete |
