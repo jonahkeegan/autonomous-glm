@@ -5,6 +5,9 @@ This module provides phased plan synthesis from audit findings, organizing
 improvements into Critical → Refinement → Polish phases with proper
 dependency resolution, and formatting them into implementation-ready
 instructions.
+
+Also provides design system proposal generation (M4-3) for recommending
+token additions and component variants.
 """
 
 from src.plan.models import (
@@ -51,6 +54,38 @@ from src.plan.validator import (
     get_validation_errors,
 )
 
+# Design System Proposals (M4-3)
+from src.plan.proposal_models import (
+    ProposalType,
+    TokenType,
+    Priority,
+    TokenProposal,
+    ComponentVariant,
+    ComponentProposal,
+    BeforeAfterDescription,
+    DesignSystemProposal,
+)
+from src.plan.token_analyzer import (
+    TokenAnalyzer,
+    DEFAULT_DESIGN_TOKENS,
+    generate_color_token_name,
+    generate_spacing_token_name,
+    generate_typography_token_name,
+    analyze_all_token_patterns,
+)
+from src.plan.proposals import (
+    ProposalGenerator,
+    calculate_impact_score,
+    determine_priority,
+    generate_design_system_proposals,
+)
+from src.plan.comparison import (
+    BeforeAfterGenerator,
+    generate_token_comparison,
+    generate_component_comparison,
+    generate_summary_comparison,
+)
+
 __all__ = [
     # Models
     "PhaseType",
@@ -92,4 +127,27 @@ __all__ = [
     "validate_instruction",
     "is_valid_instruction",
     "get_validation_errors",
+    # Design System Proposals (M4-3)
+    "ProposalType",
+    "TokenType",
+    "Priority",
+    "TokenProposal",
+    "ComponentVariant",
+    "ComponentProposal",
+    "BeforeAfterDescription",
+    "DesignSystemProposal",
+    "TokenAnalyzer",
+    "DEFAULT_DESIGN_TOKENS",
+    "generate_color_token_name",
+    "generate_spacing_token_name",
+    "generate_typography_token_name",
+    "analyze_all_token_patterns",
+    "ProposalGenerator",
+    "calculate_impact_score",
+    "determine_priority",
+    "generate_design_system_proposals",
+    "BeforeAfterGenerator",
+    "generate_token_comparison",
+    "generate_component_comparison",
+    "generate_summary_comparison",
 ]
