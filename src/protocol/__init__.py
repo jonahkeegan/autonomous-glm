@@ -56,6 +56,35 @@ from src.protocol.router import (
     route_message,
     broadcast_message,
 )
+from src.protocol.registry import (
+    HandshakeState,
+    AgentInfo,
+    AgentRegistry,
+    HandshakeAgentConfig,
+    get_registry,
+    reset_registry,
+)
+from src.protocol.state import (
+    ConnectionState,
+    ConnectionManager,
+    StateTransitionError,
+    get_connection_manager,
+    reset_connection_manager,
+)
+from src.protocol.handshake import (
+    HandshakeResult,
+    HandshakeConfig,
+    HandshakeError,
+    HandshakeTimeout,
+    Handshaker,
+    handshake_with_agent,
+)
+from src.protocol.health import (
+    HealthMonitor,
+    HealthConfig,
+    AgentHealth,
+    create_health_monitor,
+)
 
 __all__ = [
     # Message types
@@ -79,6 +108,7 @@ __all__ = [
     "ChangeType",
     "ReviewType",
     "DisputeSeverity",
+    "HandshakeState",
     # Factory functions
     "create_audit_complete_message",
     "create_design_proposal_message",
@@ -108,4 +138,28 @@ __all__ = [
     "resolve_agent_endpoint",
     "route_message",
     "broadcast_message",
+    # Registry
+    "AgentInfo",
+    "AgentRegistry",
+    "HandshakeAgentConfig",
+    "get_registry",
+    "reset_registry",
+    # State
+    "ConnectionState",
+    "ConnectionManager",
+    "StateTransitionError",
+    "get_connection_manager",
+    "reset_connection_manager",
+    # Handshake
+    "HandshakeResult",
+    "HandshakeConfig",
+    "HandshakeError",
+    "HandshakeTimeout",
+    "Handshaker",
+    "handshake_with_agent",
+    # Health
+    "HealthMonitor",
+    "HealthConfig",
+    "AgentHealth",
+    "create_health_monitor",
 ]

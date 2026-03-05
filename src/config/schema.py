@@ -457,6 +457,56 @@ class ProtocolConfig(BaseModel):
     )
 
 
+class HandshakeAgentEntryConfig(BaseModel):
+    """Configuration for a single agent in the handshake protocol."""
+    type: str = Field(..., description="Agent type identifier (e.g., 'claude', 'minimax')")
+    socket_path: str = Field(..., description="Path to agent's Unix domain socket")
+    capabilities: list[str] = Field(
+        default_factory=list,
+        description="List of agent capabilities (e.g., 'arbitration', 'frontend_implementation')"
+    )
+    required: bool = Field(
+        default=False,
+        description="Whether connection to this agent is required for operation"
+    )
+
+
+class HandshakeConfig(BaseModel):
+    """Configuration for the agent handshake protocol."""
+    handshake_timeout: float = Field(
+        default=10.0,
+        ge=1.0,
+        le=60.0,
+        description="Timeout for handshake operations in seconds"
+    )
+    protocol_version: str = Field(
+        default="1.0.0",
+        description="Protocol version for handshake"
+    )
+    heartbeat_interval: float = Field(
+        default=30.0,
+        ge=5.0,
+        le=300.0,
+        description="Interval between heartbeat checks in seconds"
+    )
+    heartbeat_timeout: float = Field(
+        default=10.0,
+        ge=1.0,
+        le=60.0,
+        description="Timeout for heartbeat responses in seconds"
+    )
+    max_missed_heartbeats: int = Field(
+        default=3,
+        ge=1,
+        le=10,
+        description="Maximum missed heartbeats before marking agent unhealthy"
+    )
+    agents: list[HandshakeAgentEntryConfig] = Field(
+        default_factory=list,
+        description="List of agents to connect to"
+    )
+
+
 class LoggingConfig(BaseModel):
     """Logging configuration."""
     level: LogLevel = Field(default=LogLevel.INFO, description="Log level")
@@ -482,4 +532,5 @@ class Config(BaseModel):
     video_ingestion: VideoIngestionConfig = Field(default_factory=VideoIngestionConfig)
     plan: PlanConfig = Field(default_factory=PlanConfig)
     protocol: ProtocolConfig = Field(default_factory=ProtocolConfig)
+    handshake: HandshakeConfig = Field(default_factory=HandshakeConfig)
     logging: LoggingConfig = Field(default_factory=LoggingConfig)

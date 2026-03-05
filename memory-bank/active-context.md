@@ -7,8 +7,8 @@
 - Pending Reviews: None
 - Active Milestone: M5 - Agent Communication 🔄 IN PROGRESS
 - Completed Milestones: M0 ✅, M1 ✅, M2 ✅, M3 ✅, M4 ✅
-- **Just Completed**: M5-1 Message Infrastructure (45 tests, 1012 total)
-- **Milestone 5 Progress**: 1/3 epics complete
+- **Just Completed**: M5-2 Agent Handshake Protocol (54 tests, 1066 total)
+- **Milestone 5 Progress**: 2/3 epics complete
 
 ---
 
@@ -531,9 +531,41 @@
 
 ---
 
+## M5-2 Agent Handshake Protocol Implementation Details
+
+**Files Created:**
+- `src/protocol/registry.py` - HandshakeState enum, AgentInfo dataclass, AgentRegistry singleton
+- `src/protocol/state.py` - ConnectionState, ConnectionManager singleton, StateTransitionError
+- `src/protocol/handshake.py` - HandshakeConfig, HandshakeResult, Handshaker class
+- `src/protocol/health.py` - HealthConfig, AgentHealth, HealthMonitor with async heartbeats
+- `interfaces/handshake.schema.json` - JSON schema for handshake messages
+- `tests/unit/test_handshake.py` - 54 comprehensive unit tests
+
+**Files Modified:**
+- `src/protocol/__init__.py` - Added exports for registry, state, handshake, health modules
+- `config/default.yaml` - Added `handshake:` configuration section
+- `config/schema.json` - Added handshake settings schema
+
+**Key Features:**
+- HandshakeState enum: DISCONNECTED → CONNECTING → HANDSHAKING → CONNECTED → ERROR
+- AgentInfo dataclass with socket path, capabilities, status tracking
+- AgentRegistry singleton for agent CRUD, capability queries, status summaries
+- ConnectionState with valid transition enforcement
+- ConnectionManager singleton for multi-agent state management
+- Handshaker class with receive_hello(), receive_ack(), receive_ready() handlers
+- HealthMonitor with async heartbeat loops, unhealthy callbacks
+- create_health_monitor() factory function
+
+**Test Coverage:**
+- 54 new tests for handshake module
+- 1066 total tests passing
+
+---
+
 ## Recent Activity
 | Date | Activity | Status |
 |------|----------|--------|
+| 2026-03-05 | M5-2 Agent Handshake Protocol complete (54 tests, 1066 total) | Complete |
 | 2026-03-04 | M5-1 Message Infrastructure complete (45 tests, 1012 total) | Complete |
 | 2026-03-04 | M4-4 Reports Generation & Persistence complete (46 tests, 967 total) - MILESTONE 4 COMPLETE | Complete |
 | 2026-03-04 | M4-3 Design System Proposals complete (96 tests, 921 total) | Complete |

@@ -1,0 +1,151 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "handshake.schema.json",
+  "title": "Agent Handshake Protocol",
+  "description": "Schema for agent handshake messages (HELLO, ACK, READY)",
+  "definitions": {
+    "HandshakeState": {
+      "type": "string",
+      "enum": ["disconnected", "connecting", "handshaking", "connected", "error"],
+      "description": "Connection states for agent handshakes"
+    },
+    "AgentInfo": {
+      "type": "object",
+      "properties": {
+        "agent_type": {
+          "type": "string",
+          "description": "Agent type identifier"
+        },
+        "socket_path": {
+          "type": "string",
+          "description": "Path to Unix domain socket"
+        },
+        "capabilities": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "List of agent capabilities"
+        },
+        "required": {
+          "type": "boolean",
+          "description": "Whether connection is required"
+        },
+        "status": {
+          "$ref": "#/definitions/HandshakeState"
+        },
+        "last_seen": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Last seen timestamp"
+        },
+        "version": {
+          "type": "string",
+          "description": "Protocol version"
+        }
+      },
+      "required": ["agent_type", "socket_path"]
+    },
+    "HandshakeResult": {
+      "type": "object",
+      "properties": {
+        "success": {
+          "type": "boolean",
+          "description": "Whether handshake succeeded"
+        },
+        "agent_type": {
+          "type": "string",
+          "description": "Agent type that was targeted"
+        },
+        "agent_info": {
+          "type": "object",
+          "description": "Peer agent info if successful"
+        },
+        "error_message": {
+          "type": "string",
+          "description": "Error message if failed"
+        },
+        "duration_ms": {
+          "type": "number",
+          "description": "Handshake duration in milliseconds"
+        }
+      },
+      "required": ["success", "agent_type"]
+    },
+    "AgentHealth": {
+      "type": "object",
+      "properties": {
+        "agent_type": {
+          "type": "string",
+          "description": "Agent type identifier"
+        },
+        "last_heartbeat": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Last successful heartbeat timestamp"
+        },
+        "missed_heartbeats": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Number of consecutive missed heartbeats"
+        },
+        "is_healthy": {
+          "type": "boolean",
+          "description": "Whether agent is currently healthy"
+        },
+        "last_error": {
+          "type": "string",
+          "description": "Last error message"
+        }
+      },
+      "required": ["agent_type"]
+    }
+  },
+  "oneOf": [
+    {
+      "type": "object",
+      "properties": {
+        "message_type": { "const": "HELLO" },
+        "payload": {
+          "type": "object",
+          "properties": {
+            "agent_name": { "type": "string" },
+            "version": { "type": "string" },
+            "capabilities": {
+              "type": "array",
+              "items": { "type": "string" }
+            }
+          },
+          "required": ["agent_name", "version"]
+        }
+      }
+    },
+    {
+      "type": "object",
+      "properties": {
+        "message_type": { "const": "ACK" },
+        "payload": {
+          "type": "object",
+          "properties": {
+            "agent_name": { "type": "string" },
+            "status": { "type": "string" },
+            "message": { "type": "string" }
+          },
+          "required": ["agent_name", "status"]
+        }
+      }
+    },
+    {
+      "type": "object",
+      "properties": {
+        "message_type": { "const": "READY" },
+        "payload": {
+          "type": "object",
+          "properties": {
+            "agent_name": { "type": "string" },
+            "status": { "type": "string" }
+          },
+          "required": ["agent_name", "status"]
+        }
+      }
+    }
+  ]
+}
