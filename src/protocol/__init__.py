@@ -85,6 +85,56 @@ from src.protocol.health import (
     AgentHealth,
     create_health_monitor,
 )
+# M5-3: Arbitration & Reliability
+from src.protocol.retry import (
+    RetryConfig,
+    RetryState,
+    RetryManager,
+    RetryableError,
+    PermanentError,
+    ErrorType,
+    create_retry_config_from_dict,
+)
+from src.protocol.sync import (
+    SyncEventType,
+    SyncStatus,
+    SyncLogEntry,
+    SyncStats,
+    SyncLogger,
+    get_sync_logger,
+    reset_sync_logger,
+)
+from src.protocol.dedup import (
+    CacheEntry,
+    DeduplicationCache,
+    get_dedup_cache,
+    reset_dedup_cache,
+    is_duplicate,
+    mark_processed,
+)
+from src.protocol.arbitration import (
+    DisputeStatus,
+    DisputeResolution,
+    DisputeRecord,
+    Arbitrator,
+    get_arbitrator,
+    reset_arbitrator,
+)
+from src.protocol.escalation import (
+    EscalationTrigger,
+    EscalationStatus,
+    EscalationRecord,
+    EscalationManager,
+    get_escalation_manager,
+    reset_escalation_manager,
+)
+from src.protocol.dead_letter import (
+    DeadLetterEntry,
+    DeadLetterQueue,
+    get_dead_letter_queue,
+    reset_dead_letter_queue,
+    add_to_dlq,
+)
 
 __all__ = [
     # Message types
@@ -162,4 +212,47 @@ __all__ = [
     "HealthConfig",
     "AgentHealth",
     "create_health_monitor",
+    # M5-3: Retry
+    "RetryConfig",
+    "RetryState",
+    "RetryManager",
+    "RetryableError",
+    "PermanentError",
+    "ErrorType",
+    "create_retry_config_from_dict",
+    # M5-3: Sync
+    "SyncEventType",
+    "SyncStatus",
+    "SyncLogEntry",
+    "SyncStats",
+    "SyncLogger",
+    "get_sync_logger",
+    "reset_sync_logger",
+    # M5-3: Deduplication
+    "CacheEntry",
+    "DeduplicationCache",
+    "get_dedup_cache",
+    "reset_dedup_cache",
+    "is_duplicate",
+    "mark_processed",
+    # M5-3: Arbitration
+    "DisputeStatus",
+    "DisputeResolution",
+    "DisputeRecord",
+    "Arbitrator",
+    "get_arbitrator",
+    "reset_arbitrator",
+    # M5-3: Escalation
+    "EscalationTrigger",
+    "EscalationStatus",
+    "EscalationRecord",
+    "EscalationManager",
+    "get_escalation_manager",
+    "reset_escalation_manager",
+    # M5-3: Dead Letter Queue
+    "DeadLetterEntry",
+    "DeadLetterQueue",
+    "get_dead_letter_queue",
+    "reset_dead_letter_queue",
+    "add_to_dlq",
 ]

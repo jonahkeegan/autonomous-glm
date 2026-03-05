@@ -167,6 +167,34 @@ protocol:
   buffer_size: 65536  # 64KB buffer
   max_message_size: 10485760  # 10MB max message
 
+# Reliability Configuration (M5-3: Arbitration & Reliability)
+reliability:
+  retry:
+    max_retries: 5
+    base_delay: 1.0  # seconds
+    max_delay: 1800.0  # seconds (30 min per PRD)
+    jitter: true
+    exponential_base: 2.0
+  
+  dedup:
+    max_size: 10000  # Maximum cached message IDs
+    ttl: 3600  # TTL in seconds (1 hour)
+  
+  dlq:
+    max_size: 1000  # Maximum entries in dead letter queue
+    persist_path: "./data/dlq.json"  # Path to persist DLQ state
+  
+  sync_log:
+    path: "./logs/sync-log.ndjson"
+    max_size_mb: 10.0  # Max log size before rotation
+  
+  arbitration:
+    arbiter: "claude"  # Default arbiter agent
+    timeout: 300.0  # seconds to wait for arbiter response
+  
+  escalation:
+    timeout: 3600.0  # seconds to wait for human response (1 hour)
+
 # Logging Configuration
 logging:
   level: INFO
