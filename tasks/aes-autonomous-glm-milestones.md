@@ -237,9 +237,11 @@ Implement the comprehensive audit protocol based on SOUL.md design philosophy.
 
 ## Milestone 4: Plan Generation
 
-**Status:** 🔲 Not Started  
+**Status:** ✅ Complete  
 **Duration Estimate:** 3-4 days  
-**Dependencies:** Milestone 3
+**Actual Duration:** 1 day  
+**Dependencies:** Milestone 3  
+**Completion Date:** 2026-03-04
 
 ### Objectives
 Generate phased improvement plans from audit findings in implementation-ready format.
@@ -254,34 +256,62 @@ Generate phased improvement plans from audit findings in implementation-ready fo
 | M4-4 | Reports & Persistence | High | Markdown/JSON output, plan persistence, report writer |
 
 ### Deliverables
-- [ ] Phased plan synthesis (M4-1):
+- [x] Phased plan synthesis (M4-1):
   - Phase 1: Critical (usability, hierarchy, accessibility)
   - Phase 2: Refinement (spacing, typography, color, alignment)
   - Phase 3: Polish (states, theming, micro-interactions)
-- [ ] Implementation instruction formatter (M4-2):
+- [x] Implementation instruction formatter (M4-2):
   - Exact file, exact component, exact property
   - Old value → new value format
   - No ambiguous language
   - Simple string templates
-- [ ] Design system proposal generation (M4-3):
+- [x] Design system proposal generation (M4-3):
   - Token proposals (new colors, spacing, typography)
   - Component variant proposals
   - Before/after text descriptions
-- [ ] Reports & Persistence (M4-4):
+- [x] Reports & Persistence (M4-4):
   - Markdown reports to `/output/reports/`
   - JSON output for agent consumption
   - PlanPhase entity persistence
 
+### Implementation Summary
+
+**Epic M4-1: Phased Plan Synthesis** ✅
+- PlanSynthesizer with phase classification (Critical/Refinement/Polish)
+- DependencyResolver with topological sorting
+- PhaseClassifier with severity/dimension rules
+- 57 tests passing
+
+**Epic M4-2: Implementation Formatter** ✅
+- InstructionFormatter with file/component mapping
+- InstructionTemplateRegistry with 10 built-in templates
+- InstructionValidator with strict mode
+- 102 tests passing
+
+**Epic M4-3: Design System Proposals** ✅
+- TokenAnalyzer with pattern detection
+- ProposalGenerator with impact scoring
+- BeforeAfterGenerator with text descriptions
+- 96 tests passing
+
+**Epic M4-4: Reports & Persistence** ✅
+- MarkdownGenerator and JsonGenerator
+- PlanPersistence with CRUD operations
+- ReportWriter with date-based directories
+- 46 tests passing
+
+**Total: 301 new tests, 967 total suite**
+
 ### Success Criteria
-- Plans correctly prioritize critical issues first
-- Implementation instructions are executable without interpretation
-- Design system proposals reference existing tokens
-- Before/after comparisons clearly show expected changes
-- Reports validate against interface schemas
+- [x] Plans correctly prioritize critical issues first
+- [x] Implementation instructions are executable without interpretation
+- [x] Design system proposals reference existing tokens
+- [x] Before/after comparisons clearly show expected changes
+- [x] Reports validate against interface schemas
 
 ### KPIs
-- Plan generation time < 2s per audit
-- Instruction clarity score > 90% (reviewer rating)
+- [x] Plan generation time < 2s per audit
+- [x] Instruction clarity score > 90% (reviewer rating)
 
 ### Epic Files
 - `tasks/epic-m4-1-phased-plan-synthesis.md`
@@ -300,9 +330,17 @@ Generate phased improvement plans from audit findings in implementation-ready fo
 ### Objectives
 Establish structured communication with autonomous-claude, autonomous-minimax, and autonomous-codex.
 
+### Epic Breakdown
+
+| Epic | Name | Priority | Description |
+|------|------|----------|-------------|
+| M5-1 | Message Infrastructure | Critical | Unix domain sockets, message models, router, schema validation |
+| M5-2 | Agent Handshake Protocol | Critical | Agent discovery, HELLO/ACK/READY sequence, registry, health monitor |
+| M5-3 | Arbitration & Reliability | High | Retry logic, arbitration routing, escalation triggers, sync logging, DLQ |
+
 ### Deliverables
-- [ ] Message queue/domain socket setup for macOS
-- [ ] Structured JSON message format implementation:
+- [ ] Message queue/domain socket setup for macOS (M5-1)
+- [ ] Structured JSON message format implementation (M5-1):
   ```json
   {
     "message_id": "uuid",
@@ -314,10 +352,26 @@ Establish structured communication with autonomous-claude, autonomous-minimax, a
     "requires_response": true
   }
   ```
-- [ ] Agent handshake protocol (Claude, Minimax, Codex)
-- [ ] Arbitration routing via autonomous-claude
-- [ ] Sync protocol with exponential backoff (1800s max)
-- [ ] Sync logging to `/logs/sync-log.ndjson`
+- [ ] Agent handshake protocol (M5-2):
+  - Config-based agent discovery
+  - HELLO → ACK → READY three-way handshake
+  - Connection state management
+  - Heartbeat/ping for health monitoring
+- [ ] Arbitration routing via autonomous-claude (M5-3)
+- [ ] Sync protocol with exponential backoff (1800s max) (M5-3)
+- [ ] Sync logging to `/logs/sync-log.ndjson` (M5-3)
+- [ ] Human-in-the-loop escalation triggers (M5-3)
+- [ ] Dead letter queue for failed messages (M5-3)
+
+### Technical Decisions
+
+| Decision | Choice | Rationale |
+|----------|--------|-----------|
+| Transport | Unix domain sockets | PRD requirement; low latency; macOS native |
+| Socket path | `/var/run/autonomous-glm/` | System-level socket directory |
+| Message persistence | In-memory | Zulip messages always available; no disk persistence needed |
+| Discovery | Config-based | Agents known at deploy time; no dynamic discovery needed |
+| Arbiter | Claude | PRD specifies arbitration via autonomous-claude |
 
 ### Success Criteria
 - Messages transmit successfully to all agents
@@ -329,6 +383,11 @@ Establish structured communication with autonomous-claude, autonomous-minimax, a
 - Message delivery latency < 100ms
 - Handshake success rate 100%
 - Zero message loss on retry
+
+### Epic Files
+- `tasks/epic-m5-1-message-infrastructure.md`
+- `tasks/epic-m5-2-agent-handshake-protocol.md`
+- `tasks/epic-m5-3-arbitration-reliability.md`
 
 ---
 
@@ -538,4 +597,4 @@ M0: Foundation
 ---
 
 *Document created: 2026-02-28*  
-*Last updated: 2026-02-28*
+*Last updated: 2026-03-04*

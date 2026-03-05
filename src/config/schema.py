@@ -431,6 +431,32 @@ class PlanConfig(BaseModel):
     )
 
 
+class ProtocolConfig(BaseModel):
+    """Protocol configuration for agent communication."""
+    socket_dir: str = Field(
+        default="/var/run/autonomous-glm",
+        description="Directory for Unix domain socket files"
+    )
+    socket_timeout: float = Field(
+        default=30.0,
+        ge=1.0,
+        le=300.0,
+        description="Socket timeout in seconds"
+    )
+    buffer_size: int = Field(
+        default=65536,
+        ge=1024,
+        le=1048576,
+        description="Buffer size for socket operations"
+    )
+    max_message_size: int = Field(
+        default=10485760,
+        ge=1024,
+        le=104857600,
+        description="Maximum message size in bytes"
+    )
+
+
 class LoggingConfig(BaseModel):
     """Logging configuration."""
     level: LogLevel = Field(default=LogLevel.INFO, description="Log level")
@@ -455,4 +481,5 @@ class Config(BaseModel):
     ingestion: IngestionConfig = Field(default_factory=IngestionConfig)
     video_ingestion: VideoIngestionConfig = Field(default_factory=VideoIngestionConfig)
     plan: PlanConfig = Field(default_factory=PlanConfig)
+    protocol: ProtocolConfig = Field(default_factory=ProtocolConfig)
     logging: LoggingConfig = Field(default_factory=LoggingConfig)

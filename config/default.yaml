@@ -160,6 +160,13 @@ plan:
   respect_phase_boundaries: true
   max_actions_per_phase: 100
 
+# Protocol Configuration (M5-1: Message Infrastructure)
+protocol:
+  socket_dir: "/var/run/autonomous-glm"  # Unix domain socket directory
+  socket_timeout: 30.0  # seconds
+  buffer_size: 65536  # 64KB buffer
+  max_message_size: 10485760  # 10MB max message
+
 # Logging Configuration
 logging:
   level: INFO

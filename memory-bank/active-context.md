@@ -1,14 +1,14 @@
 # Active Context
 
 ## Current State
-- Phase: **Milestone 4 COMPLETE - All 4 Epics Done**
+- Phase: **Milestone 5 IN PROGRESS - Agent Communication**
 - Last Audit: None
 - Active Artifacts: None
 - Pending Reviews: None
-- Active Milestone: M4 - Plan Generation ✅ COMPLETE
+- Active Milestone: M5 - Agent Communication 🔄 IN PROGRESS
 - Completed Milestones: M0 ✅, M1 ✅, M2 ✅, M3 ✅, M4 ✅
-- **Just Completed**: M4-4 Reports Generation & Persistence (46 tests, 967 total)
-- **Milestone 4 Progress**: 4/4 epics complete
+- **Just Completed**: M5-1 Message Infrastructure (45 tests, 1012 total)
+- **Milestone 5 Progress**: 1/3 epics complete
 
 ---
 
@@ -501,9 +501,40 @@
 
 ---
 
+## M5-1 Message Infrastructure Implementation Details
+
+**Files Created:**
+- `src/protocol/__init__.py` - Module exports with clean public API
+- `src/protocol/message.py` - Pydantic models (AgentMessage, MessageAck, payload models, enums, factory functions)
+- `src/protocol/validator.py` - MessageValidator with schema caching, source/target validation
+- `src/protocol/transport.py` - SocketConfig, UnixSocketServer, UnixSocketClient with async I/O
+- `src/protocol/router.py` - MessageRouter with handler registration, default handler, error handling
+- `tests/unit/test_protocol.py` - 45 comprehensive unit tests
+
+**Files Modified:**
+- `config/default.yaml` - Added `protocol:` configuration section
+- `tests/pytest.ini` - Added pytest-asyncio configuration (asyncio_mode = auto)
+
+**Key Features:**
+- AgentMessage with UUID message_id, ISO timestamps, source/target agents, message type, payload
+- MessageAck with status validation (acknowledged, rejected, error, pending)
+- Payload models: AuditCompletePayload, DesignProposalPayload, DisputePayload, HumanRequiredPayload
+- Enums: AgentType (5 agents), MessageType (8 types), ProposalType (5 types), ChangeType (3), ReviewType (7), DisputeSeverity (3)
+- Factory functions for all message types
+- MessageValidator with JSON schema caching
+- Unix domain socket server/client with async support
+- MessageRouter with handler registration and default fallback
+
+**Test Coverage:**
+- 45 new tests for protocol module
+- 1012 total tests passing
+
+---
+
 ## Recent Activity
 | Date | Activity | Status |
 |------|----------|--------|
+| 2026-03-04 | M5-1 Message Infrastructure complete (45 tests, 1012 total) | Complete |
 | 2026-03-04 | M4-4 Reports Generation & Persistence complete (46 tests, 967 total) - MILESTONE 4 COMPLETE | Complete |
 | 2026-03-04 | M4-3 Design System Proposals complete (96 tests, 921 total) | Complete |
 | 2026-03-04 | M4-2 Implementation Instruction Formatter complete (102 tests, 825 total) | Complete |
