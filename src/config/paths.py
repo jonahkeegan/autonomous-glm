@@ -114,3 +114,13 @@ def get_default_data_dir() -> Path:
         Path: Path to the data directory.
     """
     return get_project_root() / "data"
+
+
+def get_output_dir() -> Path:
+    """
+    Get the default output directory path.
+    
+    Returns:
+        Path: Path to the output directory.
+    """
+    return get_project_root() / "output"

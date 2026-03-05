@@ -8,6 +8,9 @@ instructions.
 
 Also provides design system proposal generation (M4-3) for recommending
 token additions and component variants.
+
+Also provides report generation and persistence (M4-4) for creating
+Markdown and JSON reports and storing them to the database.
 """
 
 from src.plan.models import (
@@ -151,3 +154,81 @@ __all__ = [
     "generate_component_comparison",
     "generate_summary_comparison",
 ]
+
+# Report Generation & Persistence (M4-4)
+from src.plan.report_models import (
+    ReportType,
+    ReportMetadata,
+    AuditSummaryReport,
+    ImplementationPlanReport,
+    DesignProposalReport,
+    FullReport,
+)
+from src.plan.markdown import (
+    MarkdownGenerator,
+    generate_audit_summary_markdown,
+    generate_implementation_plan_markdown,
+    generate_design_proposals_markdown,
+    generate_full_report_markdown,
+)
+from src.plan.json_output import (
+    JsonGenerator,
+    generate_agent_payload,
+    generate_findings_json,
+    generate_instructions_json,
+    generate_proposals_json,
+    validate_agent_message,
+)
+from src.plan.persistence import (
+    PlanPersistence,
+    save_plan,
+    get_plan,
+    get_plans_by_session,
+    update_plan_status,
+    save_report,
+    get_report,
+)
+from src.plan.report_writer import (
+    ReportWriter,
+    write_markdown_report,
+    write_json_report,
+    write_full_report,
+    generate_report_filename,
+)
+
+__all__.extend([
+    # Report Models
+    "ReportType",
+    "ReportMetadata",
+    "AuditSummaryReport",
+    "ImplementationPlanReport",
+    "DesignProposalReport",
+    "FullReport",
+    # Markdown Generation
+    "MarkdownGenerator",
+    "generate_audit_summary_markdown",
+    "generate_implementation_plan_markdown",
+    "generate_design_proposals_markdown",
+    "generate_full_report_markdown",
+    # JSON Output
+    "JsonGenerator",
+    "generate_agent_payload",
+    "generate_findings_json",
+    "generate_instructions_json",
+    "generate_proposals_json",
+    "validate_agent_message",
+    # Persistence
+    "PlanPersistence",
+    "save_plan",
+    "get_plan",
+    "get_plans_by_session",
+    "update_plan_status",
+    "save_report",
+    "get_report",
+    # Report Writer
+    "ReportWriter",
+    "write_markdown_report",
+    "write_json_report",
+    "write_full_report",
+    "generate_report_filename",
+])
