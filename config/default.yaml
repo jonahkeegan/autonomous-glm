@@ -201,3 +201,15 @@ logging:
   format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
   file_rotation: "10 MB"
   file_count: 5
+
+# CLI Configuration
+cli:
+  output:
+    format: table  # table or json
+    color: true
+    pager: true
+    progress: true
+  defaults:
+    dimensions: []  # Empty = all dimensions
+    verbose: false
+    output_dir: null  # Uses default reports_dir

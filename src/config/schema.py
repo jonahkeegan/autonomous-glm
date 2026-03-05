@@ -518,6 +518,54 @@ class LoggingConfig(BaseModel):
     file_count: int = Field(default=5, ge=1, le=100, description="Number of log files to keep")
 
 
+class CLIOutputConfig(BaseModel):
+    """CLI output configuration."""
+    format: str = Field(
+        default="table",
+        description="Default output format (table, json)"
+    )
+    color: bool = Field(
+        default=True,
+        description="Enable colored output"
+    )
+    pager: bool = Field(
+        default=True,
+        description="Use pager for long output"
+    )
+    progress: bool = Field(
+        default=True,
+        description="Show progress indicators"
+    )
+
+
+class CLIDefaultsConfig(BaseModel):
+    """CLI default values configuration."""
+    dimensions: list[str] = Field(
+        default=[],
+        description="Default dimensions to audit (empty = all)"
+    )
+    verbose: bool = Field(
+        default=False,
+        description="Default verbose mode"
+    )
+    output_dir: Optional[str] = Field(
+        default=None,
+        description="Default output directory for reports"
+    )
+
+
+class CLIConfig(BaseModel):
+    """CLI configuration."""
+    output: CLIOutputConfig = Field(
+        default_factory=CLIOutputConfig,
+        description="Output formatting options"
+    )
+    defaults: CLIDefaultsConfig = Field(
+        default_factory=CLIDefaultsConfig,
+        description="Default values for CLI commands"
+    )
+
+
 class Config(BaseModel):
     """Root configuration model containing all configuration sections."""
     app: AppConfig = Field(default_factory=AppConfig)
@@ -534,3 +582,4 @@ class Config(BaseModel):
     protocol: ProtocolConfig = Field(default_factory=ProtocolConfig)
     handshake: HandshakeConfig = Field(default_factory=HandshakeConfig)
     logging: LoggingConfig = Field(default_factory=LoggingConfig)
+    cli: CLIConfig = Field(default_factory=CLIConfig)

@@ -1,14 +1,14 @@
 # Active Context
 
 ## Current State
-- Phase: **Milestone 5 COMPLETE - Agent Communication** ✅
+- Phase: **Milestone 6 IN PROGRESS** 
 - Last Audit: None
 - Active Artifacts: None
 - Pending Reviews: None
-- Active Milestone: M6 - Orchestration & Health (next)
-- Completed Milestones: M0 ✅, M1 ✅, M2 ✅, M3 ✅, M4 ✅, M5 ✅
-- **Just Completed**: M5-3 Arbitration & Reliability (56 tests, 1122 total)
-- **Milestone 5 Progress**: 3/3 epics complete - MILESTONE COMPLETE
+- Active Milestone: M6 - Reporting & CLI
+- Completed Milestones: M0 ✅, M1 ✅, M2 ✅, M3 ✅, M4 ✅, M5 ✅, M6-1 ✅
+- **Just Completed**: M6-1 CLI Core Commands (73 tests, 1195 total)
+- **Next Step**: M6-2 Watch Mode & Auto-Processing
 
 ---
 
@@ -618,9 +618,60 @@
 
 ---
 
+## M6-1 CLI Core Commands Implementation Details
+
+**Files Created:**
+- `src/cli/__init__.py` - Module exports with version
+- `src/cli/main.py` - Root CLI group with global options (--verbose, --json)
+- `src/cli/errors.py` - CLIError hierarchy with 8 exit codes
+- `src/cli/formatters.py` - Rich-based formatters (tables, panels, JSON)
+- `src/cli/progress.py` - Progress indicators (spinner, progress bar)
+- `src/cli/commands/__init__.py` - Command package exports
+- `src/cli/commands/audit.py` - `glm audit` command with dimension validation
+- `src/cli/commands/report.py` - `glm report` command with export options
+- `src/cli/commands/propose.py` - `glm propose` command with status management
+- `pyproject.toml` - Package configuration with `glm` entry point
+- `tests/unit/test_cli_main.py` - 12 main CLI tests
+- `tests/unit/test_cli_audit.py` - 13 audit command tests
+- `tests/unit/test_cli_report.py` - 14 report command tests
+- `tests/unit/test_cli_propose.py` - 14 propose command tests
+- `tests/unit/test_cli_formatters.py` - 20 formatter tests
+
+**Files Modified:**
+- `requirements.txt` - Added click>=8.0.0, rich>=13.0.0
+- `config/schema.py` - Added CLIConfig model
+- `config/default.yaml` - Added cli configuration section
+
+**Key Features:**
+- Click-based CLI with 3 subcommands (audit, report, propose)
+- Rich output formatting with tables, panels, severity styling
+- Global --json flag for machine-readable output
+- Global --verbose flag for detailed output
+- Custom exit codes (0-7) for scripting
+- Dimension validation against allowed list
+- Report export to Markdown or JSON
+- Proposal approval/rejection workflow
+
+**Test Coverage:**
+- 73 new tests for CLI module
+- 1195 total tests passing
+
+---
+
+## Milestone 6 Progress
+
+| Epic | Description | Status |
+|------|-------------|--------|
+| M6-1 | CLI Core Commands | ✅ Complete (73 tests pass) |
+| M6-2 | Watch Mode & Auto-Processing | Pending |
+| M6-3 | Dashboard & PDF Export | Pending |
+
+---
+
 ## Recent Activity
 | Date | Activity | Status |
 |------|----------|--------|
+| 2026-03-05 | M6-1 CLI Core Commands complete (73 tests, 1195 total) | Complete |
 | 2026-03-05 | M5-3 Arbitration & Reliability complete (56 tests, 1122 total) - MILESTONE 5 COMPLETE | Complete |
 | 2026-03-05 | M5-2 Agent Handshake Protocol complete (54 tests, 1066 total) | Complete |
 | 2026-03-04 | M5-1 Message Infrastructure complete (45 tests, 1012 total) | Complete |
