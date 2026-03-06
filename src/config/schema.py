@@ -8,6 +8,7 @@ from enum import Enum
 from typing import Optional
 
 from pydantic import BaseModel, Field, field_validator
+from pathlib import Path
 
 
 class Environment(str, Enum):
@@ -554,6 +555,46 @@ class CLIDefaultsConfig(BaseModel):
     )
 
 
+class WatchConfigModel(BaseModel):
+    """Configuration for watch mode."""
+    debounce_window_seconds: float = Field(
+        default=2.0,
+        ge=0.1,
+        le=60.0,
+        description="Seconds to wait before processing duplicate events"
+    )
+    max_queue_size: int = Field(
+        default=100,
+        ge=1,
+        le=1000,
+        description="Maximum items in processing queue"
+    )
+    processing_interval_seconds: float = Field(
+        default=0.5,
+        ge=0.1,
+        le=10.0,
+        description="Interval between queue processing cycles"
+    )
+    event_log_path: str = Field(
+        default="logs/watch-log.ndjson",
+        description="Path to event log file"
+    )
+    screenshot_extensions: list[str] = Field(
+        default=["png", "jpg", "jpeg", "gif", "webp"],
+        description="Screenshot file extensions to detect"
+    )
+    video_extensions: list[str] = Field(
+        default=["mp4", "mov", "avi", "mkv", "webm"],
+        description="Video file extensions to detect"
+    )
+    
+    @field_validator("screenshot_extensions", "video_extensions")
+    @classmethod
+    def lowercase_extensions(cls, v: list[str]) -> list[str]:
+        """Ensure all extensions are lowercase."""
+        return [ext.lower().lstrip(".") for ext in v]
+
+
 class CLIConfig(BaseModel):
     """CLI configuration."""
     output: CLIOutputConfig = Field(
@@ -583,3 +624,4 @@ class Config(BaseModel):
     handshake: HandshakeConfig = Field(default_factory=HandshakeConfig)
     logging: LoggingConfig = Field(default_factory=LoggingConfig)
     cli: CLIConfig = Field(default_factory=CLIConfig)
+    watch: WatchConfigModel = Field(default_factory=WatchConfigModel)

@@ -16,6 +16,7 @@ python-multipart>=0.0.6
 # CLI dependencies
 click>=8.0.0
 rich>=13.0.0
+watchdog>=3.0.0
 
 # Development/Testing dependencies
 pytest>=7.0.0

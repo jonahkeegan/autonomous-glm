@@ -323,9 +323,11 @@ Generate phased improvement plans from audit findings in implementation-ready fo
 
 ## Milestone 5: Agent Communication Protocol
 
-**Status:** 🔲 Not Started  
+**Status:** ✅ Complete  
 **Duration Estimate:** 4-5 days  
-**Dependencies:** Milestone 4
+**Actual Duration:** 1 day  
+**Dependencies:** Milestone 4  
+**Completion Date:** 2026-03-05
 
 ### Objectives
 Establish structured communication with autonomous-claude, autonomous-minimax, and autonomous-codex.
@@ -339,8 +341,8 @@ Establish structured communication with autonomous-claude, autonomous-minimax, a
 | M5-3 | Arbitration & Reliability | High | Retry logic, arbitration routing, escalation triggers, sync logging, DLQ |
 
 ### Deliverables
-- [ ] Message queue/domain socket setup for macOS (M5-1)
-- [ ] Structured JSON message format implementation (M5-1):
+- [x] Message queue/domain socket setup for macOS (M5-1)
+- [x] Structured JSON message format implementation (M5-1):
   ```json
   {
     "message_id": "uuid",
@@ -352,16 +354,45 @@ Establish structured communication with autonomous-claude, autonomous-minimax, a
     "requires_response": true
   }
   ```
-- [ ] Agent handshake protocol (M5-2):
+- [x] Agent handshake protocol (M5-2):
   - Config-based agent discovery
   - HELLO → ACK → READY three-way handshake
   - Connection state management
   - Heartbeat/ping for health monitoring
-- [ ] Arbitration routing via autonomous-claude (M5-3)
-- [ ] Sync protocol with exponential backoff (1800s max) (M5-3)
-- [ ] Sync logging to `/logs/sync-log.ndjson` (M5-3)
-- [ ] Human-in-the-loop escalation triggers (M5-3)
-- [ ] Dead letter queue for failed messages (M5-3)
+- [x] Arbitration routing via autonomous-claude (M5-3)
+- [x] Sync protocol with exponential backoff (1800s max) (M5-3)
+- [x] Sync logging to `/logs/sync-log.ndjson` (M5-3)
+- [x] Human-in-the-loop escalation triggers (M5-3)
+- [x] Dead letter queue for failed messages (M5-3)
+
+### Implementation Summary
+
+**Epic M5-1: Message Infrastructure** ✅
+- AgentMessage/MessageAck Pydantic models with full metadata
+- Payload models for all message types (Audit, Design, Dispute, Human)
+- Unix domain socket server/client with async I/O
+- MessageRouter with handler registration
+- MessageValidator with JSON schema caching
+- 45 tests passing
+
+**Epic M5-2: Agent Handshake Protocol** ✅
+- AgentRegistry singleton for agent CRUD and capability queries
+- ConnectionManager with state machine (DISCONNECTED → CONNECTED)
+- Handshaker with HELLO/ACK/READY sequence
+- HealthMonitor with async heartbeat loops
+- handshake.schema.json for message validation
+- 54 tests passing
+
+**Epic M5-3: Arbitration & Reliability** ✅
+- RetryManager with exponential backoff (1800s max per PRD)
+- SyncLogger with NDJSON persistence
+- DeduplicationCache with LRU eviction and TTL
+- Arbitrator with dispute routing to Claude
+- EscalationManager with 7 trigger types
+- DeadLetterQueue with JSON persistence
+- 56 tests passing
+
+**Total: 155 new tests, 1122 total suite**
 
 ### Technical Decisions
 
@@ -400,27 +431,75 @@ Establish structured communication with autonomous-claude, autonomous-minimax, a
 ### Objectives
 Build the command-line interface and reporting output system.
 
+### Epic Breakdown
+
+| Epic | Name | Priority | Description |
+|------|------|----------|-------------|
+| M6-1 | CLI Core Commands | Critical | Command parsing, audit/report/propose commands, terminal tables, JSON output |
+| M6-2 | Watch Mode & Auto-Processing | High | Directory watching, artifact detection, automatic audit triggering |
+| M6-3 | Dashboard & PDF Export | Medium | Metrics dashboard, HTML/terminal display, PDF generation |
+
 ### Deliverables
-- [ ] Markdown report generation (`/output/reports/`)
-- [ ] JSON output for agent consumption
-- [ ] CLI interface with flags:
-  - `--audit <artifact_id>` — trigger audit
-  - `--report <audit_id>` — fetch last report
-  - `--propose` — open design system proposal
-  - `--watch <directory>` — watch for new artifacts
-- [ ] Summary tables (terminal output)
-- [ ] Dashboard metrics output (local HTML or terminal)
-- [ ] PDF export option for human review
+- [ ] Markdown report generation (`/output/reports/`) — M4-4 foundation exists
+- [ ] JSON output for agent consumption (M6-1)
+- [ ] CLI interface with flags (M6-1):
+  - `glm audit <artifact_id>` — trigger audit
+  - `glm report <audit_id>` — fetch report
+  - `glm propose [proposal_id]` — view design system proposals
+- [ ] Watch mode (M6-2):
+  - `glm watch <directory>` — watch for new artifacts
+  - Automatic audit triggering on file detection
+- [ ] Summary tables (terminal output) (M6-1)
+- [ ] Dashboard metrics output (M6-3):
+  - `glm dashboard` — terminal display
+  - `glm dashboard --html` — HTML output
+- [ ] PDF export option for human review (M6-3):
+  - `glm report <id> --pdf` — export as PDF
+
+### Technical Decisions
+
+| Decision | Choice | Rationale |
+|----------|--------|-----------|
+| CLI Framework | Click | Mature, decorator-based, built-in subcommand support |
+| Terminal Output | Rich | Beautiful tables, progress bars, cross-platform colors |
+| Watch Library | watchdog | Cross-platform, native macOS FSEvents integration |
+| PDF Generation | WeasyPrint | Pure Python, CSS print support, no binary deps |
+| Templates | Jinja2 | Familiar syntax, auto-escaping, template inheritance |
+
+### New Dependencies
+
+| Package | Version | Purpose |
+|---------|---------|---------|
+| click | >=8.0.0 | CLI framework |
+| rich | >=13.0.0 | Terminal formatting |
+| watchdog | >=3.0.0 | File system monitoring |
+| weasyprint | >=60.0 | PDF generation |
+| jinja2 | >=3.0.0 | HTML templates |
+
+### System Dependencies (macOS)
+
+```bash
+# Required for WeasyPrint PDF generation
+brew install pango gdk-pixbuf libffi
+```
 
 ### Success Criteria
-- CLI commands execute without errors
-- Reports render correctly in Markdown viewers
-- JSON output validates against schemas
-- Watch mode detects new artifacts automatically
+- [ ] CLI commands execute without errors
+- [ ] Reports render correctly in Markdown viewers
+- [ ] JSON output validates against schemas
+- [ ] Watch mode detects new artifacts automatically
+- [ ] Dashboard displays aggregate metrics
+- [ ] PDF export generates valid PDF files
 
 ### KPIs
 - Report generation < 1s
 - CLI response time < 200ms
+- Watch mode detection latency < 500ms
+
+### Epic Files
+- `tasks/epic-m6-1-cli-core-commands.md`
+- `tasks/epic-m6-2-watch-mode-auto-processing.md`
+- `tasks/epic-m6-3-dashboard-pdf-export.md`
 
 ---
 
@@ -597,4 +676,4 @@ M0: Foundation
 ---
 
 *Document created: 2026-02-28*  
-*Last updated: 2026-03-04*
+*Last updated: 2026-03-05*

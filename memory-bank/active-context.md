@@ -6,9 +6,9 @@
 - Active Artifacts: None
 - Pending Reviews: None
 - Active Milestone: M6 - Reporting & CLI
-- Completed Milestones: M0 ✅, M1 ✅, M2 ✅, M3 ✅, M4 ✅, M5 ✅, M6-1 ✅
-- **Just Completed**: M6-1 CLI Core Commands (73 tests, 1195 total)
-- **Next Step**: M6-2 Watch Mode & Auto-Processing
+- Completed Milestones: M0 ✅, M1 ✅, M2 ✅, M3 ✅, M4 ✅, M5 ✅, M6-1 ✅, M6-2 ✅
+- **Just Completed**: M6-2 Watch Mode & Auto-Processing (28 tests, 1223 total)
+- **Next Step**: M6-3 Dashboard & PDF Export
 
 ---
 
@@ -668,9 +668,48 @@
 
 ---
 
+## M6-2 Watch Mode & Auto-Processing Implementation Details
+
+**Files Created:**
+- `src/cli/watch/__init__.py` - Module exports with clean public API
+- `src/cli/watch/models.py` - Pydantic models (ArtifactType, WatchState, WatchEventType, WatchStatus, QueueStatus, WatchEvent, WatchConfig)
+- `src/cli/watch/debouncer.py` - EventDebouncer with time-based deduplication, thread-safe
+- `src/cli/watch/handler.py` - ArtifactEventHandler integrating watchdog FileSystemEventHandler
+- `src/cli/watch/logger.py` - WatchEventLogger with NDJSON logging
+- `src/cli/watch/processor.py` - AutoProcessor with queue-based processing, worker thread
+- `src/cli/watch/manager.py` - WatchManager orchestrating all components
+- `src/cli/commands/watch.py` - CLI commands (start, status, events)
+- `tests/unit/test_watch_models.py` - 15 model tests
+- `tests/unit/test_watch_debouncer.py` - 13 debouncer tests
+
+**Files Modified:**
+- `src/config/schema.py` - Added WatchConfigModel
+- `config/default.yaml` - Added watch configuration section
+- `requirements.txt` - Added watchdog>=3.0.0
+- `src/cli/commands/__init__.py` - Added watch import
+- `src/cli/main.py` - Added watch command registration
+
+**Key Features:**
+- Real-time directory monitoring with watchdog
+- Time-based event debouncing (configurable window)
+- Queue-based processing pipeline with max size
+- NDJSON event logging for audit trails
+- Multiple directory support with recursive watching
+- Process existing artifacts on start option
+- Dry-run mode for detection-only
+- Signal handlers for graceful shutdown (SIGINT, SIGTERM)
+- CLI commands: `glm watch start`, `glm watch status`, `glm watch events`
+
+**Test Coverage:**
+- 28 new tests for watch module
+- 1223 total tests passing
+
+---
+
 ## Recent Activity
 | Date | Activity | Status |
 |------|----------|--------|
+| 2026-03-05 | M6-2 Watch Mode & Auto-Processing complete (28 tests, 1223 total) | Complete |
 | 2026-03-05 | M6-1 CLI Core Commands complete (73 tests, 1195 total) | Complete |
 | 2026-03-05 | M5-3 Arbitration & Reliability complete (56 tests, 1122 total) - MILESTONE 5 COMPLETE | Complete |
 | 2026-03-05 | M5-2 Agent Handshake Protocol complete (54 tests, 1066 total) | Complete |

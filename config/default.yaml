@@ -213,3 +213,22 @@ cli:
     dimensions: []  # Empty = all dimensions
     verbose: false
     output_dir: null  # Uses default reports_dir
+
+# Watch Mode Configuration
+watch:
+  debounce_window_seconds: 2.0  # Wait time before processing duplicate events
+  max_queue_size: 100  # Maximum items in processing queue
+  processing_interval_seconds: 0.5  # Interval between queue processing cycles
+  event_log_path: "./logs/watch-log.ndjson"
+  screenshot_extensions:
+    - png
+    - jpg
+    - jpeg
+    - gif
+    - webp
+  video_extensions:
+    - mp4
+    - mov
+    - avi
+    - mkv
+    - webm
