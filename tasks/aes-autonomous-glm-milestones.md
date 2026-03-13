@@ -424,37 +424,66 @@ Establish structured communication with autonomous-claude, autonomous-minimax, a
 
 ## Milestone 6: Reporting & CLI
 
-**Status:** 🔲 Not Started  
+**Status:** ✅ Complete  
 **Duration Estimate:** 3-4 days  
-**Dependencies:** Milestone 5
+**Actual Duration:** 8 days  
+**Dependencies:** Milestone 5  
+**Completion Date:** 2026-03-13
 
 ### Objectives
 Build the command-line interface and reporting output system.
 
 ### Epic Breakdown
 
-| Epic | Name | Priority | Description |
-|------|------|----------|-------------|
-| M6-1 | CLI Core Commands | Critical | Command parsing, audit/report/propose commands, terminal tables, JSON output |
-| M6-2 | Watch Mode & Auto-Processing | High | Directory watching, artifact detection, automatic audit triggering |
-| M6-3 | Dashboard & PDF Export | Medium | Metrics dashboard, HTML/terminal display, PDF generation |
+| Epic | Name | Priority | Tests | Status |
+|------|------|----------|-------|--------|
+| M6-1 | CLI Core Commands | Critical | 73 | ✅ Complete |
+| M6-2 | Watch Mode & Auto-Processing | High | 28 | ✅ Complete |
+| M6-3 | Dashboard & PDF Export | Medium | 29 | ✅ Complete |
+
+**Total: 130 new tests, 1252 total suite**
 
 ### Deliverables
-- [ ] Markdown report generation (`/output/reports/`) — M4-4 foundation exists
-- [ ] JSON output for agent consumption (M6-1)
-- [ ] CLI interface with flags (M6-1):
+- [x] Markdown report generation (`/output/reports/`) — M4-4 foundation exists
+- [x] JSON output for agent consumption (M6-1)
+- [x] CLI interface with flags (M6-1):
   - `glm audit <artifact_id>` — trigger audit
   - `glm report <audit_id>` — fetch report
   - `glm propose [proposal_id]` — view design system proposals
-- [ ] Watch mode (M6-2):
+- [x] Watch mode (M6-2):
   - `glm watch <directory>` — watch for new artifacts
   - Automatic audit triggering on file detection
-- [ ] Summary tables (terminal output) (M6-1)
-- [ ] Dashboard metrics output (M6-3):
+- [x] Summary tables (terminal output) (M6-1)
+- [x] Dashboard metrics output (M6-3):
   - `glm dashboard` — terminal display
   - `glm dashboard --html` — HTML output
-- [ ] PDF export option for human review (M6-3):
+- [x] PDF export option for human review (M6-3):
   - `glm report <id> --pdf` — export as PDF
+
+### Implementation Summary
+
+**Epic M6-1: CLI Core Commands** ✅
+- Click-based CLI with 3 subcommands (audit, report, propose)
+- Rich output formatting with tables, panels, spinners
+- Global --json and --verbose flags
+- Custom exit codes (0-7) for scripting
+- 73 tests passing
+
+**Epic M6-2: Watch Mode & Auto-Processing** ✅
+- Real-time directory monitoring with watchdog
+- Time-based event debouncing (configurable window)
+- Queue-based processing pipeline with worker thread
+- NDJSON event logging for audit trails
+- Signal handlers for graceful shutdown (SIGINT, SIGTERM)
+- 28 tests passing
+
+**Epic M6-3: Dashboard & PDF Export** ✅
+- MetricsAggregator with database queries
+- Rich terminal output with panels and tables
+- Standalone HTML with embedded CSS
+- PDF export via WeasyPrint with Jinja2 templates
+- Time period filtering (day, week, month, all)
+- 29 tests passing
 
 ### Technical Decisions
 
@@ -475,6 +504,7 @@ Build the command-line interface and reporting output system.
 | watchdog | >=3.0.0 | File system monitoring |
 | weasyprint | >=60.0 | PDF generation |
 | jinja2 | >=3.0.0 | HTML templates |
+| markdown | >=3.0.0 | Markdown conversion |
 
 ### System Dependencies (macOS)
 
@@ -484,22 +514,27 @@ brew install pango gdk-pixbuf libffi
 ```
 
 ### Success Criteria
-- [ ] CLI commands execute without errors
-- [ ] Reports render correctly in Markdown viewers
-- [ ] JSON output validates against schemas
-- [ ] Watch mode detects new artifacts automatically
-- [ ] Dashboard displays aggregate metrics
-- [ ] PDF export generates valid PDF files
+- [x] CLI commands execute without errors
+- [x] Reports render correctly in Markdown viewers
+- [x] JSON output validates against schemas
+- [x] Watch mode detects new artifacts automatically
+- [x] Dashboard displays aggregate metrics
+- [x] PDF export generates valid PDF files
 
 ### KPIs
-- Report generation < 1s
-- CLI response time < 200ms
-- Watch mode detection latency < 500ms
+- Report generation < 1s (deferred to M7 performance testing)
+- CLI response time < 200ms (deferred to M7 performance testing)
+- Watch mode detection latency < 500ms (deferred to M7 performance testing)
 
 ### Epic Files
 - `tasks/epic-m6-1-cli-core-commands.md`
 - `tasks/epic-m6-2-watch-mode-auto-processing.md`
 - `tasks/epic-m6-3-dashboard-pdf-export.md`
+
+### Completion Reports
+- `task-completion-reports/m6-1-cli-core-commands-completion.md`
+- `task-completion-reports/m6-2-watch-mode-auto-processing-completion.md`
+- `task-completion-reports/m6-3-dashboard-pdf-export-completion.md`
 
 ---
 
@@ -512,33 +547,55 @@ brew install pango gdk-pixbuf libffi
 ### Objectives
 Build comprehensive testing infrastructure with golden datasets and coverage targets.
 
+### Epic Breakdown
+
+| Epic | Name | Priority | Dependencies | Description |
+|------|------|----------|--------------|-------------|
+| M7-1 | Golden Dataset Creation | Critical | None | Synthetic screenshots, expected outputs, CV accuracy validation |
+| M7-2 | Coverage & Performance Testing | High | M7-1 | >90% coverage, performance KPI validation |
+| M7-3 | Integration Tests | High | None (parallel) | Agent mocks, protocol flows, database integration |
+| M7-4 | E2E & CI Pipeline | High | M7-1, M7-2, M7-3 | Full audit cycle E2E, GitHub Actions CI |
+
 ### Deliverables
-- [ ] Golden dataset creation:
-  - Synthetic UI screenshots with known issues
-  - Video flows with expected findings
-  - Expected audit/plan outputs
-- [ ] Unit tests (target: >90% coverage)
-  - Input parsing tests
-  - Entity extraction tests
-  - Rule application tests
-- [ ] Integration tests with agent mocks
-- [ ] E2E tests:
+- [ ] Golden dataset creation (M7-1):
+  - Synthetic UI screenshots with known issues (20+)
+  - Video flows with expected findings (2)
+  - Expected detection/audit outputs
+  - CV accuracy validation scripts
+- [ ] Coverage & Performance (M7-2):
+  - Coverage gap analysis and tests
+  - Performance benchmark suite
+  - Coverage report generation
+- [ ] Integration tests with agent mocks (M7-3):
+  - Agent mock implementations
+  - Protocol flow tests
+  - Database integration tests
+- [ ] E2E tests (M7-4):
   - Multi-agent audit cycle simulation
   - Protocol flows (ingest, feedback, arbitration)
   - Fuzz/edge cases (ambiguous, low-contrast, incomplete)
 - [ ] Test result reporting (Markdown coverage reports)
-- [ ] CI harness configuration
+- [ ] CI harness configuration (GitHub Actions)
 
 ### Success Criteria
 - Unit test coverage > 90%
 - All golden dataset tests pass
+- CV detection accuracy > 95% on golden dataset
 - E2E simulates complete audit cycle
 - Edge cases handled gracefully
+- CI pipeline runs in < 15 minutes
 
 ### KPIs
-- Test suite execution < 5 minutes
+- Test suite execution < 5 minutes (unit + integration)
 - Coverage > 90%
 - Zero flaky tests
+- CV accuracy > 95%
+
+### Epic Files
+- `tasks/epic-m7-1-golden-dataset-creation.md`
+- `tasks/epic-m7-2-coverage-performance-testing.md`
+- `tasks/epic-m7-3-integration-tests.md`
+- `tasks/epic-m7-4-e2e-ci-pipeline.md`
 
 ---
 
@@ -668,12 +725,12 @@ M0: Foundation
 
 ## Next Steps
 
-1. **Begin Milestone 0** — Set up foundation infrastructure
-2. **Create golden dataset** — Parallel track for testing assets
-3. **Validate GLM-5 access** — Confirm CV pipeline availability
+1. **Begin Milestone 7** — Testing Infrastructure (golden dataset, coverage validation)
+2. **Performance Testing** — Validate KPIs for CLI, watch mode, and report generation
+3. **Production Deployment** — System is feature-complete per PRD
 4. **Coordinate with agent teams** — Confirm communication protocols with Claude/Minimax/Codex
 
 ---
 
 *Document created: 2026-02-28*  
-*Last updated: 2026-03-05*
+*Last updated: 2026-03-13*

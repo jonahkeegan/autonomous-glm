@@ -1,0 +1,23 @@
+{
+  "screenshot_id": "1f147a79-1eff-4f85-abc5-6d2785cabff2",
+  "name": "typography_002_hierarchy_break",
+  "expected_findings": [
+    {
+      "dimension": "typography",
+      "issue": "typography_hierarchy_break",
+      "severity": "medium",
+      "location": {
+        "component_ids": [
+          "comp_0",
+          "comp_1"
+        ]
+      },
+      "rationale": "Injected issue: typography_hierarchy_break"
+    }
+  ],
+  "tolerance": {
+    "severity_flexibility": false,
+    "max_extra_findings": 2
+  },
+  "created": "2026-03-13T13:21:43.615514"
+}

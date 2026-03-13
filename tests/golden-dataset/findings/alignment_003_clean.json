@@ -1,0 +1,10 @@
+{
+  "screenshot_id": "c02c5b80-4997-406f-a7b8-0473a888111f",
+  "name": "alignment_003_clean",
+  "expected_findings": [],
+  "tolerance": {
+    "severity_flexibility": false,
+    "max_extra_findings": 2
+  },
+  "created": "2026-03-13T13:21:43.672929"
+}

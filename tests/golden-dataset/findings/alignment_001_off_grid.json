@@ -1,0 +1,24 @@
+{
+  "screenshot_id": "195b1b09-ddc1-43ce-b9a6-456ca7a895ee",
+  "name": "alignment_001_off_grid",
+  "expected_findings": [
+    {
+      "dimension": "alignment_grid",
+      "issue": "off_grid_elements",
+      "severity": "low",
+      "location": {
+        "component_ids": [
+          "comp_0",
+          "comp_1",
+          "comp_2"
+        ]
+      },
+      "rationale": "Injected issue: off_grid_elements"
+    }
+  ],
+  "tolerance": {
+    "severity_flexibility": false,
+    "max_extra_findings": 2
+  },
+  "created": "2026-03-13T13:21:43.657556"
+}

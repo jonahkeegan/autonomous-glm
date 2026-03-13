@@ -1,0 +1,100 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ExpectedDetectionResult",
+  "description": "Schema for expected CV detection results in golden dataset",
+  "type": "object",
+  "required": ["screenshot_id", "name", "dimensions", "components", "component_count", "component_types", "created"],
+  "properties": {
+    "screenshot_id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Unique identifier for the screenshot"
+    },
+    "name": {
+      "type": "string",
+      "description": "Screenshot name (without extension)"
+    },
+    "dimensions": {
+      "type": "object",
+      "required": ["width", "height"],
+      "properties": {
+        "width": { "type": "integer", "minimum": 1 },
+        "height": { "type": "integer", "minimum": 1 }
+      }
+    },
+    "components": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "type", "bounding_box", "confidence"],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique component identifier"
+          },
+          "type": {
+            "type": "string",
+            "enum": ["button", "input", "text", "header", "card", "image", "navigation", "container", "label", "icon"],
+            "description": "Component type"
+          },
+          "label": {
+            "type": ["string", "null"],
+            "description": "Text label or placeholder"
+          },
+          "bounding_box": {
+            "type": "object",
+            "description": "Normalized bounding box (0.0-1.0)",
+            "required": ["x", "y", "w", "h"],
+            "properties": {
+              "x": { "type": "number", "minimum": 0, "maximum": 1 },
+              "y": { "type": "number", "minimum": 0, "maximum": 1 },
+              "w": { "type": "number", "minimum": 0, "maximum": 1 },
+              "h": { "type": "number", "minimum": 0, "maximum": 1 }
+            }
+          },
+          "bounding_box_px": {
+            "type": "object",
+            "description": "Pixel bounding box",
+            "required": ["x", "y", "width", "height"],
+            "properties": {
+              "x": { "type": "integer", "minimum": 0 },
+              "y": { "type": "integer", "minimum": 0 },
+              "width": { "type": "integer", "minimum": 1 },
+              "height": { "type": "integer", "minimum": 1 }
+            }
+          },
+          "confidence": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1,
+            "description": "Detection confidence (1.0 for ground truth)"
+          },
+          "attributes": {
+            "type": "object",
+            "properties": {
+              "text": { "type": ["string", "null"] },
+              "visible": { "type": "boolean" },
+              "is_issue": { "type": "boolean" },
+              "issue_type": { "type": ["string", "null"] }
+            }
+          }
+        }
+      }
+    },
+    "component_count": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Total number of components"
+    },
+    "component_types": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Unique component types present"
+    },
+    "created": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO-8601 timestamp"
+    }
+  }
+}

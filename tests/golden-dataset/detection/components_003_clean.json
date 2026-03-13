@@ -1,0 +1,282 @@
+{
+  "screenshot_id": "a8ad146f-2cff-4202-9395-bae6fa8f93b5",
+  "name": "components_003_clean",
+  "dimensions": {
+    "width": 400,
+    "height": 600
+  },
+  "components": [
+    {
+      "id": "comp_0",
+      "type": "header",
+      "label": "Sign In",
+      "bounding_box": {
+        "x": 0.0,
+        "y": 0.0,
+        "w": 1.0,
+        "h": 0.1
+      },
+      "bounding_box_px": {
+        "x": 0,
+        "y": 0,
+        "width": 400,
+        "height": 60
+      },
+      "confidence": 1.0,
+      "attributes": {
+        "text": "Sign In",
+        "visible": true,
+        "is_issue": false,
+        "issue_type": null
+      }
+    },
+    {
+      "id": "comp_1",
+      "type": "text",
+      "label": "Welcome back!",
+      "bounding_box": {
+        "x": 0.06,
+        "y": 0.13333333333333333,
+        "w": 0.4075,
+        "h": 0.03
+      },
+      "bounding_box_px": {
+        "x": 24,
+        "y": 80,
+        "width": 163,
+        "height": 18
+      },
+      "confidence": 1.0,
+      "attributes": {
+        "text": "Welcome back!",
+        "visible": true,
+        "is_issue": false,
+        "issue_type": null
+      }
+    },
+    {
+      "id": "comp_2",
+      "type": "text",
+      "label": "Please enter your credentials",
+      "bounding_box": {
+        "x": 0.06,
+        "y": 0.19166666666666668,
+        "w": 0.4625,
+        "h": 0.021666666666666667
+      },
+      "bounding_box_px": {
+        "x": 24,
+        "y": 115,
+        "width": 185,
+        "height": 13
+      },
+      "confidence": 1.0,
+      "attributes": {
+        "text": "Please enter your credentials",
+        "visible": true,
+        "is_issue": false,
+        "issue_type": null
+      }
+    },
+    {
+      "id": "comp_3",
+      "type": "text",
+      "label": "Email",
+      "bounding_box": {
+        "x": 0.06,
+        "y": 0.26666666666666666,
+        "w": 0.0775,
+        "h": 0.015
+      },
+      "bounding_box_px": {
+        "x": 24,
+        "y": 160,
+        "width": 31,
+        "height": 9
+      },
+      "confidence": 1.0,
+      "attributes": {
+        "text": "Email",
+        "visible": true,
+        "is_issue": false,
+        "issue_type": null
+      }
+    },
+    {
+      "id": "comp_4",
+      "type": "input",
+      "label": "Enter your email",
+      "bounding_box": {
+        "x": 0.06,
+        "y": 0.3,
+        "w": 0.88,
+        "h": 0.07333333333333333
+      },
+      "bounding_box_px": {
+        "x": 24,
+        "y": 180,
+        "width": 352,
+        "height": 44
+      },
+      "confidence": 1.0,
+      "attributes": {
+        "text": "Enter your email",
+        "visible": true,
+        "is_issue": false,
+        "issue_type": null
+      }
+    },
+    {
+      "id": "comp_5",
+      "type": "text",
+      "label": "Password",
+      "bounding_box": {
+        "x": 0.06,
+        "y": 0.4166666666666667,
+        "w": 0.135,
+        "h": 0.015
+      },
+      "bounding_box_px": {
+        "x": 24,
+        "y": 250,
+        "width": 54,
+        "height": 9
+      },
+      "confidence": 1.0,
+      "attributes": {
+        "text": "Password",
+        "visible": true,
+        "is_issue": false,
+        "issue_type": null
+      }
+    },
+    {
+      "id": "comp_6",
+      "type": "input",
+      "label": "Enter your password",
+      "bounding_box": {
+        "x": 0.06,
+        "y": 0.45,
+        "w": 0.88,
+        "h": 0.07333333333333333
+      },
+      "bounding_box_px": {
+        "x": 24,
+        "y": 270,
+        "width": 352,
+        "height": 44
+      },
+      "confidence": 1.0,
+      "attributes": {
+        "text": "Enter your password",
+        "visible": true,
+        "is_issue": false,
+        "issue_type": null
+      }
+    },
+    {
+      "id": "comp_7",
+      "type": "button",
+      "label": "Sign In",
+      "bounding_box": {
+        "x": 0.06,
+        "y": 0.5666666666666667,
+        "w": 0.88,
+        "h": 0.08
+      },
+      "bounding_box_px": {
+        "x": 24,
+        "y": 340,
+        "width": 352,
+        "height": 48
+      },
+      "confidence": 1.0,
+      "attributes": {
+        "text": "Sign In",
+        "visible": true,
+        "is_issue": false,
+        "issue_type": null
+      }
+    },
+    {
+      "id": "comp_8",
+      "type": "text",
+      "label": "Forgot password?",
+      "bounding_box": {
+        "x": 0.375,
+        "y": 0.6833333333333333,
+        "w": 0.245,
+        "h": 0.02
+      },
+      "bounding_box_px": {
+        "x": 150,
+        "y": 410,
+        "width": 98,
+        "height": 12
+      },
+      "confidence": 1.0,
+      "attributes": {
+        "text": "Forgot password?",
+        "visible": true,
+        "is_issue": false,
+        "issue_type": null
+      }
+    },
+    {
+      "id": "comp_9",
+      "type": "text",
+      "label": "Don't have an account?",
+      "bounding_box": {
+        "x": 0.06,
+        "y": 0.7666666666666667,
+        "w": 0.375,
+        "h": 0.016666666666666666
+      },
+      "bounding_box_px": {
+        "x": 24,
+        "y": 460,
+        "width": 150,
+        "height": 10
+      },
+      "confidence": 1.0,
+      "attributes": {
+        "text": "Don't have an account?",
+        "visible": true,
+        "is_issue": false,
+        "issue_type": null
+      }
+    },
+    {
+      "id": "comp_10",
+      "type": "text",
+      "label": "Sign up",
+      "bounding_box": {
+        "x": 0.5,
+        "y": 0.7666666666666667,
+        "w": 0.12,
+        "h": 0.021666666666666667
+      },
+      "bounding_box_px": {
+        "x": 200,
+        "y": 460,
+        "width": 48,
+        "height": 13
+      },
+      "confidence": 1.0,
+      "attributes": {
+        "text": "Sign up",
+        "visible": true,
+        "is_issue": false,
+        "issue_type": null
+      }
+    }
+  ],
+  "component_count": 11,
+  "component_types": [
+    "button",
+    "header",
+    "input",
+    "text"
+  ],
+  "created": "2026-03-13T13:21:43.695628"
+}

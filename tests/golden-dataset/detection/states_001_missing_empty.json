@@ -1,0 +1,473 @@
+{
+  "screenshot_id": "1c6c07c5-ec5c-498f-b84f-e6f8bbd1b7f4",
+  "name": "states_001_missing_empty",
+  "dimensions": {
+    "width": 400,
+    "height": 600
+  },
+  "components": [
+    {
+      "id": "comp_0",
+      "type": "text",
+      "label": "Home",
+      "bounding_box": {
+        "x": 0.03,
+        "y": 0.03333333333333333,
+        "w": 0.0825,
+        "h": 0.015
+      },
+      "bounding_box_px": {
+        "x": 12,
+        "y": 20,
+        "width": 33,
+        "height": 9
+      },
+      "confidence": 1.0,
+      "attributes": {
+        "text": "Home",
+        "visible": true,
+        "is_issue": false,
+        "issue_type": null
+      }
+    },
+    {
+      "id": "comp_1",
+      "type": "text",
+      "label": "Users",
+      "bounding_box": {
+        "x": 0.03,
+        "y": 0.1,
+        "w": 0.08,
+        "h": 0.015
+      },
+      "bounding_box_px": {
+        "x": 12,
+        "y": 60,
+        "width": 32,
+        "height": 9
+      },
+      "confidence": 1.0,
+      "attributes": {
+        "text": "Users",
+        "visible": true,
+        "is_issue": false,
+        "issue_type": null
+      }
+    },
+    {
+      "id": "comp_2",
+      "type": "text",
+      "label": "Reports",
+      "bounding_box": {
+        "x": 0.03,
+        "y": 0.16666666666666666,
+        "w": 0.1075,
+        "h": 0.02
+      },
+      "bounding_box_px": {
+        "x": 12,
+        "y": 100,
+        "width": 43,
+        "height": 12
+      },
+      "confidence": 1.0,
+      "attributes": {
+        "text": "Reports",
+        "visible": true,
+        "is_issue": false,
+        "issue_type": null
+      }
+    },
+    {
+      "id": "comp_3",
+      "type": "text",
+      "label": "Settings",
+      "bounding_box": {
+        "x": 0.03,
+        "y": 0.23333333333333334,
+        "w": 0.11,
+        "h": 0.02
+      },
+      "bounding_box_px": {
+        "x": 12,
+        "y": 140,
+        "width": 44,
+        "height": 12
+      },
+      "confidence": 1.0,
+      "attributes": {
+        "text": "Settings",
+        "visible": true,
+        "is_issue": false,
+        "issue_type": null
+      }
+    },
+    {
+      "id": "comp_4",
+      "type": "header",
+      "label": "Users",
+      "bounding_box": {
+        "x": 0.2,
+        "y": 0.0,
+        "w": 0.8,
+        "h": 0.1
+      },
+      "bounding_box_px": {
+        "x": 80,
+        "y": 0,
+        "width": 320,
+        "height": 60
+      },
+      "confidence": 1.0,
+      "attributes": {
+        "text": "Users",
+        "visible": true,
+        "is_issue": false,
+        "issue_type": null
+      }
+    },
+    {
+      "id": "comp_5",
+      "type": "card",
+      "label": null,
+      "bounding_box": {
+        "x": 0.24,
+        "y": 0.13333333333333333,
+        "w": 0.72,
+        "h": 0.1
+      },
+      "bounding_box_px": {
+        "x": 96,
+        "y": 80,
+        "width": 288,
+        "height": 60
+      },
+      "confidence": 1.0,
+      "attributes": {
+        "text": null,
+        "visible": true,
+        "is_issue": false,
+        "issue_type": null
+      }
+    },
+    {
+      "id": "comp_6",
+      "type": "text",
+      "label": "John Doe",
+      "bounding_box": {
+        "x": 0.39,
+        "y": 0.15333333333333332,
+        "w": 0.1525,
+        "h": 0.016666666666666666
+      },
+      "bounding_box_px": {
+        "x": 156,
+        "y": 92,
+        "width": 61,
+        "height": 10
+      },
+      "confidence": 1.0,
+      "attributes": {
+        "text": "John Doe",
+        "visible": true,
+        "is_issue": false,
+        "issue_type": null
+      }
+    },
+    {
+      "id": "comp_7",
+      "type": "text",
+      "label": "john@example.com",
+      "bounding_box": {
+        "x": 0.39,
+        "y": 0.18666666666666668,
+        "w": 0.275,
+        "h": 0.02
+      },
+      "bounding_box_px": {
+        "x": 156,
+        "y": 112,
+        "width": 110,
+        "height": 12
+      },
+      "confidence": 1.0,
+      "attributes": {
+        "text": "john@example.com",
+        "visible": true,
+        "is_issue": false,
+        "issue_type": null
+      }
+    },
+    {
+      "id": "comp_8",
+      "type": "card",
+      "label": null,
+      "bounding_box": {
+        "x": 0.24,
+        "y": 0.25333333333333335,
+        "w": 0.72,
+        "h": 0.1
+      },
+      "bounding_box_px": {
+        "x": 96,
+        "y": 152,
+        "width": 288,
+        "height": 60
+      },
+      "confidence": 1.0,
+      "attributes": {
+        "text": null,
+        "visible": true,
+        "is_issue": false,
+        "issue_type": null
+      }
+    },
+    {
+      "id": "comp_9",
+      "type": "text",
+      "label": "Jane Smith",
+      "bounding_box": {
+        "x": 0.39,
+        "y": 0.2733333333333333,
+        "w": 0.1775,
+        "h": 0.016666666666666666
+      },
+      "bounding_box_px": {
+        "x": 156,
+        "y": 164,
+        "width": 71,
+        "height": 10
+      },
+      "confidence": 1.0,
+      "attributes": {
+        "text": "Jane Smith",
+        "visible": true,
+        "is_issue": false,
+        "issue_type": null
+      }
+    },
+    {
+      "id": "comp_10",
+      "type": "text",
+      "label": "jane@example.com",
+      "bounding_box": {
+        "x": 0.39,
+        "y": 0.30666666666666664,
+        "w": 0.275,
+        "h": 0.02
+      },
+      "bounding_box_px": {
+        "x": 156,
+        "y": 184,
+        "width": 110,
+        "height": 12
+      },
+      "confidence": 1.0,
+      "attributes": {
+        "text": "jane@example.com",
+        "visible": true,
+        "is_issue": false,
+        "issue_type": null
+      }
+    },
+    {
+      "id": "comp_11",
+      "type": "card",
+      "label": null,
+      "bounding_box": {
+        "x": 0.24,
+        "y": 0.37333333333333335,
+        "w": 0.72,
+        "h": 0.1
+      },
+      "bounding_box_px": {
+        "x": 96,
+        "y": 224,
+        "width": 288,
+        "height": 60
+      },
+      "confidence": 1.0,
+      "attributes": {
+        "text": null,
+        "visible": true,
+        "is_issue": false,
+        "issue_type": null
+      }
+    },
+    {
+      "id": "comp_12",
+      "type": "text",
+      "label": "Bob Wilson",
+      "bounding_box": {
+        "x": 0.39,
+        "y": 0.3933333333333333,
+        "w": 0.1775,
+        "h": 0.016666666666666666
+      },
+      "bounding_box_px": {
+        "x": 156,
+        "y": 236,
+        "width": 71,
+        "height": 10
+      },
+      "confidence": 1.0,
+      "attributes": {
+        "text": "Bob Wilson",
+        "visible": true,
+        "is_issue": false,
+        "issue_type": null
+      }
+    },
+    {
+      "id": "comp_13",
+      "type": "text",
+      "label": "bob@example.com",
+      "bounding_box": {
+        "x": 0.39,
+        "y": 0.4266666666666667,
+        "w": 0.265,
+        "h": 0.02
+      },
+      "bounding_box_px": {
+        "x": 156,
+        "y": 256,
+        "width": 106,
+        "height": 12
+      },
+      "confidence": 1.0,
+      "attributes": {
+        "text": "bob@example.com",
+        "visible": true,
+        "is_issue": false,
+        "issue_type": null
+      }
+    },
+    {
+      "id": "comp_14",
+      "type": "card",
+      "label": null,
+      "bounding_box": {
+        "x": 0.24,
+        "y": 0.49333333333333335,
+        "w": 0.72,
+        "h": 0.1
+      },
+      "bounding_box_px": {
+        "x": 96,
+        "y": 296,
+        "width": 288,
+        "height": 60
+      },
+      "confidence": 1.0,
+      "attributes": {
+        "text": null,
+        "visible": true,
+        "is_issue": false,
+        "issue_type": null
+      }
+    },
+    {
+      "id": "comp_15",
+      "type": "text",
+      "label": "Alice Brown",
+      "bounding_box": {
+        "x": 0.39,
+        "y": 0.5133333333333333,
+        "w": 0.185,
+        "h": 0.016666666666666666
+      },
+      "bounding_box_px": {
+        "x": 156,
+        "y": 308,
+        "width": 74,
+        "height": 10
+      },
+      "confidence": 1.0,
+      "attributes": {
+        "text": "Alice Brown",
+        "visible": true,
+        "is_issue": false,
+        "issue_type": null
+      }
+    },
+    {
+      "id": "comp_16",
+      "type": "text",
+      "label": "alice@example.com",
+      "bounding_box": {
+        "x": 0.39,
+        "y": 0.5466666666666666,
+        "w": 0.2775,
+        "h": 0.02
+      },
+      "bounding_box_px": {
+        "x": 156,
+        "y": 328,
+        "width": 111,
+        "height": 12
+      },
+      "confidence": 1.0,
+      "attributes": {
+        "text": "alice@example.com",
+        "visible": true,
+        "is_issue": false,
+        "issue_type": null
+      }
+    },
+    {
+      "id": "comp_17",
+      "type": "card",
+      "label": null,
+      "bounding_box": {
+        "x": 0.04,
+        "y": 0.13333333333333333,
+        "w": 0.92,
+        "h": 0.6666666666666666
+      },
+      "bounding_box_px": {
+        "x": 16,
+        "y": 80,
+        "width": 368,
+        "height": 400
+      },
+      "confidence": 1.0,
+      "attributes": {
+        "text": null,
+        "visible": true,
+        "is_issue": true,
+        "issue_type": "missing_empty_state"
+      }
+    },
+    {
+      "id": "comp_18",
+      "type": "text",
+      "label": "Items List",
+      "bounding_box": {
+        "x": 0.06,
+        "y": 0.15,
+        "w": 0.25,
+        "h": 0.03333333333333333
+      },
+      "bounding_box_px": {
+        "x": 24,
+        "y": 90,
+        "width": 100,
+        "height": 20
+      },
+      "confidence": 1.0,
+      "attributes": {
+        "text": "Items List",
+        "visible": true,
+        "is_issue": true,
+        "issue_type": "missing_empty_state"
+      }
+    }
+  ],
+  "component_count": 19,
+  "component_types": [
+    "card",
+    "header",
+    "text"
+  ],
+  "created": "2026-03-13T13:21:43.703548"
+}

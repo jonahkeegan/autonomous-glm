@@ -1,0 +1,23 @@
+{
+  "screenshot_id": "75f59e42-2d7a-46f7-8316-478e610649e1",
+  "name": "density_002_too_sparse",
+  "expected_findings": [
+    {
+      "dimension": "density",
+      "issue": "too_sparse",
+      "severity": "low",
+      "location": {
+        "component_ids": [
+          "comp_0",
+          "comp_1"
+        ]
+      },
+      "rationale": "Injected issue: too_sparse"
+    }
+  ],
+  "tolerance": {
+    "severity_flexibility": false,
+    "max_extra_findings": 2
+  },
+  "created": "2026-03-13T13:21:43.727665"
+}

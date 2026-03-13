@@ -1,0 +1,24 @@
+{
+  "screenshot_id": "b2af68c8-700c-418f-8b4b-5cca95f4026c",
+  "name": "hierarchy_002_competing_elements",
+  "expected_findings": [
+    {
+      "dimension": "visual_hierarchy",
+      "issue": "competing_elements",
+      "severity": "medium",
+      "location": {
+        "component_ids": [
+          "comp_0",
+          "comp_1",
+          "comp_2"
+        ]
+      },
+      "rationale": "Injected issue: competing_elements"
+    }
+  ],
+  "tolerance": {
+    "severity_flexibility": false,
+    "max_extra_findings": 2
+  },
+  "created": "2026-03-13T13:21:43.564171"
+}

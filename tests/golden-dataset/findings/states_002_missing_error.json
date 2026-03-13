@@ -1,0 +1,22 @@
+{
+  "screenshot_id": "74c248c7-65af-41c4-b2e1-1aef1a2b8087",
+  "name": "states_002_missing_error",
+  "expected_findings": [
+    {
+      "dimension": "error_states",
+      "issue": "missing_error_state",
+      "severity": "medium",
+      "location": {
+        "component_ids": [
+          "comp_0"
+        ]
+      },
+      "rationale": "Injected issue: missing_error_state"
+    }
+  ],
+  "tolerance": {
+    "severity_flexibility": false,
+    "max_extra_findings": 2
+  },
+  "created": "2026-03-13T13:21:43.711305"
+}

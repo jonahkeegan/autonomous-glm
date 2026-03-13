@@ -1,0 +1,217 @@
+{
+  "description": "Golden dataset for Autonomous-GLM CV/Audit validation",
+  "created": "2026-03-13T13:21:43.729406",
+  "total_screenshots": 22,
+  "dimensions_covered": [
+    "accessibility",
+    "alignment_grid",
+    "color",
+    "components",
+    "density",
+    "empty_states",
+    "error_states",
+    "spacing_rhythm",
+    "typography",
+    "visual_hierarchy"
+  ],
+  "screenshots": [
+    {
+      "name": "hierarchy_001_no_focal_point",
+      "description": "Dashboard with no clear focal point - all cards same size",
+      "image": "hierarchy_001_no_focal_point.png",
+      "detection": "hierarchy_001_no_focal_point.json",
+      "findings": "hierarchy_001_no_focal_point.json",
+      "dimension": "visual_hierarchy",
+      "has_issues": true
+    },
+    {
+      "name": "hierarchy_002_competing_elements",
+      "description": "Multiple competing CTA buttons with same prominence",
+      "image": "hierarchy_002_competing_elements.png",
+      "detection": "hierarchy_002_competing_elements.json",
+      "findings": "hierarchy_002_competing_elements.json",
+      "dimension": "visual_hierarchy",
+      "has_issues": true
+    },
+    {
+      "name": "hierarchy_003_clean",
+      "description": "Clean login form with proper visual hierarchy",
+      "image": "hierarchy_003_clean.png",
+      "detection": "hierarchy_003_clean.json",
+      "findings": "hierarchy_003_clean.json",
+      "dimension": "visual_hierarchy",
+      "has_issues": false
+    },
+    {
+      "name": "spacing_001_cramped_margins",
+      "description": "Content with cramped margins - too close to edges",
+      "image": "spacing_001_cramped_margins.png",
+      "detection": "spacing_001_cramped_margins.json",
+      "findings": "spacing_001_cramped_margins.json",
+      "dimension": "spacing_rhythm",
+      "has_issues": true
+    },
+    {
+      "name": "spacing_002_inconsistent_rhythm",
+      "description": "Cards with inconsistent vertical spacing",
+      "image": "spacing_002_inconsistent_rhythm.png",
+      "detection": "spacing_002_inconsistent_rhythm.json",
+      "findings": "spacing_002_inconsistent_rhythm.json",
+      "dimension": "spacing_rhythm",
+      "has_issues": true
+    },
+    {
+      "name": "spacing_003_clean",
+      "description": "Clean dashboard with consistent spacing",
+      "image": "spacing_003_clean.png",
+      "detection": "spacing_003_clean.json",
+      "findings": "spacing_003_clean.json",
+      "dimension": "spacing_rhythm",
+      "has_issues": false
+    },
+    {
+      "name": "typography_001_small_font",
+      "description": "Text with font size too small to read",
+      "image": "typography_001_small_font.png",
+      "detection": "typography_001_small_font.json",
+      "findings": "typography_001_small_font.json",
+      "dimension": "typography",
+      "has_issues": true
+    },
+    {
+      "name": "typography_002_hierarchy_break",
+      "description": "Heading smaller than body text",
+      "image": "typography_002_hierarchy_break.png",
+      "detection": "typography_002_hierarchy_break.json",
+      "findings": "typography_002_hierarchy_break.json",
+      "dimension": "typography",
+      "has_issues": true
+    },
+    {
+      "name": "typography_003_clean",
+      "description": "Clean typography with proper hierarchy",
+      "image": "typography_003_clean.png",
+      "detection": "typography_003_clean.json",
+      "findings": "typography_003_clean.json",
+      "dimension": "typography",
+      "has_issues": false
+    },
+    {
+      "name": "color_001_low_contrast",
+      "description": "Low contrast text on light background",
+      "image": "color_001_low_contrast.png",
+      "detection": "color_001_low_contrast.json",
+      "findings": "color_001_low_contrast.json",
+      "dimension": "color",
+      "has_issues": true
+    },
+    {
+      "name": "color_002_accessibility",
+      "description": "Color-only status indicators without labels",
+      "image": "color_002_accessibility.png",
+      "detection": "color_002_accessibility.json",
+      "findings": "color_002_accessibility.json",
+      "dimension": "accessibility",
+      "has_issues": true
+    },
+    {
+      "name": "color_003_clean",
+      "description": "Clean color scheme with proper contrast",
+      "image": "color_003_clean.png",
+      "detection": "color_003_clean.json",
+      "findings": "color_003_clean.json",
+      "dimension": "color",
+      "has_issues": false
+    },
+    {
+      "name": "alignment_001_off_grid",
+      "description": "Elements not aligned to 8px grid",
+      "image": "alignment_001_off_grid.png",
+      "detection": "alignment_001_off_grid.json",
+      "findings": "alignment_001_off_grid.json",
+      "dimension": "alignment_grid",
+      "has_issues": true
+    },
+    {
+      "name": "alignment_002_misalignment",
+      "description": "Labels and inputs visually misaligned",
+      "image": "alignment_002_misalignment.png",
+      "detection": "alignment_002_misalignment.json",
+      "findings": "alignment_002_misalignment.json",
+      "dimension": "alignment_grid",
+      "has_issues": true
+    },
+    {
+      "name": "alignment_003_clean",
+      "description": "Clean alignment with proper grid",
+      "image": "alignment_003_clean.png",
+      "detection": "alignment_003_clean.json",
+      "findings": "alignment_003_clean.json",
+      "dimension": "alignment_grid",
+      "has_issues": false
+    },
+    {
+      "name": "components_001_size_inconsistency",
+      "description": "Buttons with inconsistent sizes",
+      "image": "components_001_size_inconsistency.png",
+      "detection": "components_001_size_inconsistency.json",
+      "findings": "components_001_size_inconsistency.json",
+      "dimension": "components",
+      "has_issues": true
+    },
+    {
+      "name": "components_002_style_proliferation",
+      "description": "Too many button color variants",
+      "image": "components_002_style_proliferation.png",
+      "detection": "components_002_style_proliferation.json",
+      "findings": "components_002_style_proliferation.json",
+      "dimension": "components",
+      "has_issues": true
+    },
+    {
+      "name": "components_003_clean",
+      "description": "Clean components with consistent styling",
+      "image": "components_003_clean.png",
+      "detection": "components_003_clean.json",
+      "findings": "components_003_clean.json",
+      "dimension": "components",
+      "has_issues": false
+    },
+    {
+      "name": "states_001_missing_empty",
+      "description": "List without empty state design",
+      "image": "states_001_missing_empty.png",
+      "detection": "states_001_missing_empty.json",
+      "findings": "states_001_missing_empty.json",
+      "dimension": "empty_states",
+      "has_issues": true
+    },
+    {
+      "name": "states_002_missing_error",
+      "description": "Form input with error but no error message",
+      "image": "states_002_missing_error.png",
+      "detection": "states_002_missing_error.json",
+      "findings": "states_002_missing_error.json",
+      "dimension": "error_states",
+      "has_issues": true
+    },
+    {
+      "name": "density_001_too_dense",
+      "description": "Layout with too many elements packed tightly",
+      "image": "density_001_too_dense.png",
+      "detection": "density_001_too_dense.json",
+      "findings": "density_001_too_dense.json",
+      "dimension": "density",
+      "has_issues": true
+    },
+    {
+      "name": "density_002_too_sparse",
+      "description": "Layout with too much empty space",
+      "image": "density_002_too_sparse.png",
+      "detection": "density_002_too_sparse.json",
+      "findings": "density_002_too_sparse.json",
+      "dimension": "density",
+      "has_issues": true
+    }
+  ]
+}

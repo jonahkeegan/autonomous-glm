@@ -1,0 +1,22 @@
+{
+  "screenshot_id": "ae4be336-ef6d-425f-9537-e8fbc76c498b",
+  "name": "color_001_low_contrast",
+  "expected_findings": [
+    {
+      "dimension": "color",
+      "issue": "low_contrast",
+      "severity": "high",
+      "location": {
+        "component_ids": [
+          "comp_0"
+        ]
+      },
+      "rationale": "Injected issue: low_contrast"
+    }
+  ],
+  "tolerance": {
+    "severity_flexibility": false,
+    "max_extra_findings": 2
+  },
+  "created": "2026-03-13T13:21:43.631373"
+}

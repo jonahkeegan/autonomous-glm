@@ -1,0 +1,713 @@
+{
+  "screenshot_id": "1eb64a35-a120-4121-b749-33a28dde06a1",
+  "name": "color_002_accessibility",
+  "dimensions": {
+    "width": 400,
+    "height": 600
+  },
+  "components": [
+    {
+      "id": "comp_0",
+      "type": "header",
+      "label": "Dashboard",
+      "bounding_box": {
+        "x": 0.0,
+        "y": 0.0,
+        "w": 1.0,
+        "h": 0.1
+      },
+      "bounding_box_px": {
+        "x": 0,
+        "y": 0,
+        "width": 400,
+        "height": 60
+      },
+      "confidence": 1.0,
+      "attributes": {
+        "text": "Dashboard",
+        "visible": true,
+        "is_issue": false,
+        "issue_type": null
+      }
+    },
+    {
+      "id": "comp_1",
+      "type": "card",
+      "label": null,
+      "bounding_box": {
+        "x": 0.04,
+        "y": 0.13333333333333333,
+        "w": 0.44,
+        "h": 0.13333333333333333
+      },
+      "bounding_box_px": {
+        "x": 16,
+        "y": 80,
+        "width": 176,
+        "height": 80
+      },
+      "confidence": 1.0,
+      "attributes": {
+        "text": null,
+        "visible": true,
+        "is_issue": false,
+        "issue_type": null
+      }
+    },
+    {
+      "id": "comp_2",
+      "type": "text",
+      "label": "Total Users",
+      "bounding_box": {
+        "x": 0.07,
+        "y": 0.15333333333333332,
+        "w": 0.155,
+        "h": 0.015
+      },
+      "bounding_box_px": {
+        "x": 28,
+        "y": 92,
+        "width": 62,
+        "height": 9
+      },
+      "confidence": 1.0,
+      "attributes": {
+        "text": "Total Users",
+        "visible": true,
+        "is_issue": false,
+        "issue_type": null
+      }
+    },
+    {
+      "id": "comp_3",
+      "type": "text",
+      "label": "1,234",
+      "bounding_box": {
+        "x": 0.07,
+        "y": 0.19166666666666668,
+        "w": 0.1475,
+        "h": 0.03666666666666667
+      },
+      "bounding_box_px": {
+        "x": 28,
+        "y": 115,
+        "width": 59,
+        "height": 22
+      },
+      "confidence": 1.0,
+      "attributes": {
+        "text": "1,234",
+        "visible": true,
+        "is_issue": false,
+        "issue_type": null
+      }
+    },
+    {
+      "id": "comp_4",
+      "type": "card",
+      "label": null,
+      "bounding_box": {
+        "x": 0.52,
+        "y": 0.13333333333333333,
+        "w": 0.44,
+        "h": 0.13333333333333333
+      },
+      "bounding_box_px": {
+        "x": 208,
+        "y": 80,
+        "width": 176,
+        "height": 80
+      },
+      "confidence": 1.0,
+      "attributes": {
+        "text": null,
+        "visible": true,
+        "is_issue": false,
+        "issue_type": null
+      }
+    },
+    {
+      "id": "comp_5",
+      "type": "text",
+      "label": "Revenue",
+      "bounding_box": {
+        "x": 0.55,
+        "y": 0.15333333333333332,
+        "w": 0.125,
+        "h": 0.015
+      },
+      "bounding_box_px": {
+        "x": 220,
+        "y": 92,
+        "width": 50,
+        "height": 9
+      },
+      "confidence": 1.0,
+      "attributes": {
+        "text": "Revenue",
+        "visible": true,
+        "is_issue": false,
+        "issue_type": null
+      }
+    },
+    {
+      "id": "comp_6",
+      "type": "text",
+      "label": "$12.4K",
+      "bounding_box": {
+        "x": 0.55,
+        "y": 0.19166666666666668,
+        "w": 0.1875,
+        "h": 0.03666666666666667
+      },
+      "bounding_box_px": {
+        "x": 220,
+        "y": 115,
+        "width": 75,
+        "height": 22
+      },
+      "confidence": 1.0,
+      "attributes": {
+        "text": "$12.4K",
+        "visible": true,
+        "is_issue": false,
+        "issue_type": null
+      }
+    },
+    {
+      "id": "comp_7",
+      "type": "card",
+      "label": null,
+      "bounding_box": {
+        "x": 0.04,
+        "y": 0.3,
+        "w": 0.44,
+        "h": 0.13333333333333333
+      },
+      "bounding_box_px": {
+        "x": 16,
+        "y": 180,
+        "width": 176,
+        "height": 80
+      },
+      "confidence": 1.0,
+      "attributes": {
+        "text": null,
+        "visible": true,
+        "is_issue": false,
+        "issue_type": null
+      }
+    },
+    {
+      "id": "comp_8",
+      "type": "text",
+      "label": "Orders",
+      "bounding_box": {
+        "x": 0.07,
+        "y": 0.32,
+        "w": 0.0925,
+        "h": 0.015
+      },
+      "bounding_box_px": {
+        "x": 28,
+        "y": 192,
+        "width": 37,
+        "height": 9
+      },
+      "confidence": 1.0,
+      "attributes": {
+        "text": "Orders",
+        "visible": true,
+        "is_issue": false,
+        "issue_type": null
+      }
+    },
+    {
+      "id": "comp_9",
+      "type": "text",
+      "label": "567",
+      "bounding_box": {
+        "x": 0.07,
+        "y": 0.35833333333333334,
+        "w": 0.0975,
+        "h": 0.03
+      },
+      "bounding_box_px": {
+        "x": 28,
+        "y": 215,
+        "width": 39,
+        "height": 18
+      },
+      "confidence": 1.0,
+      "attributes": {
+        "text": "567",
+        "visible": true,
+        "is_issue": false,
+        "issue_type": null
+      }
+    },
+    {
+      "id": "comp_10",
+      "type": "card",
+      "label": null,
+      "bounding_box": {
+        "x": 0.52,
+        "y": 0.3,
+        "w": 0.44,
+        "h": 0.13333333333333333
+      },
+      "bounding_box_px": {
+        "x": 208,
+        "y": 180,
+        "width": 176,
+        "height": 80
+      },
+      "confidence": 1.0,
+      "attributes": {
+        "text": null,
+        "visible": true,
+        "is_issue": false,
+        "issue_type": null
+      }
+    },
+    {
+      "id": "comp_11",
+      "type": "text",
+      "label": "Growth",
+      "bounding_box": {
+        "x": 0.55,
+        "y": 0.32,
+        "w": 0.0975,
+        "h": 0.015
+      },
+      "bounding_box_px": {
+        "x": 220,
+        "y": 192,
+        "width": 39,
+        "height": 9
+      },
+      "confidence": 1.0,
+      "attributes": {
+        "text": "Growth",
+        "visible": true,
+        "is_issue": false,
+        "issue_type": null
+      }
+    },
+    {
+      "id": "comp_12",
+      "type": "text",
+      "label": "+23%",
+      "bounding_box": {
+        "x": 0.55,
+        "y": 0.35833333333333334,
+        "w": 0.1525,
+        "h": 0.03
+      },
+      "bounding_box_px": {
+        "x": 220,
+        "y": 215,
+        "width": 61,
+        "height": 18
+      },
+      "confidence": 1.0,
+      "attributes": {
+        "text": "+23%",
+        "visible": true,
+        "is_issue": false,
+        "issue_type": null
+      }
+    },
+    {
+      "id": "comp_13",
+      "type": "text",
+      "label": "Recent Activity",
+      "bounding_box": {
+        "x": 0.04,
+        "y": 0.48333333333333334,
+        "w": 0.2975,
+        "h": 0.028333333333333332
+      },
+      "bounding_box_px": {
+        "x": 16,
+        "y": 290,
+        "width": 119,
+        "height": 17
+      },
+      "confidence": 1.0,
+      "attributes": {
+        "text": "Recent Activity",
+        "visible": true,
+        "is_issue": false,
+        "issue_type": null
+      }
+    },
+    {
+      "id": "comp_14",
+      "type": "card",
+      "label": null,
+      "bounding_box": {
+        "x": 0.04,
+        "y": 0.5333333333333333,
+        "w": 0.92,
+        "h": 0.08333333333333333
+      },
+      "bounding_box_px": {
+        "x": 16,
+        "y": 320,
+        "width": 368,
+        "height": 50
+      },
+      "confidence": 1.0,
+      "attributes": {
+        "text": null,
+        "visible": true,
+        "is_issue": false,
+        "issue_type": null
+      }
+    },
+    {
+      "id": "comp_15",
+      "type": "text",
+      "label": "John Doe",
+      "bounding_box": {
+        "x": 0.07,
+        "y": 0.5466666666666666,
+        "w": 0.1525,
+        "h": 0.016666666666666666
+      },
+      "bounding_box_px": {
+        "x": 28,
+        "y": 328,
+        "width": 61,
+        "height": 10
+      },
+      "confidence": 1.0,
+      "attributes": {
+        "text": "John Doe",
+        "visible": true,
+        "is_issue": false,
+        "issue_type": null
+      }
+    },
+    {
+      "id": "comp_16",
+      "type": "text",
+      "label": "Created new account",
+      "bounding_box": {
+        "x": 0.07,
+        "y": 0.58,
+        "w": 0.2925,
+        "h": 0.015
+      },
+      "bounding_box_px": {
+        "x": 28,
+        "y": 348,
+        "width": 117,
+        "height": 9
+      },
+      "confidence": 1.0,
+      "attributes": {
+        "text": "Created new account",
+        "visible": true,
+        "is_issue": false,
+        "issue_type": null
+      }
+    },
+    {
+      "id": "comp_17",
+      "type": "text",
+      "label": "2m ago",
+      "bounding_box": {
+        "x": 0.85,
+        "y": 0.56,
+        "w": 0.1025,
+        "h": 0.018333333333333333
+      },
+      "bounding_box_px": {
+        "x": 340,
+        "y": 336,
+        "width": 41,
+        "height": 11
+      },
+      "confidence": 1.0,
+      "attributes": {
+        "text": "2m ago",
+        "visible": true,
+        "is_issue": false,
+        "issue_type": null
+      }
+    },
+    {
+      "id": "comp_18",
+      "type": "card",
+      "label": null,
+      "bounding_box": {
+        "x": 0.04,
+        "y": 0.6333333333333333,
+        "w": 0.92,
+        "h": 0.08333333333333333
+      },
+      "bounding_box_px": {
+        "x": 16,
+        "y": 380,
+        "width": 368,
+        "height": 50
+      },
+      "confidence": 1.0,
+      "attributes": {
+        "text": null,
+        "visible": true,
+        "is_issue": false,
+        "issue_type": null
+      }
+    },
+    {
+      "id": "comp_19",
+      "type": "text",
+      "label": "Jane Smith",
+      "bounding_box": {
+        "x": 0.07,
+        "y": 0.6466666666666666,
+        "w": 0.1775,
+        "h": 0.016666666666666666
+      },
+      "bounding_box_px": {
+        "x": 28,
+        "y": 388,
+        "width": 71,
+        "height": 10
+      },
+      "confidence": 1.0,
+      "attributes": {
+        "text": "Jane Smith",
+        "visible": true,
+        "is_issue": false,
+        "issue_type": null
+      }
+    },
+    {
+      "id": "comp_20",
+      "type": "text",
+      "label": "Completed purchase",
+      "bounding_box": {
+        "x": 0.07,
+        "y": 0.68,
+        "w": 0.285,
+        "h": 0.02
+      },
+      "bounding_box_px": {
+        "x": 28,
+        "y": 408,
+        "width": 114,
+        "height": 12
+      },
+      "confidence": 1.0,
+      "attributes": {
+        "text": "Completed purchase",
+        "visible": true,
+        "is_issue": false,
+        "issue_type": null
+      }
+    },
+    {
+      "id": "comp_21",
+      "type": "text",
+      "label": "5m ago",
+      "bounding_box": {
+        "x": 0.85,
+        "y": 0.66,
+        "w": 0.1025,
+        "h": 0.018333333333333333
+      },
+      "bounding_box_px": {
+        "x": 340,
+        "y": 396,
+        "width": 41,
+        "height": 11
+      },
+      "confidence": 1.0,
+      "attributes": {
+        "text": "5m ago",
+        "visible": true,
+        "is_issue": false,
+        "issue_type": null
+      }
+    },
+    {
+      "id": "comp_22",
+      "type": "card",
+      "label": null,
+      "bounding_box": {
+        "x": 0.04,
+        "y": 0.7333333333333333,
+        "w": 0.92,
+        "h": 0.08333333333333333
+      },
+      "bounding_box_px": {
+        "x": 16,
+        "y": 440,
+        "width": 368,
+        "height": 50
+      },
+      "confidence": 1.0,
+      "attributes": {
+        "text": null,
+        "visible": true,
+        "is_issue": false,
+        "issue_type": null
+      }
+    },
+    {
+      "id": "comp_23",
+      "type": "text",
+      "label": "Bob Wilson",
+      "bounding_box": {
+        "x": 0.07,
+        "y": 0.7466666666666667,
+        "w": 0.1775,
+        "h": 0.016666666666666666
+      },
+      "bounding_box_px": {
+        "x": 28,
+        "y": 448,
+        "width": 71,
+        "height": 10
+      },
+      "confidence": 1.0,
+      "attributes": {
+        "text": "Bob Wilson",
+        "visible": true,
+        "is_issue": false,
+        "issue_type": null
+      }
+    },
+    {
+      "id": "comp_24",
+      "type": "text",
+      "label": "Updated profile",
+      "bounding_box": {
+        "x": 0.07,
+        "y": 0.78,
+        "w": 0.21,
+        "h": 0.02
+      },
+      "bounding_box_px": {
+        "x": 28,
+        "y": 468,
+        "width": 84,
+        "height": 12
+      },
+      "confidence": 1.0,
+      "attributes": {
+        "text": "Updated profile",
+        "visible": true,
+        "is_issue": false,
+        "issue_type": null
+      }
+    },
+    {
+      "id": "comp_25",
+      "type": "text",
+      "label": "10m ago",
+      "bounding_box": {
+        "x": 0.85,
+        "y": 0.76,
+        "w": 0.12,
+        "h": 0.018333333333333333
+      },
+      "bounding_box_px": {
+        "x": 340,
+        "y": 456,
+        "width": 48,
+        "height": 11
+      },
+      "confidence": 1.0,
+      "attributes": {
+        "text": "10m ago",
+        "visible": true,
+        "is_issue": false,
+        "issue_type": null
+      }
+    },
+    {
+      "id": "comp_26",
+      "type": "text",
+      "label": "Success",
+      "bounding_box": {
+        "x": 0.1,
+        "y": 0.13333333333333333,
+        "w": 0.25,
+        "h": 0.03333333333333333
+      },
+      "bounding_box_px": {
+        "x": 40,
+        "y": 80,
+        "width": 100,
+        "height": 20
+      },
+      "confidence": 1.0,
+      "attributes": {
+        "text": "Success",
+        "visible": true,
+        "is_issue": true,
+        "issue_type": "color_accessibility"
+      }
+    },
+    {
+      "id": "comp_27",
+      "type": "text",
+      "label": "Warning",
+      "bounding_box": {
+        "x": 0.1,
+        "y": 0.18333333333333332,
+        "w": 0.25,
+        "h": 0.03333333333333333
+      },
+      "bounding_box_px": {
+        "x": 40,
+        "y": 110,
+        "width": 100,
+        "height": 20
+      },
+      "confidence": 1.0,
+      "attributes": {
+        "text": "Warning",
+        "visible": true,
+        "is_issue": true,
+        "issue_type": "color_accessibility"
+      }
+    },
+    {
+      "id": "comp_28",
+      "type": "text",
+      "label": "Error",
+      "bounding_box": {
+        "x": 0.1,
+        "y": 0.23333333333333334,
+        "w": 0.25,
+        "h": 0.03333333333333333
+      },
+      "bounding_box_px": {
+        "x": 40,
+        "y": 140,
+        "width": 100,
+        "height": 20
+      },
+      "confidence": 1.0,
+      "attributes": {
+        "text": "Error",
+        "visible": true,
+        "is_issue": true,
+        "issue_type": "color_accessibility"
+      }
+    }
+  ],
+  "component_count": 29,
+  "component_types": [
+    "card",
+    "header",
+    "text"
+  ],
+  "created": "2026-03-13T13:21:43.639909"
+}

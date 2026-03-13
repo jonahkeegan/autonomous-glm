@@ -1,0 +1,23 @@
+{
+  "screenshot_id": "641de79c-319f-496b-9d6c-0c21f38c8c40",
+  "name": "spacing_001_cramped_margins",
+  "expected_findings": [
+    {
+      "dimension": "spacing_rhythm",
+      "issue": "cramped_margins",
+      "severity": "medium",
+      "location": {
+        "component_ids": [
+          "comp_0",
+          "comp_1"
+        ]
+      },
+      "rationale": "Injected issue: cramped_margins"
+    }
+  ],
+  "tolerance": {
+    "severity_flexibility": false,
+    "max_extra_findings": 2
+  },
+  "created": "2026-03-13T13:21:43.578384"
+}
