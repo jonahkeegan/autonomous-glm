@@ -82,6 +82,7 @@ class TestSchemaFilesExist:
             "audit-complete.schema.json",
             "design-proposal.schema.json",
             "dispute.schema.json",
+            "handshake.schema.json",
             "human-required.schema.json",
         ]
         
@@ -92,7 +93,7 @@ class TestSchemaFilesExist:
     
     def test_schema_count(self, schema_files):
         """Expected number of schema files."""
-        assert len(schema_files) == 4
+        assert len(schema_files) == 5
 
 
 class TestSchemaValidJson:
