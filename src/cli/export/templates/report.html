@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title }}</title>
+    <style>
+        /* Base styles */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            font-size: 11pt;
+            line-height: 1.5;
+            color: #333;
+        }
+        .page { padding: 20mm; }
+        
+        /* Header */
+        .header {
+            text-align: center;
+            margin-bottom: 20pt;
+            padding-bottom: 10pt;
+            border-bottom: 2px solid #007bff;
+        }
+        .header h1 { color: #007bff; margin-bottom: 4pt; border: none; }
+        .header .generated { color: #adb5bd; font-size: 9pt; }
+        
+        /* Stats grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10pt;
+            margin: 12pt 0;
+        }
+        .stat-card {
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 4pt;
+            padding: 10pt;
+            text-align: center;
+        }
+        .stat-value { font-size: 20pt; font-weight: 700; color: #007bff; }
+        .stat-label { font-size: 9pt; color: #6c757d; text-transform: uppercase; }
+        
+        /* Severity colors */
+        .severity-critical { background: #dc3545; color: white; padding: 2pt 6pt; border-radius: 3pt; }
+        .severity-high { background: #fd7e14; color: white; padding: 2pt 6pt; border-radius: 3pt; }
+        .severity-medium { background: #ffc107; color: #333; padding: 2pt 6pt; border-radius: 3pt; }
+        .severity-low { background: #28a745; color: white; padding: 2pt 6pt; border-radius: 3pt; }
+        
+        /* Sections */
+        h2 { font-size: 14pt; color: #2c3e50; margin-top: 16pt; margin-bottom: 8pt; border-bottom: 1px solid #dee2e6; padding-bottom: 4pt; }
+        
+        /* Tables */
+        table { width: 100%; border-collapse: collapse; margin: 10pt 0; font-size: 10pt; }
+        th, td { padding: 6pt 8pt; text-align: left; border-bottom: 1px solid #dee2e6; }
+        th { background: #f8f9fa; font-weight: 600; }
+        
+        /* Findings */
+        .finding { border-left: 3pt solid #dee2e6; padding-left: 10pt; margin: 10pt 0; }
+        .finding.critical { border-left-color: #dc3545; }
+        .finding.high { border-left-color: #fd7e14; }
+        .finding.medium { border-left-color: #ffc107; }
+        .finding.low { border-left-color: #28a745; }
+        .finding-title { font-weight: 600; color: #343a40; }
+        .finding-meta { font-size: 9pt; color: #6c757d; margin-top: 2pt; }
+        
+        /* Footer */
+        .footer { margin-top: 20pt; padding-top: 10pt; border-top: 1px solid #dee2e6; text-align: center; color: #adb5bd; font-size: 8pt; }
+        
+        @media print { body { print-color-adjust: exact; -webkit-print-color-adjust: exact; } }
+        @page { margin: 15mm; }
+    </style>
+</head>
+<body>
+    <div class="page">
+        <div class="header">
+            <h1>{{ title }}</h1>
+            <div class="generated">Generated: {{ generated_at }}</div>
+        </div>
+        
+        {% if report %}
+        <!-- Summary Stats -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-value">{{ findings|length }}</div>
+                <div class="stat-label">Total Findings</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">{{ by_severity.get('critical', 0) }}</div>
+                <div class="stat-label">Critical</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">{{ by_severity.get('high', 0) }}</div>
+                <div class="stat-label">High</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">{{ by_severity.get('medium', 0) }}</div>
+                <div class="stat-label">Medium</div>
+            </div>
+        </div>
+        
+        <!-- Findings by Severity -->
+        <h2>Findings by Severity</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Severity</th>
+                    <th>Count</th>
+                    <th>Percentage</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% set total = findings|length %}
+                {% for severity in ['critical', 'high', 'medium', 'low'] %}
+                {% set count = by_severity.get(severity, 0) %}
+                {% if count > 0 %}
+                <tr>
+                    <td><span class="severity-{{ severity }}">{{ severity|title }}</span></td>
+                    <td>{{ count }}</td>
+                    <td>{{ (count / total * 100)|round(1) if total > 0 else 0 }}%</td>
+                </tr>
+                {% endif %}
+                {% endfor %}
+            </tbody>
+        </table>
+        
+        <!-- Findings by Phase -->
+        {% if by_phase %}
+        <h2>Findings by Phase</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Phase</th>
+                    <th>Count</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for phase, count in by_phase.items() %}
+                <tr>
+                    <td>{{ phase|title }}</td>
+                    <td>{{ count }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% endif %}
+        
+        <!-- Detailed Findings -->
+        <h2>Detailed Findings</h2>
+        {% for finding in findings %}
+        <div class="finding {{ finding.get('severity', 'low') }}">
+            <div class="finding-title">{{ finding.get('title', 'Untitled Finding') }}</div>
+            <div class="finding-meta">
+                <span class="severity-{{ finding.get('severity', 'low') }}">{{ finding.get('severity', 'low')|title }}</span>
+                &bull; {{ finding.get('dimension', 'Unknown') }}
+                {% if finding.get('phase') %} &bull; Phase: {{ finding.get('phase') }}{% endif %}
+            </div>
+            {% if finding.get('description') %}
+            <p>{{ finding.get('description') }}</p>
+            {% endif %}
+        </div>
+        {% endfor %}
+        {% else %}
+        <!-- Markdown content fallback -->
+        {{ content|safe }}
+        {% endif %}
+        
+        <div class="footer">
+            Autonomous-GLM Design Audit System
+        </div>
+    </div>
+</body>
+</html>

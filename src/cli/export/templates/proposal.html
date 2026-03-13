@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title }}</title>
+    <style>
+        /* Base styles */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            font-size: 11pt;
+            line-height: 1.5;
+            color: #333;
+        }
+        .page { padding: 20mm; }
+        
+        /* Header */
+        .header {
+            text-align: center;
+            margin-bottom: 20pt;
+            padding-bottom: 10pt;
+            border-bottom: 2px solid #6f42c1;
+        }
+        .header h1 { color: #6f42c1; margin-bottom: 4pt; border: none; }
+        .header .generated { color: #adb5bd; font-size: 9pt; }
+        
+        /* Stats grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10pt;
+            margin: 12pt 0;
+        }
+        .stat-card {
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 4pt;
+            padding: 10pt;
+            text-align: center;
+        }
+        .stat-value { font-size: 20pt; font-weight: 700; color: #6f42c1; }
+        .stat-label { font-size: 9pt; color: #6c757d; text-transform: uppercase; }
+        
+        /* Sections */
+        h2 { font-size: 14pt; color: #2c3e50; margin-top: 16pt; margin-bottom: 8pt; border-bottom: 1px solid #dee2e6; padding-bottom: 4pt; }
+        h3 { font-size: 12pt; color: #495057; margin-top: 12pt; margin-bottom: 6pt; }
+        
+        /* Tables */
+        table { width: 100%; border-collapse: collapse; margin: 10pt 0; font-size: 10pt; }
+        th, td { padding: 6pt 8pt; text-align: left; border-bottom: 1px solid #dee2e6; }
+        th { background: #f8f9fa; font-weight: 600; }
+        
+        /* Token categories */
+        .token-category { margin: 10pt 0; }
+        .token-name { font-family: 'Monaco', 'Menlo', monospace; font-size: 10pt; background: #f1f3f5; padding: 2pt 4pt; border-radius: 2pt; }
+        .token-value { color: #6c757d; }
+        
+        /* Change types */
+        .change-add { color: #28a745; }
+        .change-modify { color: #ffc107; }
+        .change-remove { color: #dc3545; }
+        
+        /* Footer */
+        .footer { margin-top: 20pt; padding-top: 10pt; border-top: 1px solid #dee2e6; text-align: center; color: #adb5bd; font-size: 8pt; }
+        
+        @media print { body { print-color-adjust: exact; -webkit-print-color-adjust: exact; } }
+        @page { margin: 15mm; }
+    </style>
+</head>
+<body>
+    <div class="page">
+        <div class="header">
+            <h1>{{ title }}</h1>
+            <div class="generated">Generated: {{ generated_at }}</div>
+        </div>
+        
+        <!-- Summary Stats -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-value">{{ tokens|length }}</div>
+                <div class="stat-label">Tokens</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">{{ changes|length }}</div>
+                <div class="stat-label">Changes</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">{{ proposal.get('priority', 'Medium') }}</div>
+                <div class="stat-label">Priority</div>
+            </div>
+        </div>
+        
+        <!-- Proposal Description -->
+        {% if proposal.get('description') %}
+        <h2>Description</h2>
+        <p>{{ proposal.get('description') }}</p>
+        {% endif %}
+        
+        <!-- Token Changes -->
+        {% if tokens %}
+        <h2>Token Changes</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Token</th>
+                    <th>Category</th>
+                    <th>Current</th>
+                    <th>Proposed</th>
+                    <th>Change</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for token in tokens %}
+                <tr>
+                    <td><span class="token-name">{{ token.get('name', 'unknown') }}</span></td>
+                    <td>{{ token.get('category', '-') }}</td>
+                    <td>{{ token.get('current_value', '-') }}</td>
+                    <td>{{ token.get('proposed_value', '-') }}</td>
+                    <td class="change-{{ token.get('change_type', 'modify') }}">{{ token.get('change_type', 'modify')|title }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% endif %}
+        
+        <!-- Implementation Notes -->
+        {% if proposal.get('implementation_notes') %}
+        <h2>Implementation Notes</h2>
+        <p>{{ proposal.get('implementation_notes') }}</p>
+        {% endif %}
+        
+        <!-- Related Findings -->
+        {% if proposal.get('related_findings') %}
+        <h2>Related Findings</h2>
+        <ul>
+            {% for finding_id in proposal.get('related_findings', []) %}
+            <li>{{ finding_id }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        
+        <div class="footer">
+            Autonomous-GLM Design Audit System
+        </div>
+    </div>
+</body>
+</html>

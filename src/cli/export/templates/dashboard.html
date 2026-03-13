@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title }}</title>
+    <style>
+        /* Base styles */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            font-size: 11pt;
+            line-height: 1.5;
+            color: #333;
+        }
+        .page { padding: 20mm; }
+        
+        /* Header */
+        .header {
+            text-align: center;
+            margin-bottom: 20pt;
+            padding-bottom: 10pt;
+            border-bottom: 2px solid #007bff;
+        }
+        .header h1 { color: #007bff; margin-bottom: 4pt; border: none; }
+        .header .period { color: #6c757d; font-size: 10pt; }
+        .header .generated { color: #adb5bd; font-size: 9pt; margin-top: 4pt; }
+        
+        /* Stats grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10pt;
+            margin: 12pt 0;
+        }
+        .stat-card {
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 4pt;
+            padding: 10pt;
+            text-align: center;
+        }
+        .stat-value { font-size: 20pt; font-weight: 700; color: #007bff; }
+        .stat-label { font-size: 9pt; color: #6c757d; text-transform: uppercase; }
+        
+        /* Severity colors */
+        .severity-critical { background: #dc3545; color: white; padding: 2pt 6pt; border-radius: 3pt; }
+        .severity-high { background: #fd7e14; color: white; padding: 2pt 6pt; border-radius: 3pt; }
+        .severity-medium { background: #ffc107; color: #333; padding: 2pt 6pt; border-radius: 3pt; }
+        .severity-low { background: #28a745; color: white; padding: 2pt 6pt; border-radius: 3pt; }
+        
+        /* Severity bar */
+        .severity-row { display: flex; align-items: center; margin: 6pt 0; }
+        .severity-label { width: 60pt; color: #6c757d; font-size: 10pt; }
+        .severity-bar { flex: 1; height: 16pt; background: #e9ecef; border-radius: 3pt; overflow: hidden; }
+        .severity-fill { height: 100%; border-radius: 3pt; }
+        .severity-fill.critical { background: #dc3545; }
+        .severity-fill.high { background: #fd7e14; }
+        .severity-fill.medium { background: #ffc107; }
+        .severity-fill.low { background: #28a745; }
+        .severity-count { width: 30pt; text-align: right; font-weight: 600; }
+        
+        /* Two-column layout */
+        .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 15pt; margin-top: 15pt; }
+        
+        /* Sections */
+        h2 { font-size: 14pt; color: #2c3e50; margin-top: 16pt; margin-bottom: 8pt; border-bottom: 1px solid #dee2e6; padding-bottom: 4pt; }
+        .card { background: #f8f9fa; border: 1px solid #dee2e6; border-radius: 4pt; padding: 12pt; }
+        
+        /* Tables */
+        table { width: 100%; border-collapse: collapse; margin: 10pt 0; font-size: 10pt; }
+        th, td { padding: 6pt 8pt; text-align: left; border-bottom: 1px solid #dee2e6; }
+        th { background: #fff; font-weight: 600; }
+        
+        /* Dimension list */
+        .dimension-item { display: flex; justify-content: space-between; padding: 4pt 0; border-bottom: 1px solid #eee; }
+        .dimension-name { flex: 1; }
+        .dimension-count { font-weight: 600; margin-right: 10pt; }
+        .dimension-pct { color: #6c757d; width: 40pt; text-align: right; }
+        
+        /* Footer */
+        .footer { margin-top: 20pt; padding-top: 10pt; border-top: 1px solid #dee2e6; text-align: center; color: #adb5bd; font-size: 8pt; }
+        
+        @media print { body { print-color-adjust: exact; -webkit-print-color-adjust: exact; } }
+        @page { margin: 15mm; }
+    </style>
+</head>
+<body>
+    <div class="page">
+        <div class="header">
+            <h1>{{ title }}</h1>
+            {% if metrics.period %}
+            <div class="period">Period: {{ metrics.period.value|title }}</div>
+            {% endif %}
+            <div class="generated">Generated: {{ generated_at }}</div>
+        </div>
+        
+        <!-- Audit Stats -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-value">{{ metrics.total_audits }}</div>
+                <div class="stat-label">Total Audits</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">{{ metrics.successful_audits }}</div>
+                <div class="stat-label">Successful</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">{{ metrics.failed_audits }}</div>
+                <div class="stat-label">Failed</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">{{ metrics.findings_summary.total }}</div>
+                <div class="stat-label">Findings</div>
+            </div>
+        </div>
+        
+        <div class="two-col">
+            <!-- Findings by Severity -->
+            <div class="card">
+                <h2 style="margin-top: 0;">Findings by Severity</h2>
+                {% set total = metrics.findings_summary.total %}
+                {% for severity in ['critical', 'high', 'medium', 'low'] %}
+                {% set count = metrics.findings_summary.get(severity, 0) %}
+                {% set pct = (count / total * 100) if total > 0 else 0 %}
+                <div class="severity-row">
+                    <span class="severity-label">{{ severity|title }}</span>
+                    <div class="severity-bar">
+                        <div class="severity-fill {{ severity }}" style="width: {{ pct }}%"></div>
+                    </div>
+                    <span class="severity-count">{{ count }}</span>
+                </div>
+                {% endfor %}
+            </div>
+            
+            <!-- Artifacts -->
+            <div class="card">
+                <h2 style="margin-top: 0;">Artifacts</h2>
+                <div class="dimension-item">
+                    <span class="dimension-name">Screens</span>
+                    <span class="dimension-count">{{ metrics.artifact_stats.total_screens }}</span>
+                </div>
+                <div class="dimension-item">
+                    <span class="dimension-name">Flows</span>
+                    <span class="dimension-count">{{ metrics.artifact_stats.total_flows }}</span>
+                </div>
+                <div class="dimension-item">
+                    <span class="dimension-name">Components</span>
+                    <span class="dimension-count">{{ metrics.artifact_stats.total_components }}</span>
+                </div>
+                <div class="dimension-item">
+                    <span class="dimension-name">Tokens</span>
+                    <span class="dimension-count">{{ metrics.artifact_stats.total_tokens }}</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Top Dimensions -->
+        {% if metrics.dimension_breakdown %}
+        <h2>Top Dimensions</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Dimension</th>
+                    <th>Count</th>
+                    <th>Percentage</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in metrics.dimension_breakdown[:10] %}
+                <tr>
+                    <td>{{ item.dimension }}</td>
+                    <td>{{ item.count }}</td>
+                    <td>{{ item.percentage }}%</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% endif %}
+        
+        <!-- Trend Data -->
+        {% if metrics.trend_data.points %}
+        <h2>Recent Trend</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Audits</th>
+                    <th>Findings</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for point in metrics.trend_data.points[-7:] %}
+                <tr>
+                    <td>{{ point.date }}</td>
+                    <td>{{ point.audits }}</td>
+                    <td>{{ point.findings }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% endif %}
+        
+        <div class="footer">
+            Autonomous-GLM Design Audit System
+        </div>
+    </div>
+</body>
+</html>

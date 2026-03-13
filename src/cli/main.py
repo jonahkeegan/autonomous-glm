@@ -8,7 +8,7 @@ import click
 from rich.console import Console
 
 from .errors import CLIError, ExitCode
-from .commands import audit, report, propose, watch
+from .commands import audit, report, propose, watch, dashboard
 
 # Version will be read from package metadata
 __version__ = "0.1.0"
@@ -108,6 +108,7 @@ cli.add_command(audit)
 cli.add_command(report)
 cli.add_command(propose)
 cli.add_command(watch)
+cli.add_command(dashboard)
 
 
 # =============================================================================

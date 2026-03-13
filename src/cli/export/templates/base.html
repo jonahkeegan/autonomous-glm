@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title }}</title>
+    <style>
+        /* Reset and base styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            font-size: 11pt;
+            line-height: 1.5;
+            color: #333;
+            background: #fff;
+        }
+        
+        /* Page layout */
+        .page {
+            width: 210mm;
+            min-height: 297mm;
+            padding: 20mm;
+            margin: 0 auto;
+            background: white;
+        }
+        
+        /* Typography */
+        h1 {
+            font-size: 24pt;
+            font-weight: 700;
+            color: #1a1a1a;
+            margin-bottom: 8pt;
+            border-bottom: 3px solid #007bff;
+            padding-bottom: 8pt;
+        }
+        
+        h2 {
+            font-size: 16pt;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-top: 16pt;
+            margin-bottom: 8pt;
+            border-bottom: 1px solid #dee2e6;
+            padding-bottom: 4pt;
+        }
+        
+        h3 {
+            font-size: 13pt;
+            font-weight: 600;
+            color: #343a40;
+            margin-top: 12pt;
+            margin-bottom: 6pt;
+        }
+        
+        p {
+            margin-bottom: 8pt;
+        }
+        
+        /* Header */
+        .header {
+            text-align: center;
+            margin-bottom: 20pt;
+            padding-bottom: 10pt;
+            border-bottom: 2px solid #007bff;
+        }
+        
+        .header h1 {
+            border: none;
+            margin-bottom: 4pt;
+        }
+        
+        .header .subtitle {
+            color: #6c757d;
+            font-size: 10pt;
+        }
+        
+        .header .generated {
+            color: #adb5bd;
+            font-size: 9pt;
+            margin-top: 4pt;
+        }
+        
+        /* Tables */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 10pt 0;
+            font-size: 10pt;
+        }
+        
+        th, td {
+            padding: 6pt 8pt;
+            text-align: left;
+            border-bottom: 1px solid #dee2e6;
+        }
+        
+        th {
+            background-color: #f8f9fa;
+            font-weight: 600;
+            color: #495057;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+        
+        /* Severity badges */
+        .severity-critical {
+            background-color: #dc3545;
+            color: white;
+            padding: 2pt 6pt;
+            border-radius: 3pt;
+            font-size: 9pt;
+            font-weight: 600;
+        }
+        
+        .severity-high {
+            background-color: #fd7e14;
+            color: white;
+            padding: 2pt 6pt;
+            border-radius: 3pt;
+            font-size: 9pt;
+            font-weight: 600;
+        }
+        
+        .severity-medium {
+            background-color: #ffc107;
+            color: #333;
+            padding: 2pt 6pt;
+            border-radius: 3pt;
+            font-size: 9pt;
+            font-weight: 600;
+        }
+        
+        .severity-low {
+            background-color: #28a745;
+            color: white;
+            padding: 2pt 6pt;
+            border-radius: 3pt;
+            font-size: 9pt;
+            font-weight: 600;
+        }
+        
+        /* Summary stats */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10pt;
+            margin: 12pt 0;
+        }
+        
+        .stat-card {
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 4pt;
+            padding: 10pt;
+            text-align: center;
+        }
+        
+        .stat-value {
+            font-size: 20pt;
+            font-weight: 700;
+            color: #007bff;
+        }
+        
+        .stat-label {
+            font-size: 9pt;
+            color: #6c757d;
+            text-transform: uppercase;
+        }
+        
+        /* Findings list */
+        .finding {
+            border-left: 3pt solid #dee2e6;
+            padding-left: 10pt;
+            margin: 10pt 0;
+        }
+        
+        .finding.critical {
+            border-left-color: #dc3545;
+        }
+        
+        .finding.high {
+            border-left-color: #fd7e14;
+        }
+        
+        .finding.medium {
+            border-left-color: #ffc107;
+        }
+        
+        .finding.low {
+            border-left-color: #28a745;
+        }
+        
+        .finding-title {
+            font-weight: 600;
+            color: #343a40;
+        }
+        
+        .finding-meta {
+            font-size: 9pt;
+            color: #6c757d;
+            margin-top: 2pt;
+        }
+        
+        .finding-description {
+            margin-top: 4pt;
+            color: #495057;
+        }
+        
+        /* Footer */
+        .footer {
+            margin-top: 20pt;
+            padding-top: 10pt;
+            border-top: 1px solid #dee2e6;
+            text-align: center;
+            color: #adb5bd;
+            font-size: 8pt;
+        }
+        
+        /* Print styles */
+        @media print {
+            body {
+                print-color-adjust: exact;
+                -webkit-print-color-adjust: exact;
+            }
+            
+            .page {
+                page-break-after: always;
+            }
+            
+            h1, h2, h3 {
+                page-break-after: avoid;
+            }
+            
+            .finding {
+                page-break-inside: avoid;
+            }
+        }
+        
+        /* Page numbers */
+        @page {
+            margin: 15mm;
+            @bottom-center {
+                content: "Page " counter(page) " of " counter(pages);
+                font-size: 9pt;
+                color: #adb5bd;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="page">
+        <div class="header">
+            <h1>{{ title }}</h1>
+            {% if subtitle %}
+            <div class="subtitle">{{ subtitle }}</div>
+            {% endif %}
+            <div class="generated">Generated: {{ generated_at }}</div>
+        </div>
+        
+        {% block content %}{% endblock %}
+        
+        <div class="footer">
+            Autonomous-GLM Design Audit System
+        </div>
+    </div>
+</body>
+</html>

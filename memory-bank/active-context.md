@@ -1,14 +1,14 @@
 # Active Context
 
 ## Current State
-- Phase: **Milestone 6 IN PROGRESS** 
+- Phase: **Milestone 6 COMPLETE** 
 - Last Audit: None
 - Active Artifacts: None
 - Pending Reviews: None
-- Active Milestone: M6 - Reporting & CLI
-- Completed Milestones: M0 ✅, M1 ✅, M2 ✅, M3 ✅, M4 ✅, M5 ✅, M6-1 ✅, M6-2 ✅
-- **Just Completed**: M6-2 Watch Mode & Auto-Processing (28 tests, 1223 total)
-- **Next Step**: M6-3 Dashboard & PDF Export
+- Active Milestone: M6 - Reporting & CLI ✅ COMPLETE
+- Completed Milestones: M0 ✅, M1 ✅, M2 ✅, M3 ✅, M4 ✅, M5 ✅, M6 ✅
+- **Just Completed**: M6-3 Dashboard & PDF Export (29 tests, 1252 total)
+- **Next Step**: All milestones complete - Ready for production deployment
 
 ---
 
@@ -663,8 +663,46 @@
 | Epic | Description | Status |
 |------|-------------|--------|
 | M6-1 | CLI Core Commands | ✅ Complete (73 tests pass) |
-| M6-2 | Watch Mode & Auto-Processing | Pending |
-| M6-3 | Dashboard & PDF Export | Pending |
+| M6-2 | Watch Mode & Auto-Processing | ✅ Complete (28 tests pass) |
+| M6-3 | Dashboard & PDF Export | ✅ Complete (29 tests pass) |
+
+---
+
+## M6-3 Dashboard & PDF Export Implementation Details
+
+**Files Created:**
+- `src/cli/dashboard/__init__.py` - Module exports with clean public API
+- `src/cli/dashboard/metrics.py` - Pydantic models (Period, FindingsSummary, TrendPoint, TrendData, ArtifactStats, DimensionBreakdown, DashboardMetrics) + MetricsAggregator
+- `src/cli/dashboard/renderer.py` - DashboardRenderer (terminal, HTML, JSON) + render_dashboard()
+- `src/cli/export/__init__.py` - Export module exports
+- `src/cli/export/pdf.py` - PDFGenerator with WeasyPrint, Jinja2 templates, markdown support
+- `src/cli/export/templates/base.html` - Base HTML template with shared styles
+- `src/cli/export/templates/report.html` - Audit report PDF template
+- `src/cli/export/templates/dashboard.html` - Dashboard metrics PDF template
+- `src/cli/export/templates/proposal.html` - Design system proposal PDF template
+- `tests/unit/test_cli_dashboard.py` - 29 comprehensive unit tests
+
+**Files Modified:**
+- `src/cli/commands/__init__.py` - Added dashboard import
+- `src/cli/commands/dashboard.py` - New dashboard command with --pdf, --html, --json, --period options
+- `src/cli/main.py` - Added dashboard command registration
+- `requirements.txt` - Added weasyprint>=60.0, jinja2>=3.0, markdown>=3.0
+
+**Key Features:**
+- `glm dashboard` command with multiple output formats
+- Time period filtering (day, week, month, all)
+- MetricsAggregator with database queries for audit statistics
+- Findings breakdown by severity (critical, high, medium, low)
+- Trend data with historical points
+- Artifact stats (screens, flows, components, tokens)
+- Rich terminal output with panels and tables
+- Standalone HTML with embedded CSS
+- PDF export via WeasyPrint with Jinja2 templates
+- Three template types: report, dashboard, proposal
+
+**Test Coverage:**
+- 29 new tests for dashboard module
+- 1252 total tests passing
 
 ---
 
@@ -709,6 +747,7 @@
 ## Recent Activity
 | Date | Activity | Status |
 |------|----------|--------|
+| 2026-03-13 | M6-3 Dashboard & PDF Export complete (29 tests, 1252 total) - MILESTONE 6 COMPLETE | Complete |
 | 2026-03-05 | M6-2 Watch Mode & Auto-Processing complete (28 tests, 1223 total) | Complete |
 | 2026-03-05 | M6-1 CLI Core Commands complete (73 tests, 1195 total) | Complete |
 | 2026-03-05 | M5-3 Arbitration & Reliability complete (56 tests, 1122 total) - MILESTONE 5 COMPLETE | Complete |
