@@ -18,3 +18,8 @@ mypy>=1.0.0
 
 # Code quality (optional, for CI)
 ruff>=0.1.0
+
+# E2E and fuzz testing
+hypothesis>=6.0.0
+pytest-timeout>=2.0.0
+pytest-asyncio>=0.21.0

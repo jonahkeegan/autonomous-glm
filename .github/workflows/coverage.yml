@@ -1,0 +1,108 @@
+name: Coverage Report
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+env:
+  PYTHON_VERSION: '3.11'
+
+jobs:
+  coverage:
+    name: Generate Coverage Report
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+          cache: 'pip'
+
+      - name: Install system dependencies
+        run: brew install pango gdk-pixbuf libffi || true
+
+      - name: Install Python dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install -r requirements-test.txt
+
+      - name: Run tests with coverage
+        run: |
+          pytest tests/unit/ tests/integration/ \
+            --cov=src \
+            --cov-report=xml \
+            --cov-report=html \
+            --cov-report=term-missing \
+            -q
+
+      - name: Generate coverage summary
+        run: |
+          python -c "
+          import xml.etree.ElementTree as ET
+          import json
+
+          tree = ET.parse('coverage.xml')
+          root = tree.getroot()
+
+          # Get overall coverage
+          line_rate = float(root.attrib.get('line-rate', 0))
+          branch_rate = float(root.attrib.get('branch-rate', 0))
+
+          # Get per-package coverage
+          packages = []
+          for package in root.findall('.//package'):
+              name = package.attrib.get('name', '')
+              line_rate_pkg = float(package.attrib.get('line-rate', 0))
+              packages.append({
+                  'name': name,
+                  'line_rate': f'{line_rate_pkg * 100:.2f}%'
+              })
+
+          # Write summary
+          summary = f'''# Test Coverage Report
+
+          **Generated:** $(date -u +'%Y-%m-%d %H:%M:%S UTC')
+          **Total Line Coverage:** {line_rate * 100:.2f}%
+          **Branch Coverage:** {branch_rate * 100:.2f}%
+
+          ## Module Coverage
+
+          | Module | Coverage | Status |
+          |--------|----------|--------|
+          '''
+
+          for pkg in sorted(packages, key=lambda x: x['name']):
+              rate = float(pkg['line_rate'].rstrip('%'))
+              status = '✅' if rate >= 80 else '⚠️'
+              summary += f\"| {pkg['name']} | {pkg['line_rate']} | {status} |\\n\"
+
+          with open('docs/test-results/coverage.md', 'w') as f:
+              f.write(summary)
+          "
+
+      - name: Create docs directory
+        run: mkdir -p docs/test-results
+
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v4
+        with:
+          file: coverage.xml
+          fail_ci_if_error: false
+
+      - name: Upload HTML coverage report
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-report
+          path: htmlcov/
+          retention-days: 30
+
+      - name: Upload coverage markdown
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-markdown
+          path: docs/test-results/coverage.md
+          retention-days: 30
